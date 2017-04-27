@@ -11,7 +11,6 @@
 */
 package snake.main.objects;
 import snake.main.SnakeMain;
-import java.awt.*;
 
 /**
  * The <name>Point</name> class represents a unit, used to build up a game field.
@@ -43,7 +42,7 @@ public class Point {
      * at random position.
      * @param snake - <code>Snake</code> object.
      */
-    public Point(Snake snake) {
+    Point(Snake snake) {
         setRandomPosition(snake);
     }
 

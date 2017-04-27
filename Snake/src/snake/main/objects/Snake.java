@@ -10,7 +10,6 @@
 *
 */
 package snake.main.objects;
-import snake.main.KeyBoard;
 import snake.main.SnakeMain;
 import java.awt.*;
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class Snake {
     /**
      * List of <code>Point</code> which form up the <code>Snake</code>.
      */
-    public List<Point> snakeList = new ArrayList<>();
+    public final List<Point> snakeList = new ArrayList<>();
     /**
      * Triggers when the <code>Snake</code> eats.
      */
@@ -43,13 +42,11 @@ public class Snake {
     /**
      * Constructs a new <code>Snake</code> object
      * in given dimensions and of given length.
-     * @param x - dimension x
-     * @param y - dimension y
-     * @param length - length of a <code>Snake</code>
+     *
      */
-    public Snake(int x, int y, int length) {
-        for (int i = 0; i < length; i++) {
-            Point point = new Point(x + i, y);
+    public Snake() {
+        for (int i = 0; i < 5; i++) {
+            Point point = new Point(5 + i, 6);
             snakeList.add(point);
         }
     }
@@ -87,8 +84,7 @@ public class Snake {
     /**
      * Method used to determine if the <code>Snake</code>
      * has crashed itself.
-     * @return true if <code>Snake</code> crashed itself
-     * @return false otherwise
+     * @return true if <code>Snake</code> crashed itself, false otherwise
      */
     public boolean selfCrashed() {
         for (int i = 1; i < snakeList.size(); i++) {
@@ -106,8 +102,7 @@ public class Snake {
      * inside the <code>Snake</code> object.
      * @param x - dimension x
      * @param y - dimension y
-     * @return true if inside the <code>Snake</code>
-     * @return false otherwise
+     * @return true if inside the <code>Snake</code>, false otherwise
      */
     public boolean insideSnake(int x, int y) {
         for (Point point : snakeList) {
@@ -120,8 +115,7 @@ public class Snake {
      * Method used to determine if the provided <code>ArrayList</code>
      * of <code>Poison</code> objects intersect with <code>Snake</code>
      * @param pointList - <code>ArrayList</code> of <code>Poison</code> objects
-     * @return true - if Poison is inside the Snake
-     * @return false otherwise
+     * @return true - if Poison is inside the Snake, false otherwise
      */
     public boolean insideSnake(ArrayList<Poison> pointList) {
         for (Point point : snakeList) {

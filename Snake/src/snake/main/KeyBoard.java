@@ -10,7 +10,7 @@
 *
 */
 package snake.main;
-import snake.main.objects.Snake;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -19,24 +19,25 @@ import java.awt.event.KeyEvent;
  * <code>KeyAdapter</code> class used to change <code>Snake</code>
  * direction according to relevant <code>KeyEvent</code>.
  *
- * @autor Myndyk Mykola
  * @version 1.0
+ * @autor Myndyk Mykola
  * @since 2017-04-26
  */
-public class KeyBoard extends KeyAdapter {
+class KeyBoard extends KeyAdapter {
 
     /**
      * Key mappings
      */
-    final static int LEFT = 37;
-    final static int UP = 38;
-    final static int RIGHT = 39;
-    final static int DOWN = 40;
+    private final static int LEFT = 37;
+    private final static int UP = 38;
+    private final static int RIGHT = 39;
+    private final static int DOWN = 40;
 
     /**
      * Method used to change direction of <code>Snake</code> according to
      * the pressed key.
-      * @param e - <code>KeyEvent</code>, which contains info about the key pressed.
+     *
+     * @param e - <code>KeyEvent</code>, which contains info about the key pressed.
      */
     public void keyPressed(KeyEvent e) {
 

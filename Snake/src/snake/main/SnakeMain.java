@@ -32,27 +32,27 @@ public class SnakeMain extends JPanel implements ActionListener {
     /**
      * The color pink.  In the default sRGB space.
      */
-    public static Color backgroundColor = Color.pink;
+    private static final Color backgroundColor = Color.pink;
     /**
      * The color cyan.  In the default sRGB space.
      */
-    public static Color snakeBodyColor = Color.CYAN;
+    public static final Color snakeBodyColor = Color.CYAN;
     /**
      * The color dark gray.  In the default sRGB space.
      */
-    public static Color snakeHeadColor = Color.darkGray;
+    public static final Color snakeHeadColor = Color.darkGray;
     /**
      * The color red.  In the default sRGB space.
      */
-    public static Color poisonColor = Color.red;
+    public static final Color poisonColor = Color.red;
     /**
      * The color yellow.  In the default sRGB space.
      */
-    public static Color appleColor = Color.yellow;
+    public static final Color appleColor = Color.yellow;
     /**
      * Root JFrame.
      */
-    public static JFrame jFrame;
+    private static JFrame jFrame;
     /**
      * Scale measure used for displaying.
      */
@@ -68,36 +68,36 @@ public class SnakeMain extends JPanel implements ActionListener {
     /**
      * Snake speed.
      */
-    public static int speed = 15;
+    private static final int speed = 15;
     /**
      * Initial poison count for Snake.
      */
-    public static int poisonCount = 0;
+    private static int poisonCount = 0;
     /**
      * Keylistener - interface for receiving keyboard events.
      */
-    public static KeyListener kl = new KeyBoard();
+    private static final KeyListener kl = new KeyBoard();
     /**
      * Snake game object.
      */
-    public static Snake snake = new Snake(5, 6, 5);
+    public static Snake snake = new Snake();
     /**
      * Timer - used for firing events with certain intervals.
      */
-    public Timer timer = new Timer(1000 / speed, this);
+    private final Timer timer = new Timer(1000 / speed, this);
     /**
      * Apple game object.
      */
-    public Apple apple = new Apple(snake);
+    private final Apple apple = new Apple(snake);
     /**
      * Collection containing a list of Poison objects to paint.
      */
-    public ArrayList<Poison> poisonList = new ArrayList<>();
+    private ArrayList<Poison> poisonList = new ArrayList<>();
 
     /**
      * Constructs a JPanel with added KeyListener, and starts Timer.
      */
-    public SnakeMain() {
+    private SnakeMain() {
         addKeyListener(kl);
         setFocusable(true);
         timer.start();
@@ -177,7 +177,7 @@ public class SnakeMain extends JPanel implements ActionListener {
         if (snake.selfCrashed() || snake.insideSnake(poisonList)) {
             timer.stop();
             JOptionPane.showMessageDialog(null, "GAME OVER, TRY AGAIN?");
-            snake = new Snake(5, 6, 5);
+            snake = new Snake();
             apple.setRandomPosition(snake);
             poisonList = new ArrayList<>();
             timer.start();
