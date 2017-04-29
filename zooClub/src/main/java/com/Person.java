@@ -1,4 +1,4 @@
-package com.marta_zooclub;
+package main.java.com;
 
 import java.io.Serializable;
 

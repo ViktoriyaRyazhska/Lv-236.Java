@@ -1,4 +1,4 @@
-package com.marta_zooclub;
+package main.java.com;
 
 /**
  * This class is Entity com.marta_zooclub.Pet.
