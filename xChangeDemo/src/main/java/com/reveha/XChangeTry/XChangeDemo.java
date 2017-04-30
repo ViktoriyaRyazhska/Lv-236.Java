@@ -22,7 +22,7 @@ public final class XChangeDemo {
     /**
      * Private constructor for XChangeDemo class.
      */
-    public XChangeDemo() {
+    private XChangeDemo() {
 
     }
 
