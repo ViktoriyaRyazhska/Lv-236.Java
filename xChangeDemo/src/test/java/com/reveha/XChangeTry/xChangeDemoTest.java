@@ -1,11 +1,11 @@
-package xChangeTry;
+package com.reveha.XChangeTry;
 
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Unit test for simple xChangeDemo.
+ * Unit test for simple XChangeDemo.
  */
 public class xChangeDemoTest
     extends TestCase

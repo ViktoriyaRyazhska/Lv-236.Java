@@ -1,25 +1,17 @@
-package xChangeTry;
+package com.reveha.XChangeTry;
 
 import org.knowm.xchange.Exchange;
 import org.knowm.xchange.ExchangeFactory;
-import org.knowm.xchange.bitcoinde.BitcoindeExchange;
-import org.knowm.xchange.bitkonan.BitKonanExchange;
-import org.knowm.xchange.bitstamp.Bitstamp;
 import org.knowm.xchange.bitstamp.BitstampExchange;
-import org.knowm.xchange.currency.CurrencyPair;
 import org.knowm.xchange.dto.marketdata.OrderBook;
 import org.knowm.xchange.dto.trade.LimitOrder;
 import org.knowm.xchange.livecoin.LivecoinExchange;
-import org.knowm.xchange.poloniex.Poloniex;
-import org.knowm.xchange.poloniex.PoloniexExchange;
 import org.knowm.xchange.service.marketdata.MarketDataService;
 import org.knowm.xchart.QuickChart;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.internal.Series;
 
-import javax.swing.*;
-import java.awt.*;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -27,55 +19,71 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * MarketPollingDemoExchanges is class that performs all calculating and sends data to GUI.
- * Main purpose is to make operations with data to prepare graphical output to user.
- * Comparing pairs BTC-USD and BTC-EUR that will allows user to chose best scenario.
+ * This class performs all calculating and sends data to GUI.
+ * Main purpose is to make operations with data
+ * to prepare graphical output to user.
+ * Comparing pairs BTC-USD and BTC-EUR that will
+ * allows user to chose best scenario.
  *
- * @author  Orest Reveha
- *
+ * @author Orest Reveha
  */
-public class MarketPollingDemoExchanges implements Runnable{
-
-    MarketPollingGUI gui;
+public class MarketPollingDemoExchanges implements Runnable {
+    /**
+     * Instance of MarketPollingGUI class.
+     */
+    private MarketPollingGUI gui;
+    /**
+     * Threshold for asks.
+     */
+    private static final int ASKS_THRESHOLD = 10000;
+    /**
+     * Threshold for bids.
+     */
+    private static final int BIDS_THRESHOLD = 10;
+    /**
+     * Bitstamp istancee.
+     */
+    private static Exchange bitstamp;
+    /**
+     * Livecoin instance.
+     */
+    private static Exchange liveCoin;
 
     /**
-     *Creating new MarketPollingDemoExchanges class.
+     * Creating new MarketPollingDemoExchanges class.
      *
-     * @param gui to decide what GUI will be used
+     * @param inputGui is to decide what GUI will be used
      */
-    public MarketPollingDemoExchanges(MarketPollingGUI gui){
-        this.gui = gui;
-
+    public MarketPollingDemoExchanges(final MarketPollingGUI inputGui) {
+        gui = inputGui;
     }
 
     /**
      * Runs main calculating process that consists from several stages.
      * <ul>
-     *     <li>Getting exchange APIs for both Bitstamp and Bitkonan</li>
-     *     <li>Getting marked data</li>
-     *     <li>Creating orders from checked options in GUI</li>
-     *     <li>Getting Bids and Asks</li>
-     *     <li>Creating chart</li>
-     *     <li>Sending output to GUI</li>
+     * <li>Getting exchange APIs for both Bitstamp and Bitkonan</li>
+     * <li>Getting marked data</li>
+     * <li>Creating orders from checked options in GUI</li>
+     * <li>Getting Bids and Asks</li>
+     * <li>Creating chart</li>
+     * <li>Sending output to GUI</li>
      * </ul>
      */
     public void run() {
-        // Use the factory to get the version 1 Bitstamp and Bitkonan exchange API using default settings
-        Exchange bitstamp = ExchangeFactory.INSTANCE.createExchange(BitstampExchange.class.getName());
-        Exchange liveCoin = ExchangeFactory.INSTANCE.createExchange(LivecoinExchange.class.getName());
-
+        // Use the factory to get the version 1 Bitstamp and Bitkonan
+        // exchange API using default settings
+        initBitstampAndLivecoin();
         // Interested in the public market data feed (no authentication)
         MarketDataService bitstampDataService = bitstamp.getMarketDataService();
         MarketDataService liveCoinDataService = liveCoin.getMarketDataService();
-
-        System.out.println("fetching data...");
-
         // Get the current orderbooks
         OrderBook orderBookBitStamp = null;
         OrderBook orderBookLiveCoin = null;
         try {
-            orderBookBitStamp = bitstampDataService.getOrderBook(gui.getCurrencyPair());
-            orderBookLiveCoin = liveCoinDataService.getOrderBook(gui.getCurrencyPair());
+            orderBookBitStamp = bitstampDataService.
+                    getOrderBook(gui.getCurrencyPair());
+            orderBookLiveCoin = liveCoinDataService.
+                    getOrderBook(gui.getCurrencyPair());
         } catch (IOException e) {
             gui.getOptionPane().showMessageDialog(gui, "Invalid currency pair");
         }
@@ -88,15 +96,19 @@ public class MarketPollingDemoExchanges implements Runnable{
         // get BIDS
         ArrayList<BigDecimal> xBidData = new ArrayList<BigDecimal>();
         ArrayList<BigDecimal> yBidData = new ArrayList<BigDecimal>();
-        getBids(orderBookBitStamp, xBidData, yBidData, 10);
+        getBids(orderBookBitStamp, xBidData, yBidData, BIDS_THRESHOLD);
 
         // Create Chart, add bids
-        XYChart chart = QuickChart.getChart("BitStamp Order Book", "USD", "BTC", "BitStamp bids", xBidData, yBidData);
+        XYChart chart = QuickChart.getChart(
+                "BitStamp Order Book",
+                "USD", "BTC",
+                "BitStamp bids",
+                xBidData, yBidData);
 
         // get ASKS
         ArrayList<BigDecimal> xAskData = new ArrayList<BigDecimal>();
         ArrayList<BigDecimal> yAskData = new ArrayList<BigDecimal>();
-        getAsks(orderBookBitStamp, xAskData, yAskData, 10000);
+        getAsks(orderBookBitStamp, xAskData, yAskData, ASKS_THRESHOLD);
 
         // add Asks Series to chart
         Series series = chart.addSeries("BitStamp asks", xAskData, yAskData);
@@ -104,15 +116,17 @@ public class MarketPollingDemoExchanges implements Runnable{
 
         ArrayList<BigDecimal> xBidDataTwo = new ArrayList<BigDecimal>();
         ArrayList<BigDecimal> yBidDataTwo = new ArrayList<BigDecimal>();
-        getBids(orderBookLiveCoin, xBidDataTwo, yBidDataTwo, 10);
+        getBids(orderBookLiveCoin, xBidDataTwo, yBidDataTwo, BIDS_THRESHOLD);
 
-        XYChart chart2 = QuickChart.getChart("LiveCoin Order Book", "USD", "BTC", "LiveCoin bids", xBidDataTwo, yBidDataTwo);
+        XYChart chart2 = QuickChart.getChart("LiveCoin Order Book",
+                "USD", "BTC", "LiveCoin bids",
+                xBidDataTwo, yBidDataTwo);
 
         //other asks Asks
         ArrayList<BigDecimal> xAskdataTwo = new ArrayList<BigDecimal>();
         ArrayList<BigDecimal> yAskDataTwo = new ArrayList<BigDecimal>();
 
-        getAsks(orderBookLiveCoin, xAskdataTwo, yAskDataTwo, 10000);
+        getAsks(orderBookLiveCoin, xAskdataTwo, yAskDataTwo, ASKS_THRESHOLD);
 
         series = chart2.addSeries("LiveCoin asks", xAskdataTwo, yAskDataTwo);
 
@@ -133,19 +147,34 @@ public class MarketPollingDemoExchanges implements Runnable{
     }
 
     /**
+     * Use the factory to get the version 1 Bitstamp and Bitkonan
+     * exchange API using default settings.
+     */
+    private void initBitstampAndLivecoin() {
+        bitstamp = ExchangeFactory.INSTANCE.
+                createExchange(BitstampExchange.class.getName());
+        liveCoin = ExchangeFactory.INSTANCE.
+                createExchange(LivecoinExchange.class.getName());
+    }
+
+    /**
      * Creating bids according to input data.
      *
      * @param orderBook Orders to use
-     * @param xData x Data
-     * @param yData y Data
+     * @param xData     x Data
+     * @param yData     y Data
      * @param threshold threshold to compare with
      */
-    public void getBids(OrderBook orderBook, ArrayList<BigDecimal> xData, ArrayList<BigDecimal> yData, int threshold){
+    private void getBids(final OrderBook orderBook,
+                         final ArrayList<BigDecimal> xData,
+                         final ArrayList<BigDecimal> yData,
+                         final int threshold) {
         BigDecimal accumulatedUnits = new BigDecimal("0");
         for (LimitOrder limitOrder : orderBook.getBids()) {
             if (limitOrder.getLimitPrice().intValue() > threshold) {
                 xData.add(limitOrder.getLimitPrice());
-                accumulatedUnits = accumulatedUnits.add(limitOrder.getTradableAmount());
+                accumulatedUnits = accumulatedUnits.add(
+                        limitOrder.getTradableAmount());
                 yData.add(accumulatedUnits);
             }
         }
@@ -154,19 +183,23 @@ public class MarketPollingDemoExchanges implements Runnable{
     }
 
     /**
-     *Creating asks according to input data.
+     * Creating asks according to input data.
      *
      * @param orderBook Orders to use
-     * @param xData x Data
-     * @param yData y Data
+     * @param xData     x Data
+     * @param yData     y Data
      * @param threshold threshold to compare with
      */
-    public void getAsks(OrderBook orderBook, ArrayList<BigDecimal> xData, ArrayList<BigDecimal> yData, int threshold){
+    private void getAsks(final OrderBook orderBook,
+                         final ArrayList<BigDecimal> xData,
+                         final ArrayList<BigDecimal> yData,
+                         final int threshold) {
         BigDecimal accumulatedUnits = new BigDecimal("0");
         for (LimitOrder limitOrder : orderBook.getAsks()) {
             if (limitOrder.getLimitPrice().intValue() < threshold) {
                 xData.add(limitOrder.getLimitPrice());
-                accumulatedUnits = accumulatedUnits.add(limitOrder.getTradableAmount());
+                accumulatedUnits = accumulatedUnits.
+                        add(limitOrder.getTradableAmount());
                 yData.add(accumulatedUnits);
             }
         }
