@@ -1,0 +1,25 @@
+Як учень, я хочу мати змогу залогуватися в систему, використовуючи
+логін і пароль.
+
+Також мені потрібно бачити розклад уроків (список предметів) на тиждень/місяць,
+домашні завдання до відповідних уроків, а також номери аудиторій(класів)
+і ім'я вчителя, що веде відповідний урок.
+Queries:
+
+Розклад на місяць (-15 і +15 днів від сьогодні)
+(для розкладу на тиждень треба змінити 30 на 7)
+
+SELECT schedule.DATE, schedule.LESSON_POSITION, lesson.NAME, teacher.FIRSTNAME, teacher.LASTNAME,
+classroom.NAME, schedule.HOMEWORK
+FROM schedule 
+JOIN teacher ON teacher.ID = schedule.TEACHER_ID
+JOIN classroom ON schedule.CLASSROOM_ID = classroom.ID
+JOIN lesson ON schedule.LESSON_ID = lesson.ID
+WHERE schedule.FORM_ID = (my form ID here)
+AND TIMESTAMPDIFF(DAY,schedule.DATE,DATE_FORMAT(now(), '%Y/%m/%d')) < 30
+ORDER BY schedule.date, schedule.LESSON_POSITION 
+
+Я хочу бачити свої оцінки з минулих уроків, а також відмітки відвідуваності.
+
+Мені потрібен зв'язок з вчителем, можливість бачити імейл і телефонний номер
+вчителя.
