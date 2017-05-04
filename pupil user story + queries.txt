@@ -21,5 +21,14 @@ ORDER BY schedule.date, schedule.LESSON_POSITION
 
 Я хочу бачити свої оцінки з минулих уроків, а також відмітки відвідуваності.
 
+SELECT SCHEDULE.DATE, LESSON.NAME, ATTENDANCES.ATTEND, ATTENDANCES.GRADE
+FROM SCHEDULE
+JOIN LESSON ON SCHEDULE.LESSON_ID = LESSON.ID
+JOIN ATTENDANCES ON SCHEDULE.ID = ATTENDANCES.SCHEDULE_ID
+WHERE ATTENDANCES.PUPIL_ID IN(
+SELECT ID FROM PUPIL 
+WHERE FIRSTNAME LIKE 'Вовочка' AND LASTNAME LIKE 'Іванов') AND DATE < now()
+ORDER BY SCHEDULE.DATE, SCHEDULE.LESSON_POSITION;
+
 Мені потрібен зв'язок з вчителем, можливість бачити імейл і телефонний номер
 вчителя.
