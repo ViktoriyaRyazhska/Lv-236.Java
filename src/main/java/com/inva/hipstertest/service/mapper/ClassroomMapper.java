@@ -13,6 +13,7 @@ import java.util.List;
 public interface ClassroomMapper {
 
     @Mapping(source = "school.id", target = "schoolId")
+    @Mapping(source = "school.name", target = "schoolName")
     ClassroomDTO classroomToClassroomDTO(Classroom classroom);
 
     List<ClassroomDTO> classroomsToClassroomDTOs(List<Classroom> classrooms);
@@ -29,7 +30,7 @@ public interface ClassroomMapper {
      * @param id id of the entity
      * @return the entity instance
      */
-     
+
     default Classroom classroomFromId(Long id) {
         if (id == null) {
             return null;
@@ -38,6 +39,6 @@ public interface ClassroomMapper {
         classroom.setId(id);
         return classroom;
     }
-    
+
 
 }
