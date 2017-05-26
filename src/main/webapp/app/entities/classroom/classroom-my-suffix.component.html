@@ -16,23 +16,21 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="schoolNetApp.classroom.name">Name</span></th>
-            <th><span jhiTranslate="schoolNetApp.classroom.enabled">Enabled</span></th>
             <th><span jhiTranslate="schoolNetApp.classroom.school">School</span></th>
+            <th><span jhiTranslate="schoolNetApp.classroom.enabled">Enabled</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let classroom of classrooms ;trackBy: trackId">
-                <td><a [routerLink]="['../classroom-my-suffix', classroom.id ]">{{classroom.id}}</a></td>
                 <td>{{classroom.name}}</td>
-                <td>{{classroom.enabled}}</td>
                 <td>
                     <div *ngIf="classroom.schoolId">
                         <a [routerLink]="['../school-my-suffix', classroom.schoolId  ]" >{{classroom.schoolId}}</a>
                     </div>
                 </td>
+                <td>{{classroom.enabled}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
