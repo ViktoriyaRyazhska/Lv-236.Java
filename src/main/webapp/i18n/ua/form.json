@@ -1,0 +1,25 @@
+{
+    "schoolNetApp": {
+        "form" : {
+            "home": {
+                "title": "Forms",
+                "createLabel": "Створити новий Form",
+                "createOrEditLabel": "Створити або редагувати Form"
+            },
+            "created": "Новий Form створений з ідентифікатором {{ param }}",
+            "updated": "Form оновлений з ідентифікатором {{ param }}",
+            "deleted": "Form видалений з ідентифікатором {{ param }}",
+            "delete": {
+                "question": "Ви впевнені що хочете видалити Form {{ id }}?"
+            },
+            "detail": {
+                "title": "Form"
+            },
+            "name": "Name",
+            "enabled": "Enabled",
+            "pupil": "Pupil",
+            "schedule": "Schedule",
+            "school": "School"
+        }
+    }
+}

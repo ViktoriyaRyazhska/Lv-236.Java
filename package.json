@@ -1,6 +1,6 @@
 {
   "name": "school-net",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "description": "Description for SchoolNet",
   "private": true,
   "cacheDirectories": [
