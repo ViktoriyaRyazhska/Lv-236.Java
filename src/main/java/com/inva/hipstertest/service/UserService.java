@@ -235,4 +235,20 @@ public class UserService {
             userRepository.delete(user);
         }
     }
+
+
+    /**
+     * CREATE getters because i want use this variables in other classes.
+     * */
+    public UserRepository getUserRepository() {
+        return userRepository;
+    }
+
+    public PasswordEncoder getPasswordEncoder() {
+        return passwordEncoder;
+    }
+
+    public AuthorityRepository getAuthorityRepository() {
+        return authorityRepository;
+    }
 }

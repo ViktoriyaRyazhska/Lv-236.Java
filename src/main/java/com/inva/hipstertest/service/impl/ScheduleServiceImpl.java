@@ -91,10 +91,24 @@ public class ScheduleServiceImpl implements ScheduleService{
     }
 
     @Override
-    public List<ScheduleDTO> findAllByFormIdAndMonth(Long id) {
+    public List<ScheduleDTO> findAllByFormId(Long id) {
         log.debug("Request to get schedules for form {}", id);
-        List<ScheduleDTO> schedules = scheduleRepository.findByFormIdAndMonth(id).stream()
+        List<ScheduleDTO> schedules = scheduleRepository.findByFormId(id).stream()
             .map(scheduleMapper::scheduleToScheduleDTO).collect(Collectors.toCollection(LinkedList::new));
         return schedules;
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllByTeacherId(Long id) {
+        log.debug("Request to get schedules for teacher {}", id);
+        List<Schedule> schedules = scheduleRepository.findAllByTeacherId(id);
+        List<ScheduleDTO> scheduleDTOS = scheduleMapper.schedulesToScheduleDTOs(schedules);
+        return scheduleDTOS;
+    }
+
+    @Override
+    public void updateHomeworkById(String homework, Long scheduleId) {
+        log.debug("Request to set homework for schedule {}", homework, scheduleId);
+        scheduleRepository.updateHomeworkById(homework, scheduleId);
     }
 }

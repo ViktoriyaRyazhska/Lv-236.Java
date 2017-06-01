@@ -11,6 +11,7 @@ import { ScheduleMySuffixService } from './schedule-my-suffix.service';
 import { LessonMySuffix, LessonMySuffixService } from '../lesson';
 import { FormMySuffix, FormMySuffixService } from '../form';
 import { ClassroomMySuffix, ClassroomMySuffixService } from '../classroom';
+import { TeacherMySuffix, TeacherMySuffixService } from '../teacher';
 
 @Component({
     selector: 'jhi-schedule-my-suffix-dialog',
@@ -27,6 +28,8 @@ export class ScheduleMySuffixDialogComponent implements OnInit {
     forms: FormMySuffix[];
 
     classrooms: ClassroomMySuffix[];
+
+    teachers: TeacherMySuffix[];
     constructor(
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
@@ -35,6 +38,7 @@ export class ScheduleMySuffixDialogComponent implements OnInit {
         private lessonService: LessonMySuffixService,
         private formService: FormMySuffixService,
         private classroomService: ClassroomMySuffixService,
+        private teacherService: TeacherMySuffixService,
         private eventManager: EventManager
     ) {
         this.jhiLanguageService.setLocations(['schedule']);
@@ -49,6 +53,8 @@ export class ScheduleMySuffixDialogComponent implements OnInit {
             (res: Response) => { this.forms = res.json(); }, (res: Response) => this.onError(res.json()));
         this.classroomService.query().subscribe(
             (res: Response) => { this.classrooms = res.json(); }, (res: Response) => this.onError(res.json()));
+        this.teacherService.query().subscribe(
+            (res: Response) => { this.teachers = res.json(); }, (res: Response) => this.onError(res.json()));
     }
     clear() {
         this.activeModal.dismiss('cancel');
@@ -96,6 +102,10 @@ export class ScheduleMySuffixDialogComponent implements OnInit {
     }
 
     trackClassroomById(index: number, item: ClassroomMySuffix) {
+        return item.id;
+    }
+
+    trackTeacherById(index: number, item: TeacherMySuffix) {
         return item.id;
     }
 }

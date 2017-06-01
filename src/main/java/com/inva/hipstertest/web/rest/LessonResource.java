@@ -28,7 +28,7 @@ public class LessonResource {
     private final Logger log = LoggerFactory.getLogger(LessonResource.class);
 
     private static final String ENTITY_NAME = "lesson";
-        
+
     private final LessonService lessonService;
 
     public LessonResource(LessonService lessonService) {
@@ -87,6 +87,18 @@ public class LessonResource {
     public List<LessonDTO> getAllLessons() {
         log.debug("REST request to get all Lessons");
         return lessonService.findAll();
+    }
+
+    /**
+     * GET  /lessons/teacher/:teacherId : get all the lessons .
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of lessons in body
+     */
+    @GetMapping("/lessons/teacher/{teacherId}")
+    @Timed
+    public List<LessonDTO> getAllLessonsByCurrentUser(@PathVariable("teacherId") Long teacherId) {
+        log.debug("REST request to get all lessons for the current teacher : {}", teacherId);
+        return lessonService.getAllLessonsByTeacherId(teacherId);
     }
 
     /**

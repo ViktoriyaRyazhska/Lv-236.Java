@@ -28,7 +28,7 @@ public class PupilResource {
     private final Logger log = LoggerFactory.getLogger(PupilResource.class);
 
     private static final String ENTITY_NAME = "pupil";
-        
+
     private final PupilService pupilService;
 
     public PupilResource(PupilService pupilService) {
@@ -100,6 +100,19 @@ public class PupilResource {
     public ResponseEntity<PupilDTO> getPupil(@PathVariable Long id) {
         log.debug("REST request to get Pupil : {}", id);
         PupilDTO pupilDTO = pupilService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(pupilDTO));
+    }
+
+    /**
+     * GET  pupil.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the pupilDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/pupilhome/getpupil")
+    @Timed
+    public ResponseEntity<PupilDTO> getPupil() {
+        log.debug("REST request to get Pupil by current User");
+        PupilDTO pupilDTO = pupilService.findPupilByCurrentUser();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(pupilDTO));
     }
 

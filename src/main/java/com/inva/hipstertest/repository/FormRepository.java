@@ -13,8 +13,6 @@ import java.util.List;
 @SuppressWarnings("unused")
 public interface FormRepository extends JpaRepository<Form, Long> {
 
-    @Query("select distinct form from Form form left join form.schedules schedule" +
-        " left join schedule.lesson lesson left join lesson.teachers teacher where teacher.id = :teacherId")
+    @Query("select forms from Form forms join forms.schedules schedules where schedules.teacher.id =:teacherId")
     List<Form> findAllByTeacherId(@Param("teacherId") Long teacherId);
-
 }

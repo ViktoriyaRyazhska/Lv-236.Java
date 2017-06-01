@@ -1,5 +1,6 @@
 package com.inva.hipstertest.service;
 
+import com.inva.hipstertest.domain.School;
 import com.inva.hipstertest.service.dto.SchoolDTO;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public interface SchoolService {
 
     /**
      *  Get all the schools.
-     *  
+     *
      *  @return the list of entities
      */
     List<SchoolDTO> findAll();
@@ -37,4 +38,5 @@ public interface SchoolService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
 }

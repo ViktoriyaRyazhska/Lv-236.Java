@@ -1,0 +1,46 @@
+<div>
+    <h2>{{selectedDate | date:'shortDate'}}</h2>
+    <h2>
+        <span>User Schedules</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="pupilSchedules">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                    <th><span>Lesson Position</span></th>
+                    <th><span>Lesson</span></th>
+                    <th><span>Homework</span></th>
+                    <th><span>Classroom</span></th>
+                    <th><span>Teacher</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let schedule of getSchedulesWithBlanks()">
+                    <td>{{schedule.lessonPosition}}</td>
+                    <td>
+                        <div *ngIf="schedule.lessonId">
+                            <a [routerLink]="['../lesson-my-suffix', schedule.lessonId  ]" >{{schedule.lessonName}}</a>
+                        </div>
+                    </td>
+                <a (click)="selectHomework(schedule.homework)"> <td>{{schedule.homework | lengthPipe : 10}}</td></a>
+                    <td>
+                        <div *ngIf="schedule.classroomId">
+                            <a [routerLink]="['../classroom-my-suffix', schedule.classroomId  ]" >{{schedule.classroomName}}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="schedule.teacherId">
+                            <a [routerLink]="['../teacher-my-suffix', schedule.teacherId  ]" >{{schedule.teacherFirstName + ' ' +schedule.teacherLastName}}</a>
+                        </div>
+                    </td>
+            </tr>
+            </tbody>
+        </table>
+        <!--show selected homework-->
+        <h2>{{selectedHomework}}</h2>
+    </div>
+</div>

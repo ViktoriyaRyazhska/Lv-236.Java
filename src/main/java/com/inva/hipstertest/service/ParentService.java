@@ -1,6 +1,7 @@
 package com.inva.hipstertest.service;
 
 import com.inva.hipstertest.service.dto.ParentDTO;
+
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface ParentService {
 
     /**
      *  Get all the parents.
-     *  
+     *
      *  @return the list of entities
      */
     List<ParentDTO> findAll();

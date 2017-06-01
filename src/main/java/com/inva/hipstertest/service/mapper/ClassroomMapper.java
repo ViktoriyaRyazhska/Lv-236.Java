@@ -39,6 +39,4 @@ public interface ClassroomMapper {
         classroom.setId(id);
         return classroom;
     }
-
-
 }

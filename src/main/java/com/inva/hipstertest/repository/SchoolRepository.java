@@ -3,6 +3,7 @@ package com.inva.hipstertest.repository;
 import com.inva.hipstertest.domain.School;
 
 import org.springframework.data.jpa.repository.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 

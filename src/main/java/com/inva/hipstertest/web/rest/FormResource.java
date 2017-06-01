@@ -28,7 +28,7 @@ public class FormResource {
     private final Logger log = LoggerFactory.getLogger(FormResource.class);
 
     private static final String ENTITY_NAME = "form";
-        
+
     private final FormService formService;
 
     public FormResource(FormService formService) {
@@ -87,6 +87,19 @@ public class FormResource {
     public List<FormDTO> getAllForms() {
         log.debug("REST request to get all Forms");
         return formService.findAll();
+    }
+
+    /**
+     * GET  /forms/teacher/:teacherId : get the "id" teacher.
+     *
+     * @param teacherId the id of teacher
+     * @return the ResponseEntity with status 200 (OK) and with body the list of formsDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/forms/teacher/{teacherId}")
+    @Timed
+    public List<FormDTO> getAllByCurrentTeacher(@PathVariable("teacherId") Long teacherId) {
+        log.debug("REST request to get all Forms by the current teacher : {}", teacherId);
+        return formService.findAllByTeacherId(teacherId);
     }
 
     /**

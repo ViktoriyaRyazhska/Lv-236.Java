@@ -1,0 +1,155 @@
+{
+    "global": {
+        "title": "SchoolNet",
+        "browsehappy": "Ваш браузер <strong>застарів</strong>. Будь-ласка <a href=\"http://browsehappy.com/?locale=ru\">оновіть ваш браузер</a>.",
+        "menu": {
+            "teacher-home": "Учитель",
+            "user-home": "User Home",
+            "pupil-home": "Pupil Home",
+            "management":"Управління",
+            "teacher-management":{
+                "teachers":"Вчителі",
+                "schedules":"Розклад",
+                "forms":"Класи"
+            },
+            "home": "Головна",
+            "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+            "entities": {
+                "main": "Сутності",
+                "schoolMySuffix": "School",
+                "formMySuffix": "Form",
+                "pupilMySuffix": "Pupil",
+                "teacherMySuffix": "Teacher",
+                "classroomMySuffix": "Classroom",
+                "lessonMySuffix": "Lesson",
+                "scheduleMySuffix": "Schedule",
+                "attendancesMySuffix": "Attendances",
+                "parentMySuffix": "Parent",
+                "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
+            },
+            "account": {
+                "main": "Профіль",
+                "settings": "Налаштування",
+                "password": "Пароль",
+                "sessions": "Сесії",
+                "login": "Увійти",
+                "logout": "Вийти",
+                "register": "Зареєструватися"
+            },
+            "admin": {
+                "main": "Адміністрування",
+                "userManagement": "Управління користувачами",
+                "tracker": "Трекер корист.",
+                "metrics": "Метрики",
+                "health": "Стан",
+                "configuration": "Налаштування",
+                "logs": "Логи",
+                "audits": "Аудит",
+                "apidocs": "API",
+                "database": "База даних",
+                "jhipster-needle-menu-add-admin-element": "JHipster will add additional menu entries here (do not translate!)"
+            },
+            "language": "Мова"
+        },
+        "form": {
+            "username": "Логін",
+            "username.placeholder": "Ваш логін",
+            "newpassword": "Новий пароль",
+            "newpassword.placeholder": "Новий пароль",
+            "confirmpassword": "Підтвердження нового пароля",
+            "confirmpassword.placeholder": "Підтвердіть новий пароль",
+            "email": "Email",
+            "email.placeholder": "Ваш email",
+            "imageUrl": "URL-адреса для фотографії користувача",
+            "imageUrl.placeholder": "Ваша URL-адреса для фотографії"
+        },
+        "messages": {
+            "info": {
+                "authenticated": {
+                    "prefix": "Якщо ви хочете ",
+                    "link": "авторизуватися",
+                    "suffix": ", ви можете спробувати акаунти за замовчуванням:<br/>- Адміністратор (логін=\"admin\" і пароль=\"admin\") <br/>- Користувач (логін=\"user\" і пароль=\"user\")."
+                },
+                "register": {
+                    "noaccount": "У вас немає акаунта?",
+                    "link": "Створити новий акаунт"
+                }
+            },
+            "error": {
+                "dontmatch": "Пароль і його підтвердження не збігаються!"
+            },
+            "validate": {
+                "newpassword": {
+                    "required": "Пароль повинен бути вказаний.",
+                    "minlength": "Довжина пароля повинна бути не менше 5-ти символів",
+                    "maxlength": "Пароль не може бути довшим ніж 50-ть символів",
+                    "strength": "Складність пароля:"
+                },
+                "confirmpassword": {
+                    "required": "Підтвердження пароля повинно бути вказано.",
+                    "minlength": "Довжина підтвердження пароля повинна бути не менше 5-ти символів",
+                    "maxlength": "Підтвердження пароля не може бути довшим ніж 50-ть символів"
+                },
+                "email": {
+                    "required": "Email повинен бути вказаний.",
+                    "invalid": "Email не вірний.",
+                    "minlength": "Довжина email повинна бути не менше 5-ти символів",
+                    "maxlength": "Email не може бути довшим ніж 50-ть символів"
+                }
+            }
+        },
+        "field": {
+            "id" : "ID"
+        },
+        "ribbon": {
+            "dev":"Lv-236.Java"
+        }
+    },
+    "entity": {
+        "action": {
+            "addblob": "Додати двійковий об'єкт",
+            "addimage": "Додати зображення",
+            "back": "Назад",
+            "cancel": "Відміна",
+            "delete": "Видалити",
+            "edit": "Змінити",
+            "open": "Відкрити",
+            "save": "Зберегти",
+            "view": "Перегляд"
+        },
+        "detail": {
+            "field": "Поле",
+            "value": "Значення"
+        },
+        "delete": {
+            "title": "Підтвердіть операцію видалення"
+        },
+        "validation": {
+            "required": "Це поле обов'язкове до заповнення.",
+            "minlength": "Це поле є обов'язковим, принаймні {{min}} символів.",
+            "maxlength": "Це поле не може бути довшим, ніж {{max}} символів.",
+            "min": "Це поле має бути більшим, ніж {{min}}.",
+            "max": "Це поле не може бути більшим, ніж {{max}}.",
+            "minbytes": "Це поле має бути більшим, ніж {{min}} байтів.",
+            "maxbytes": "Це поле не може бути більшим, ніж {{max}} байтів.",
+            "pattern": "Це поле має слідувати моделі {{pattern}}.",
+            "number": "Це поле має бути число.",
+            "datetimelocal": "Це поле має бути дата та час.",
+            "minlengthL": "Це поле є обов'язковим, принаймні 3 символа.",
+            "maxlengthL": "Це поле не може бути довшим, ніж 50 символів.",
+            "minlengthE": "Це поле є обов'язковим, принаймні 7 символів.",
+            "maxlengthE": "Це поле не може бути довшим, ніж 100 символів."
+        }
+    },
+    "error": {
+        "internalServerError": "Internal server error",
+        "server.not.reachable": "Сервер не доступний",
+        "url.not.found": "Not found",
+        "NotNull": "Поле {{fieldName}} не може бути порожнім!",
+        "Size": "Поле {{fieldName}} не відповідає вимогам мін/макс. розміру!",
+        "userexists": "Ім'я користувача вже використовується!",
+        "emailexists": "Email вже використовується!",
+        "idexists": "Новий {{entityName}} не може мати даний ID"
+    },
+    "footer": "Створено групою Lv-236.Java :)"
+}

@@ -19,6 +19,8 @@ public interface ScheduleMapper {
     @Mapping(source = "form.id", target = "formId")
     @Mapping(source = "classroom.id", target = "classroomId")
     @Mapping(source = "teacher.id", target = "teacherId")
+    @Mapping(source = "teacher.user.lastName", target = "teacherLastName")
+    @Mapping(source = "teacher.user.firstName", target = "teacherFirstName")
     ScheduleDTO scheduleToScheduleDTO(Schedule schedule);
 
     List<ScheduleDTO> schedulesToScheduleDTOs(List<Schedule> schedules);

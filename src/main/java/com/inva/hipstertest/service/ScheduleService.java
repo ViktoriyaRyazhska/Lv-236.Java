@@ -1,6 +1,8 @@
 package com.inva.hipstertest.service;
 
+import com.inva.hipstertest.domain.Schedule;
 import com.inva.hipstertest.service.dto.ScheduleDTO;
+
 import java.util.List;
 
 /**
@@ -37,7 +39,14 @@ public interface ScheduleService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    /**
+     * Find all Schedules by form ID
+     * @param id form Id of Pupil
+     * @return
+     */
+    List<ScheduleDTO> findAllByFormId(Long id);
 
+    List<ScheduleDTO> findAllByTeacherId(Long teacherId);
 
-    List<ScheduleDTO> findAllByFormIdAndMonth(Long id);
+    void updateHomeworkById(String homework, Long scheduleId);
 }

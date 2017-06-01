@@ -1,0 +1,27 @@
+{
+    "headTeacher": {
+        "teacher-management" : {
+            "home": {
+                "title": "Вчителі",
+                "createLabel": "Створити нового Вчителя",
+                "createOrEditLabel": "Створити або редагувати вчителя"
+            },
+            "created": "Новий вчитель створений {{ param }}",
+            "updated": "Вчитель оновлений {{ param }}",
+            "deleted": "Вчитель видалений {{ param }}",
+            "delete": {
+                "question": "Ви серйозно хочете видалити Вчителя {{ id }}?"
+            },
+            "detail": {
+                "title": "Вчитель"
+            },
+            "name": "І'мя",
+            "enabled": "Активний",
+            "classroom": "Кімната",
+            "form": "Клас",
+            "teacher": "Вчитель",
+            "firstName":"Ім'я",
+            "lastName":"Прізвище"
+        }
+    }
+}

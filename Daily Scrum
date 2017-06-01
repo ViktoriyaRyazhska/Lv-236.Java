@@ -47,3 +47,67 @@ Volodymyr: 24.05.2017
 3) -
 ----------------------------------------
 ----------------------------------------
+Myndyk Mykola: 25.05.2017
+1) Added relations between calendar and schedule(after click on some date we see all lessons related to),
+   removed link to user-home page from start screen, only after login link appears
+2) Add homework window that will appear after click on homeworkButton
+3) none
+----------------------------------------
+----------------------------------------
+Volodymyr: 26.05.2017
+1) Now I can create classrooms. Changed design of page
+2) Change structure, move creating of classroom to headteacher. connect to angular
+3) none
+----------------------------------------
+Vasyl: 26.05.2017
+1) Added and translate to Ukrainian language localization for project,
+    added posibilities to reset password and register new user throught email verification,
+    added possibilities to add and show user photo avatar,
+    small\cosmetic changes to whole project.
+2) Add field for saving user phone number and maybe saving avatar in DB.
+3) -
+----------------------------------------
+Marta: 25.05.2017
+1) Added possibilty to see pupils of the form I click on
+2) Change UI design of view of class
+3) -
+----------------------------------------
+Orest: 26.05.2017
+1) 
+- Added query to get formId for Pupil using principal.login
+- Added query to get all schedules for certain formId
+- Changed back-end to receive REST request for a given URL/method
+and to respond with respective .json file
+- Created service for user-home(pupil-home) to send request for
+schedules
+- Created user-home-schedules model for received .json response
+2) 
+- Change onInit() front-end methods for user(pupil) component.
+- Change onClick() logic for calendar event
+- Refactor user-home to pupil-home
+- Refactor user-home component -> move business logic to service
+3) -
+----------------------------------------
+Orest: 28.05.2017
+1)
+- Refactored pupil-home (moved schedules logic to service),
+added another array generation for current day schedules,
+linked it with calendar.
+- Slight changes for onInit() method according to refactoring
+2)
+- Add creation of schedules table with fixed number of rows,
+add empty rows in table without lesson
+3) -
+----------------------------------------
+----------------------------------------
+Myndyk Mykola: 29.05.2017
+1) Added window with himework details when some lessons homework selected
+  displaying lastname and firstname on welcome message  
+2) 
+3) none
+----------------------------------------
+Vasyl: 29.05.2017
+1) Pushed project to production on heroku.
+2) Need migrate DB in production from mySQL to PostgreSQL.
+3) Liquibase config.
+----------------------------------------

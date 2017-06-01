@@ -18,10 +18,17 @@ public interface FormService {
 
     /**
      *  Get all the forms.
-     *  
+     *
      *  @return the list of entities
      */
     List<FormDTO> findAll();
+
+    /**
+     *  Get all the forms by teacher id.
+     *
+     *  @return the list of entities
+     */
+    List<FormDTO> findAllByTeacherId(Long teacherId);
 
     /**
      *  Get the "id" form.

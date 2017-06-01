@@ -1,0 +1,29 @@
+{
+    "schoolNetApp": {
+        "schedule" : {
+            "home": {
+                "title": "Schedules",
+                "createLabel": "Створити новий Schedule",
+                "createOrEditLabel": "Створити або редагувати Schedule"
+            },
+            "created": "Новий Schedule створений з ідентифікатором {{ param }}",
+            "updated": "Schedule оновлений з ідентифікатором {{ param }}",
+            "deleted": "Schedule видалений з ідентифікатором {{ param }}",
+            "delete": {
+                "question": "Ви впевнені що хочете видалити Schedule {{ id }}?"
+            },
+            "detail": {
+                "title": "Schedule"
+            },
+            "date": "Date",
+            "homework": "Homework",
+            "lessonPosition": "Lesson Position",
+            "enabled": "Enabled",
+            "attendances": "Attendances",
+            "lesson": "Lesson",
+            "form": "Form",
+            "classroom": "Classroom",
+            "teacher": "Teacher"
+        }
+    }
+}

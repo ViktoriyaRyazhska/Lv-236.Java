@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class FormServiceImpl implements FormService{
 
     private final Logger log = LoggerFactory.getLogger(FormServiceImpl.class);
-    
+
     private final FormRepository formRepository;
 
     private final FormMapper formMapper;
@@ -49,7 +49,7 @@ public class FormServiceImpl implements FormService{
 
     /**
      *  Get all the forms.
-     *  
+     *
      *  @return the list of entities
      */
     @Override
@@ -61,6 +61,21 @@ public class FormServiceImpl implements FormService{
             .collect(Collectors.toCollection(LinkedList::new));
 
         return result;
+    }
+
+    /**
+     *  Get all Forms by Teacher id.
+     *
+     *  @param teacherId the id of teacher entity
+     *  @return the list of entities
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public List<FormDTO> findAllByTeacherId(Long teacherId) {
+        log.debug("Request to get all Forms by Teacher : {}", teacherId);
+        List<Form> forms = formRepository.findAllByTeacherId(teacherId);
+        List<FormDTO> formsDTO = formMapper.formsToFormDTOs(forms);
+        return formsDTO;
     }
 
     /**

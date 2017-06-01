@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class LessonServiceImpl implements LessonService{
 
     private final Logger log = LoggerFactory.getLogger(LessonServiceImpl.class);
-    
+
     private final LessonRepository lessonRepository;
 
     private final LessonMapper lessonMapper;
@@ -49,7 +49,7 @@ public class LessonServiceImpl implements LessonService{
 
     /**
      *  Get all the lessons.
-     *  
+     *
      *  @return the list of entities
      */
     @Override
@@ -61,6 +61,19 @@ public class LessonServiceImpl implements LessonService{
             .collect(Collectors.toCollection(LinkedList::new));
 
         return result;
+    }
+
+    /**
+     *  Get all the lessons by teacher id.
+     *
+     *  @return the list of entities
+     */
+    @Override
+    public List<LessonDTO> getAllLessonsByTeacherId(Long teacherId) {
+        log.debug("Request to get all Lessons by teacher {}", teacherId);
+        List<Lesson> lessons = lessonRepository.getAllLessonsByTeacherId(teacherId);
+        List<LessonDTO> lessonDTOs = lessonMapper.lessonsToLessonDTOs(lessons);
+        return lessonDTOs;
     }
 
     /**

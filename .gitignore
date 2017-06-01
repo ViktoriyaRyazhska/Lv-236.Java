@@ -120,7 +120,6 @@ Desktop.ini
 ######################
 # Others
 ######################
-*.yml
 *.class
 *.*~
 *~
@@ -140,8 +139,3 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-
-######################
-# Local settings
-######################
-/src/main/resources/config/application-dev.yml

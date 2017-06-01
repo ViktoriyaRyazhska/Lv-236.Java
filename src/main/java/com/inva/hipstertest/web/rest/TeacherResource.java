@@ -1,21 +1,30 @@
 package com.inva.hipstertest.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
+import com.inva.hipstertest.domain.Authority;
+import com.inva.hipstertest.domain.User;
+import com.inva.hipstertest.repository.TeacherRepository;
+import com.inva.hipstertest.repository.UserRepository;
+import com.inva.hipstertest.service.MailService;
 import com.inva.hipstertest.service.TeacherService;
+import com.inva.hipstertest.service.dto.UserDTO;
 import com.inva.hipstertest.web.rest.util.HeaderUtil;
 import com.inva.hipstertest.service.dto.TeacherDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -28,8 +37,13 @@ public class TeacherResource {
     private final Logger log = LoggerFactory.getLogger(TeacherResource.class);
 
     private static final String ENTITY_NAME = "teacher";
-        
+
     private final TeacherService teacherService;
+
+    @Autowired
+    private MailService mailService;
+    @Autowired
+    private UserRepository userRepository;
 
     public TeacherResource(TeacherService teacherService) {
         this.teacherService = teacherService;
@@ -97,9 +111,22 @@ public class TeacherResource {
      */
     @GetMapping("/teachers/{id}")
     @Timed
-    public ResponseEntity<TeacherDTO> getTeacher(@PathVariable Long id) {
+    public ResponseEntity<TeacherDTO> getTeacher(@PathVariable Long id, Principal principal) {
         log.debug("REST request to get Teacher : {}", id);
         TeacherDTO teacherDTO = teacherService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(Optional.ofNullable(teacherDTO));
+    }
+
+    /**
+     * GET  /teachers/current : get current teacher.
+     *
+     * @return the ResponseEntity with status 200 (OK) and with body the current teacherDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/teachers/current")
+    @Timed
+    public ResponseEntity<TeacherDTO> getCurrentTeacher() {
+        log.debug("REST request to get current Teacher");
+        TeacherDTO teacherDTO = teacherService.findTeacherByCurrentUser();
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(teacherDTO));
     }
 
@@ -116,5 +143,52 @@ public class TeacherResource {
         teacherService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
+
+
+    /**
+     * GET  /teachers : get all the teachers.
+     *
+     * @return the ResponseEntity with status 200 (OK) and the list of teachers in body
+     */
+    @GetMapping("/headteacher-management")
+    @Timed
+    public List<TeacherDTO> getAllTeachersForMe() {
+        log.debug("REST request to get all Teachers");
+        return teacherService.findAll();
+
+        /*
+        Optional<User> s = userRepository.findOneWithAuthoritiesByLogin(principal.getName());
+        Set<Authority> set = s.get().getAuthorities();
+        Long ssss = userRepository.findByLoginUserId(principal.getName());
+        System.out.println(ssss + " //////////////");
+        System.out.println(teacherService.findOneWithSchool(ssss).getSchool());
+        //System.out.println(teacherService.findOne(ssss) + "   ////////////////////");
+        //System.out.println(teacherService.findOne(ssss).getSchoolId() + "    ///////////////");
+*/
+/*
+
+        TeacherDTO teacherDTOs = new TeacherDTO();
+        User user = new User();
+        //Set userDTO
+        user.setEmail("marianpulup@gmail.com");
+        user.setFirstName("Марян");
+        user.setLastName("Пилип");
+        String context = teacherService.saveTeacherWithUser(teacherDTOs, user, principal);
+        mailService.sendSimpleEmail(user.getEmail(), context);
+
+*/
+
+    }
+
+    @PostMapping("/headteacher-management")
+    @Timed
+    public ResponseEntity<TeacherDTO> createTeacherWithUser(@Valid @RequestBody TeacherDTO teacherDTO) throws URISyntaxException {
+        log.debug("REST request to save Teacher : {}", teacherDTO);
+        TeacherDTO result = teacherService.saveTeacherWithUser(teacherDTO);
+        return ResponseEntity.created(new URI("/api/headteacher-management/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
+
 
 }

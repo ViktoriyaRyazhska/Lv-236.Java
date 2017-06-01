@@ -18,10 +18,17 @@ public interface LessonService {
 
     /**
      *  Get all the lessons.
-     *  
+     *
      *  @return the list of entities
      */
     List<LessonDTO> findAll();
+
+    /**
+     *  Get all the lessons by teacher id.
+     *
+     *  @return the list of entities
+     */
+    List<LessonDTO> getAllLessonsByTeacherId(Long teacherId);
 
     /**
      *  Get the "id" lesson.

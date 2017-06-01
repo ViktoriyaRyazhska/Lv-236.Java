@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ParentServiceImpl implements ParentService{
 
     private final Logger log = LoggerFactory.getLogger(ParentServiceImpl.class);
-    
+
     private final ParentRepository parentRepository;
 
     private final ParentMapper parentMapper;
@@ -49,7 +49,7 @@ public class ParentServiceImpl implements ParentService{
 
     /**
      *  Get all the parents.
-     *  
+     *
      *  @return the list of entities
      */
     @Override
@@ -59,7 +59,6 @@ public class ParentServiceImpl implements ParentService{
         List<ParentDTO> result = parentRepository.findAllWithEagerRelationships().stream()
             .map(parentMapper::parentToParentDTO)
             .collect(Collectors.toCollection(LinkedList::new));
-
         return result;
     }
 

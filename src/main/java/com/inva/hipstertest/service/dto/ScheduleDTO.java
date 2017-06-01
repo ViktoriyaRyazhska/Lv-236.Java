@@ -34,6 +34,10 @@ public class ScheduleDTO implements Serializable {
 
     private Long teacherId;
 
+    private String teacherLastName;
+
+    private String teacherFirstName;
+
     private String lessonName;
 
     private String formName;
@@ -132,6 +136,21 @@ public class ScheduleDTO implements Serializable {
         this.classroomName = classroomName;
     }
 
+    public String getTeacherLastName() {
+        return teacherLastName;
+    }
+
+    public void setTeacherLastName(String teacherLastName) {
+        this.teacherLastName = teacherLastName;
+    }
+
+    public String getTeacherFirstName() {
+        return teacherFirstName;
+    }
+
+    public void setTeacherFirstName(String teacherFirstName) {
+        this.teacherFirstName = teacherFirstName;
+    }
 
     @Override
     public boolean equals(Object o) {

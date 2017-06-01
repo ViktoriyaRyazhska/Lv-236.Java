@@ -6,7 +6,7 @@ services:
         #     - ~/volumes/jhipster/SchoolNet/mysql/:/var/lib/mysql/
         environment:
             - MYSQL_USER=root
-            - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+            - MYSQL_ALLOW_EMPTY_PASSWORD=YES
             - MYSQL_DATABASE=schoolnet
         ports:
             - 3306:3306

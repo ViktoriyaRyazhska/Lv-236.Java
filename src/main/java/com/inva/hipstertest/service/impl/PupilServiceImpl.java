@@ -96,4 +96,10 @@ public class PupilServiceImpl implements PupilService {
         List<PupilDTO> pupilDTOs = pupilMapper.pupilsToPupilDTOs(pupils);
         return pupilDTOs;
     }
+
+    @Override
+    public PupilDTO findPupilByCurrentUser() {
+        log.debug("Request to find pupil by current user");
+        return pupilMapper.pupilToPupilDTO(pupilRepository.findPupilByCurrentUser());
+    }
 }

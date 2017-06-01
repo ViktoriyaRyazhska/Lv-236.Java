@@ -70,6 +70,34 @@ public class MailService {
         }
     }
 
+
+    /**
+     * My method for send simple email.
+     * @param to Email user.
+     * @param  content String with information
+     *                 about login and password.
+     * */
+    @Async
+    public void sendSimpleEmail(String to, String content){
+
+        final String subject = "LOGIN AND PASSWORD";
+
+        // Prepare message using a Spring helper
+        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        try {
+            MimeMessageHelper message = new MimeMessageHelper(mimeMessage, false, CharEncoding.UTF_8);
+            message.setTo(to);
+            message.setFrom(jHipsterProperties.getMail().getFrom());
+            message.setSubject(subject);
+            message.setText(content, true);
+            javaMailSender.send(mimeMessage);
+            log.debug("Sent email to User '{}'", to);
+        } catch (Exception e) {
+            log.warn("Email could not be sent to user '{}'", to, e);
+        }
+    }
+
+
     @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());

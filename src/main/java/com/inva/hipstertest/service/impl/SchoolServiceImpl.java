@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class SchoolServiceImpl implements SchoolService{
 
     private final Logger log = LoggerFactory.getLogger(SchoolServiceImpl.class);
-    
+
     private final SchoolRepository schoolRepository;
 
     private final SchoolMapper schoolMapper;
@@ -49,7 +49,7 @@ public class SchoolServiceImpl implements SchoolService{
 
     /**
      *  Get all the schools.
-     *  
+     *
      *  @return the list of entities
      */
     @Override
@@ -88,4 +88,5 @@ public class SchoolServiceImpl implements SchoolService{
         log.debug("Request to delete School : {}", id);
         schoolRepository.delete(id);
     }
+
 }

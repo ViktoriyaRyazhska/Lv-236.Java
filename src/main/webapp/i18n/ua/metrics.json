@@ -1,0 +1,93 @@
+{
+    "metrics": {
+        "title": "Метрики додатка",
+        "refresh.button": "Оновити",
+        "updating": "Оновлення...",
+        "jvm": {
+            "title": "JVM Метрики",
+            "memory": {
+                "title": "Пам'ять",
+                "total": "Всього пам'яті",
+                "heap": "Купа",
+                "nonheap": "Не купа"
+            },
+            "threads": {
+                "title": "Потоки",
+                "all": "Всі",
+                "runnable": "Активні",
+                "timedwaiting": "Часове очікування",
+                "waiting": "Очікування",
+                "blocked": "Заблоковані",
+                "dump": {
+                    "title": "Дамп потоків",
+                    "id": "Id: ",
+                    "blockedtime": "Заблоковані Час",
+                    "blockedcount": "Заблоковані Кількість",
+                    "waitedtime": "Очікуючі Час",
+                    "waitedcount": "Очікуючі Кількість",
+                    "lockname": "Назва блокування",
+                    "stacktrace": "Stacktrace",
+                    "show": "Показати",
+                    "hide": "Сховати"
+                }
+            },
+            "gc": {
+                "title": "Збирачі сміття",
+                "marksweepcount": "Mark Sweep Кількість",
+                "marksweeptime": "Mark Sweep Час",
+                "scavengecount": "Прибирання сміття Кількість",
+                "scavengetime": "Прибирання сміття Час"
+            },
+            "http": {
+                "title": "HTTP запити (подій в секунду)",
+                "active": "Активні запити:",
+                "total": "Всього запитів:",
+                "table": {
+                    "code": "Код",
+                    "count": "Кількість",
+                    "mean": "Середнє",
+                    "average": "Середнє"
+                },
+                "code": {
+                    "ok": "Ок",
+                    "notfound": "Не найдено",
+                    "servererror": "Помилка сервера"
+                }
+            }
+        },
+        "servicesstats": {
+            "title": "Статистика сервісів (час в мілісекундах)",
+            "table": {
+                "name": "Назва сервісу",
+                "count": "Кількість",
+                "mean": "Середнє",
+                "min": "Мін",
+                "max": "Макс",
+                "p50": "p50",
+                "p75": "p75",
+                "p95": "p95",
+                "p99": "p99"
+            }
+        },
+        "cache": {
+            "title": "статистика",
+            "cachename": "Назва кеша",
+            "hits": "Влучень",
+            "misses": "Промахів",
+            "evictions": "Кількість очисток"
+        },
+        "datasource": {
+            "usage": "Usage",
+            "title": "Статистика DataSource (час в мілісекундах)",
+            "name": "Pool usage",
+            "count": "Count",
+            "mean": "Середнє",
+            "min": "Мінімум",
+            "max": "Максимум",
+            "p50": "p50",
+            "p75": "p75",
+            "p95": "p95",
+            "p99": "p99"
+        }
+    }
+}

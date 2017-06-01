@@ -1,0 +1,27 @@
+{
+    "headTeacher": {
+        "teacher-management" : {
+            "home": {
+                "title": "Учителя",
+                "createLabel": "Создать нового Учителя",
+                "createOrEditLabel": "Создать или отредактировать Учителя"
+            },
+            "created": "Новый Учитель создан с идентификатором {{ param }}",
+            "updated": "Учитель обновлен с идентификатором {{ param }}",
+            "deleted": "Учитель удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Учителя {{ id }}?"
+            },
+            "detail": {
+                "title": "Учитель"
+            },
+            "name": "Имя",
+            "enabled": "Активный",
+            "classroom": "Комната",
+            "form": "Клас",
+            "teacher": "Учитель",
+            "firstName":"Имя",
+            "lastName":"Фамилия"
+        }
+    }
+}

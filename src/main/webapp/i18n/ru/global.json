@@ -3,6 +3,15 @@
         "title": "SchoolNet",
         "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
         "menu": {
+            "teacher-home": "Учитель",
+            "user-home": "User Home",
+            "pupil-home": "Pupil Home",
+            "management":"Управление",
+            "teacher-management":{
+                "teachers":"Учителя",
+                "schedules":"Расписание",
+                "forms":"Классы"
+            },
             "home": "Главная",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
@@ -50,7 +59,9 @@
             "confirmpassword": "Подтверждение нового пароля",
             "confirmpassword.placeholder": "Подтвердите новый пароль",
             "email": "Email",
-            "email.placeholder": "Ваш email"
+            "email.placeholder": "Ваш email",
+            "imageUrl": "URL-адрес для фотографии пользователя",
+            "imageUrl.placeholder": "Ваш URL-адрес для фотографии"
         },
         "messages": {
             "info": {
@@ -91,7 +102,7 @@
             "id" : "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev":"Lv-236.Java"
         }
     },
     "entity": {
@@ -123,7 +134,11 @@
             "maxbytes": "Это поле не может быть больше, чем {{max}} байтов.",
             "pattern": "Это поле должно следовать модели {{pattern}}.",
             "number": "Это поле должно быть число.",
-            "datetimelocal": "Это поле должно быть дата и время."
+            "datetimelocal": "Это поле должно быть дата и время.",
+            "minlengthL": "Это поле является обязательным, по крайней мере 3 символа.",
+            "maxlengthL": "Это поле не может быть длинее, чем 50 символов.",
+            "minlengthE": "Это поле является обязательным, по крайней мере 7 символов.",
+            "maxlengthE": "Это поле не может быть длинее, чем 100 символов."
         }
     },
     "error": {
@@ -136,5 +151,5 @@
         "emailexists": "Эл. почта уже используется!!",
         "idexists": "Новый {{entityName}} не может иметь данный ID"
     },
-    "footer": "Это ваш футтер"
+    "footer": "Сделано групой Lv-236.Java :)"
 }

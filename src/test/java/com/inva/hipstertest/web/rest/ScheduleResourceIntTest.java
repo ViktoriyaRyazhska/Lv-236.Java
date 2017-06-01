@@ -7,6 +7,7 @@ import com.inva.hipstertest.domain.Lesson;
 import com.inva.hipstertest.domain.Form;
 import com.inva.hipstertest.domain.Classroom;
 import com.inva.hipstertest.repository.ScheduleRepository;
+import com.inva.hipstertest.service.PupilService;
 import com.inva.hipstertest.service.ScheduleService;
 import com.inva.hipstertest.service.dto.ScheduleDTO;
 import com.inva.hipstertest.service.mapper.ScheduleMapper;
@@ -70,6 +71,9 @@ public class ScheduleResourceIntTest {
     private ScheduleService scheduleService;
 
     @Autowired
+    private PupilService pupilService;
+
+    @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
 
     @Autowired
@@ -88,7 +92,7 @@ public class ScheduleResourceIntTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        ScheduleResource scheduleResource = new ScheduleResource(scheduleService);
+        ScheduleResource scheduleResource = new ScheduleResource(scheduleService, pupilService);
         this.restScheduleMockMvc = MockMvcBuilders.standaloneSetup(scheduleResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

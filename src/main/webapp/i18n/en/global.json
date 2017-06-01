@@ -3,7 +3,14 @@
         "title": "SchoolNet",
         "browsehappy": "You are using an <strong>outdated</strong> browser. Please <a href=\"http://browsehappy.com/?locale=en\">upgrade your browser</a> to improve your experience.",
         "menu": {
-            "user-home": "User Home",
+            "teacher-home": "Teacher home",
+            "management":"Management",
+            "teacher-management":{
+                "teachers":"Teachers",
+                "schedules":"Schedules",
+                "forms":"Forms"
+            },
+            "pupil-home": "Pupil Home",
             "home": "Home",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
@@ -51,14 +58,16 @@
             "confirmpassword": "New password confirmation",
             "confirmpassword.placeholder": "Confirm the new password",
             "email": "Email",
-            "email.placeholder": "Your email"
+            "email.placeholder": "Your email",
+            "imageUrl": "URL for user photo",
+            "imageUrl.placeholder": "Your URL for photo"
         },
         "messages": {
             "info": {
                 "authenticated": {
                     "prefix": "If you want to ",
                     "link": "sign in",
-                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\")."
+                    "suffix": ", you can try the default accounts:<br/>- Administrator (login=\"admin\" and password=\"admin\") <br/>- User (login=\"user\" and password=\"user\") <br/>- User (login=\"user\" and password=\"user\") <br/>- Pupil (login=\"pupil\" and password=\"pupil\") <br/>- Teacher (login=\"teacher\" and password=\"teacher\") <br/>- Parent (login=\"parent\" and password=\"parent\")."
                 },
                 "register": {
                     "noaccount": "You don't have an account yet?",
@@ -92,7 +101,7 @@
             "id": "ID"
         },
         "ribbon": {
-            "dev":"Development"
+            "dev":"Lv-236.Java"
         }
     },
     "entity": {
@@ -124,7 +133,11 @@
             "maxbytes": "This field cannot be more than {{ max }} bytes.",
             "pattern": "This field should follow pattern for {{ pattern }}.",
             "number": "This field should be a number.",
-            "datetimelocal": "This field should be a date and time."
+            "datetimelocal": "This field should be a date and time.",
+            "minlengthL": "This field is required to be at least 3 characters.",
+            "maxlengthL": "This field cannot be longer than 50 characters.",
+            "minlengthE": "This field is required to be at least 7 characters.",
+            "maxlengthE": "This field cannot be longer than {{ max }} characters."
         }
     },
     "error": {
@@ -137,5 +150,5 @@
         "emailexists": "Email is already in use!",
         "idexists": "A new {{ entityName }} cannot already have an ID"
     },
-    "footer": "This is your footer"
+    "footer": "Created by Lv-236.Java group :)"
 }

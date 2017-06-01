@@ -18,8 +18,6 @@ public interface LessonRepository extends JpaRepository<Lesson, Long> {
         "and date(scd.jhi_date) <  curdate() order by scd.jhi_date desc limit 1", nativeQuery = true)
     String getLastHomeworkByLessonIdAndByFormId(@Param("lessonId") Long lessonId, @Param("formId") Long formId);
 
-    @Query(value = "select lsn.* from lesson as lsn " +
-        "join teacher_lesson as tlsn on lsn.id = tlsn.lessons_id " +
-        "where lsn.enabled = 1 and tlsn.teachers_id =: teacherId", nativeQuery = true)
+    @Query("select lessons from Lesson lessons join lessons.teachers teacher where teacher.id =:teacherId")
     List<Lesson> getAllLessonsByTeacherId(@Param("teacherId") Long teacherId);
 }
