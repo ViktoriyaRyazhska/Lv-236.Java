@@ -98,7 +98,7 @@ public class LessonResource {
      */
     @GetMapping("/lessons/teacher/{teacherId}")
     @Timed
-    public List<LessonDTO> getAllLessonsByCurrentUser(@PathVariable("teacherId") Long teacherId) {
+    public List<LessonDTO> getAllLessonsByCurrentTeacher(@PathVariable("teacherId") Long teacherId) {
         log.debug("REST request to get all lessons for the current teacher : {}", teacherId);
         return lessonService.getAllLessonsByTeacherId(teacherId);
     }

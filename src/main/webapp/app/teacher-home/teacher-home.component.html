@@ -3,14 +3,24 @@
 
 
 
-<form class="container" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
-    <div>
-        <select name="languag" ngModel>
-            <option *ngFor="let lesson of Lessons" value={{lesson.id}}>{{lesson.name}}</option>
-        </select>
-        <select name="form" ngModel>
-            <option *ngFor="let form of forms" value={{form.id}}>{{form.name}}</option>
-        </select>
-    </div>
-</form>
+<!--<form class="container" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">-->
+    <!--<div>-->
+        <!--<select name="languag" ngModel>-->
+            <!--<option *ngFor="let lesson of Lessons" value={{lesson.id}}>{{lesson.name}}</option>-->
+        <!--</select>-->
+        <!--<select name="form" ngModel>-->
+            <!--<option *ngFor="let form of forms" value={{form.id}}>{{form.name}}</option>-->
+        <!--</select>-->
+    <!--</div>-->
+<!--</form>-->
 
+<form class="container"   #userForm = "ngForm"  (ngSubmit)="onSubmit(userForm.value)">
+    <select name="Lesson" ngModel>
+        <option *ngFor="let lesson of lessons" value="Lesson">{{lesson.name}}</option>
+    </select>
+    <select name="Form" ngModel>
+        <option *ngFor="let form of forms" value="form">{{form.name}}</option>
+    </select>
+
+    <!--<input type="submit" value="submit">-->
+</form>

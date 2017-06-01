@@ -22,4 +22,3 @@ public interface ScheduleRepository extends JpaRepository<Schedule,Long> {
     @Query("update Schedule schedule set schedule.homework =:homework where schedule.id =:scheduleId")
     void updateHomeworkById(@Param("homework") String homeWork, @Param("scheduleId") Long scheduleId);
 }
-
