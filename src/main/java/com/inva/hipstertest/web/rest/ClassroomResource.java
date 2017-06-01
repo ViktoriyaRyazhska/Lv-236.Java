@@ -28,7 +28,7 @@ public class ClassroomResource {
     private final Logger log = LoggerFactory.getLogger(ClassroomResource.class);
 
     private static final String ENTITY_NAME = "classroom";
-        
+
     private final ClassroomService classroomService;
 
     public ClassroomResource(ClassroomService classroomService) {
@@ -117,4 +117,23 @@ public class ClassroomResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+//    /**
+//     * POST  /classrooms : Create a new classroom.
+//     *
+//     * @param classroomDTO the classroomDTO to create
+//     * @return the ResponseEntity with status 201 (Created) and with body the new classroomDTO, or with status 400 (Bad Request) if the classroom has already an ID
+//     * @throws URISyntaxException if the Location URI syntax is incorrect
+//     */
+//    @PostMapping("/headteacher-management")
+//    @Timed
+//    public ResponseEntity<ClassroomDTO> createClassroomWithUser(@Valid @RequestBody ClassroomDTO classroomDTO) throws URISyntaxException {
+//        log.debug("REST request to save Classroom : {}", classroomDTO);
+//        if (classroomDTO.getId() != null) {
+//            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new classroom cannot already have an ID")).body(null);
+//        }
+//        ClassroomDTO result = classroomService.saveClassroomWithUser(classroomDTO);
+//        return ResponseEntity.created(new URI("/api/classrooms/" + result.getId()))
+//            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+//            .body(result);
+//    }
 }

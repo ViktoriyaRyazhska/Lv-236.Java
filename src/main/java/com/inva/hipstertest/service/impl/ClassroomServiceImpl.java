@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class ClassroomServiceImpl implements ClassroomService{
 
     private final Logger log = LoggerFactory.getLogger(ClassroomServiceImpl.class);
-    
+
     private final ClassroomRepository classroomRepository;
 
     private final ClassroomMapper classroomMapper;
@@ -49,7 +49,7 @@ public class ClassroomServiceImpl implements ClassroomService{
 
     /**
      *  Get all the classrooms.
-     *  
+     *
      *  @return the list of entities
      */
     @Override
@@ -88,4 +88,11 @@ public class ClassroomServiceImpl implements ClassroomService{
         log.debug("Request to delete Classroom : {}", id);
         classroomRepository.delete(id);
     }
+
+//    @Override
+//    public ClassroomDTO saveClassroomWithUser(ClassroomDTO classroomDTO) {
+//        log.debug("Request to save Classroom : {}", classroomDTO);
+//        Classroom classroom = classroomMapper.classroomDTOToClassroom(classroomDTO);
+//        return classroomMapper.classroomToClassroomDTO(classroomRepository.save(classroom));
+//    }
 }

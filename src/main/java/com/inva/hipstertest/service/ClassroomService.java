@@ -18,7 +18,7 @@ public interface ClassroomService {
 
     /**
      *  Get all the classrooms.
-     *  
+     *
      *  @return the list of entities
      */
     List<ClassroomDTO> findAll();
@@ -37,4 +37,13 @@ public interface ClassroomService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+//    /**
+//     * Save a classroom.
+//     *
+//     * @param classroomDTO the entity to save
+//     * we take this entity in UI level(some form).
+//     * @return String information about login and password.
+//     */
+//    ClassroomDTO saveClassroomWithUser(ClassroomDTO classroomDTO);
 }
