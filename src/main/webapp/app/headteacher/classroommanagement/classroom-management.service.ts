@@ -2,29 +2,29 @@ import { Injectable } from '@angular/core';
 import { Http, Response, URLSearchParams, BaseRequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
-import { ClassroomManagment } from './classroom-managment.model';
+import { ClassroomManagement } from './classroom-management.model';
 @Injectable()
-export class ClassroomManagmentService {
+export class ClassroomManagementService {
 
-    private resourceUrl = 'api/classrooms';
+    private resourceUrl = 'api/headteacher-management';
 
     constructor(private http: Http) { }
 
-    create(classroom: ClassroomManagment): Observable<ClassroomManagment> {
-        const copy: ClassroomManagment = Object.assign({}, classroom);
+    create(classroom: ClassroomManagement): Observable<ClassroomManagement> {
+        const copy: ClassroomManagement = Object.assign({}, classroom);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
     }
 
-    update(classroom: ClassroomManagment): Observable<ClassroomManagment> {
-        const copy: ClassroomManagment = Object.assign({}, classroom);
+    update(classroom: ClassroomManagement): Observable<ClassroomManagement> {
+        const copy: ClassroomManagement = Object.assign({}, classroom);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             return res.json();
         });
     }
 
-    find(id: number): Observable<ClassroomManagment> {
+    find(id: number): Observable<ClassroomManagement> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             return res.json();
         });

@@ -4,23 +4,23 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Rx';
 import { EventManager, ParseLinks, PaginationUtil, JhiLanguageService, AlertService } from 'ng-jhipster';
 
-import { ClassroomManagment } from './classroom-managment.model';
-import { ClassroomManagmentService } from './classroom-managment.service';
+import { ClassroomManagement } from './classroom-management.model';
+import { ClassroomManagementService } from './classroom-management.service';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
 @Component({
-    selector: 'jhi-classroom-managment',
-    templateUrl: './classroom-managment.component.html'
+    selector: 'jhi-classroom-management',
+    templateUrl: './classroom-management.component.html'
 })
-export class ClassroomManagmentComponent implements OnInit, OnDestroy {
-classrooms: ClassroomManagment[];
+export class ClassroomManagementComponent implements OnInit, OnDestroy {
+classrooms: ClassroomManagement[];
     currentAccount: any;
     eventSubscriber: Subscription;
 
     constructor(
         private jhiLanguageService: JhiLanguageService,
-        private classroomService: ClassroomManagmentService,
+        private classroomService: ClassroomManagementService,
         private alertService: AlertService,
         private eventManager: EventManager,
         private principal: Principal
@@ -48,7 +48,7 @@ classrooms: ClassroomManagment[];
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: ClassroomManagment) {
+    trackId(index: number, item: ClassroomManagement) {
         return item.id;
     }
     registerChangeInClassrooms() {

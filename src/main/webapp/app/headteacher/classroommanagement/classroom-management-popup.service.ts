@@ -1,15 +1,15 @@
 import { Injectable, Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ClassroomManagment } from './classroom-managment.model';
-import { ClassroomManagmentService } from './classroom-managment.service';
+import { ClassroomManagement } from './classroom-management.model';
+import { ClassroomManagementService } from './classroom-management.service';
 @Injectable()
-export class ClassroomManagmentPopupService {
+export class ClassroomManagementPopupService {
     private isOpen = false;
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private classroomService: ClassroomManagmentService
+        private classroomService: ClassroomManagementService
 
     ) {}
 
@@ -24,11 +24,11 @@ export class ClassroomManagmentPopupService {
                 this.classroomModalRef(component, classroom);
             });
         } else {
-            return this.classroomModalRef(component, new ClassroomManagment());
+            return this.classroomModalRef(component, new ClassroomManagement());
         }
     }
 
-    classroomModalRef(component: Component, classroom: ClassroomManagment): NgbModalRef {
+    classroomModalRef(component: Component, classroom: ClassroomManagement): NgbModalRef {
         const modalRef = this.modalService.open(component, { size: 'lg', backdrop: 'static'});
         modalRef.componentInstance.classroom = classroom;
         modalRef.result.then((result) => {

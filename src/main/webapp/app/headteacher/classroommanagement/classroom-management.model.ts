@@ -1,4 +1,4 @@
-export class ClassroomManagment {
+export class ClassroomManagement {
     constructor(
         public id?: number,
         public name?: string,

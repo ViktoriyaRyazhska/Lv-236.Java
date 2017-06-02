@@ -5,18 +5,18 @@ import { Response } from '@angular/http';
 import { NgbActiveModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { EventManager, AlertService, JhiLanguageService } from 'ng-jhipster';
 
-import { ClassroomManagment } from './classroom-managment.model';
-import { ClassroomManagmentPopupService } from './classroom-managment-popup.service';
-import { ClassroomManagmentService } from './classroom-managment.service';
+import { ClassroomManagement } from './classroom-management.model';
+import { ClassroomManagementPopupService } from './classroom-management-popup.service';
+import { ClassroomManagementService } from './classroom-management.service';
 import { SchoolMySuffix, SchoolMySuffixService } from '../../entities/school';
 
 @Component({
-    selector: 'jhi-classroom-managment-dialog',
+    selector: 'jhi-classroom-management-dialog',
     templateUrl: './classroom-mangement-dialog.component.html'
 })
-export class ClassroomManagmentDialogComponent implements OnInit {
+export class ClassroomManagementDialogComponent implements OnInit {
 
-    classroom: ClassroomManagment;
+    classroom: ClassroomManagement;
     authorities: any[];
     isSaving: boolean;
 
@@ -25,7 +25,7 @@ export class ClassroomManagmentDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private jhiLanguageService: JhiLanguageService,
         private alertService: AlertService,
-        private classroomService: ClassroomManagmentService,
+        private classroomService: ClassroomManagementService,
         private schoolService: SchoolMySuffixService,
         private eventManager: EventManager
     ) {
@@ -46,16 +46,16 @@ export class ClassroomManagmentDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.classroom.id !== undefined) {
             this.classroomService.update(this.classroom)
-                .subscribe((res: ClassroomManagment) =>
+                .subscribe((res: ClassroomManagement) =>
                     this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
         } else {
             this.classroomService.create(this.classroom)
-                .subscribe((res: ClassroomManagment) =>
+                .subscribe((res: ClassroomManagement) =>
                     this.onSaveSuccess(res), (res: Response) => this.onSaveError(res));
         }
     }
 
-    private onSaveSuccess(result: ClassroomManagment) {
+    private onSaveSuccess(result: ClassroomManagement) {
         this.eventManager.broadcast({ name: 'classroomListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
@@ -81,27 +81,27 @@ export class ClassroomManagmentDialogComponent implements OnInit {
 }
 
 @Component({
-    selector: 'jhi-classroom-managment-popup',
+    selector: 'jhi-classroom-management-popup',
     template: ''
 })
-export class ClassroomManagmentPopupComponent implements OnInit, OnDestroy {
+export class ClassroomManagementPopupComponent implements OnInit, OnDestroy {
 
     modalRef: NgbModalRef;
     routeSub: any;
 
     constructor(
         private route: ActivatedRoute,
-        private classroomPopupService: ClassroomManagmentPopupService
+        private classroomPopupService: ClassroomManagementPopupService
     ) {}
 
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             if ( params['id'] ) {
                 this.modalRef = this.classroomPopupService
-                    .open(ClassroomManagmentDialogComponent, params['id']);
+                    .open(ClassroomManagementDialogComponent, params['id']);
             } else {
                 this.modalRef = this.classroomPopupService
-                    .open(ClassroomManagmentDialogComponent);
+                    .open(ClassroomManagementDialogComponent);
             }
         });
     }
