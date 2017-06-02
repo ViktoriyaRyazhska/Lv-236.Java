@@ -75,6 +75,13 @@
                     </li>
 
                     <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="headteacher-classroom" (click)="collapseNavbar()">
+                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.teacher-management.classroom">Classrooms</span>
+                        </a>
+                    </li>
+
+                    <li uiSrefActive="active">
                         <a class="dropdown-item" routerLink="headteacher-schedule" (click)="collapseNavbar()">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.teacher-management.schedules">Schedule</span>
