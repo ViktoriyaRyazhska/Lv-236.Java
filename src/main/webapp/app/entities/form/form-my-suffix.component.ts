@@ -6,6 +6,7 @@ import { EventManager, ParseLinks, PaginationUtil, JhiLanguageService, AlertServ
 
 import { FormMySuffix } from './form-my-suffix.model';
 import { FormMySuffixService } from './form-my-suffix.service';
+import { PupilMySuffix } from '../pupil/pupil-my-suffix.model';
 import { ITEMS_PER_PAGE, Principal } from '../../shared';
 import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
 
@@ -14,6 +15,7 @@ import { PaginationConfig } from '../../blocks/config/uib-pagination.config';
     templateUrl: './form-my-suffix.component.html'
 })
 export class FormMySuffixComponent implements OnInit, OnDestroy {
+    pupil: PupilMySuffix;
 forms: FormMySuffix[];
     currentAccount: any;
     eventSubscriber: Subscription;

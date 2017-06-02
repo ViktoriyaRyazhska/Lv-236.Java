@@ -12,3 +12,7 @@ services:
         extends:
             file: mysql.yml
             service: schoolnet-mysql
+    schoolnet-sonar:
+        extends:
+            file: sonar.yml
+            service: schoolnet-sonar

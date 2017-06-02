@@ -18,11 +18,11 @@ export class ParentMySuffixService {
     }
 
     update(parent: ParentMySuffix): Observable<ParentMySuffix> {
-        const copy: ParentMySuffix = Object.assign({}, parent);
-        return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-            return res.json();
-        });
-    }
+    const copy: ParentMySuffix = Object.assign({}, parent);
+    return this.http.put(this.resourceUrl, copy).map((res: Response) => {
+        return res.json();
+    });
+}
 
     find(id: number): Observable<ParentMySuffix> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {

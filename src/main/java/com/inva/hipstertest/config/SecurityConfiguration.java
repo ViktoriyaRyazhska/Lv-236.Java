@@ -39,8 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final CorsFilter corsFilter;
 
     public SecurityConfiguration(AuthenticationManagerBuilder authenticationManagerBuilder, UserDetailsService userDetailsService,
-            TokenProvider tokenProvider,
-        CorsFilter corsFilter) {
+            TokenProvider tokenProvider, CorsFilter corsFilter) {
 
         this.authenticationManagerBuilder = authenticationManagerBuilder;
         this.userDetailsService = userDetailsService;
@@ -111,8 +110,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/attendances/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/classrooms").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/classrooms/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/forms").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/forms/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/forms").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEAD_TEACHER, AuthoritiesConstants.TEACHER)
+            .antMatchers("/api/forms/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEAD_TEACHER, AuthoritiesConstants.TEACHER)
             .antMatchers("/api/lessons").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/lessons/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/parents").hasAuthority(AuthoritiesConstants.ADMIN)
@@ -123,8 +122,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/api/schedules/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/schools").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/schools/**").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/teachers").hasAuthority(AuthoritiesConstants.ADMIN)
-            .antMatchers("/api/teachers/**").hasAuthority(AuthoritiesConstants.ADMIN)
+            .antMatchers("/api/teachers").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEAD_TEACHER)
+            .antMatchers("/api/teachers/**").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEAD_TEACHER)
             .antMatchers("/api/users").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/users/**").hasAuthority(AuthoritiesConstants.ADMIN)
             .antMatchers("/api/headteacher-management").hasAnyAuthority(AuthoritiesConstants.ADMIN, AuthoritiesConstants.HEAD_TEACHER)

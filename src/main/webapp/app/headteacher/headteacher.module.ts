@@ -8,7 +8,7 @@ import { SchoolNetClassroomManagementModule } from './classroommanagement/classr
 @NgModule({
     imports: [
         SchoolNetTeacherManagementModule,
-        SchoolNetClassroomManagementModule
+        SchoolNetClassroomManagementModule,
     ],
     declarations: [],
     entryComponents: [],

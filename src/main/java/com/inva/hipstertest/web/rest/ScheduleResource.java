@@ -5,6 +5,8 @@ import com.inva.hipstertest.domain.Schedule;
 import com.inva.hipstertest.repository.ScheduleRepository;
 import com.inva.hipstertest.service.PupilService;
 import com.inva.hipstertest.service.ScheduleService;
+import com.inva.hipstertest.service.dto.LessonDTO;
+import com.inva.hipstertest.service.dto.PupilDTO;
 import com.inva.hipstertest.service.dto.PupilDTO;
 import com.inva.hipstertest.web.rest.util.HeaderUtil;
 import com.inva.hipstertest.service.dto.ScheduleDTO;
@@ -148,25 +150,26 @@ public class ScheduleResource {
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
     }
 
+
     /**
      * GET  /schedules : get all the schedules for certain teacher id.
      *
      * @return the ResponseEntity with status 200 (OK).
      */
-    @RequestMapping(value = "teacherhome/{teacherId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/teacher-home/schedules/teacher/{teacherId}", method = RequestMethod.GET)
     @Timed
     public List<ScheduleDTO> getScheduleByTecherId(@PathVariable("teacherId") Long teacherId) {
-        log.debug("REST request to get schedule by teacherId");
+        log.debug("REST request to get schedule by teacher : {}", teacherId);
         return scheduleService.findAllByTeacherId(teacherId);
     }
 
-    @PutMapping("teacherhome/{scheduleId}")
-    @Timed
-    void updateHomeworkByScheduleId(@Valid @RequestBody String homework, Long scheduleId) throws URISyntaxException {
-        log.debug("REST request to update Schedule Homework : {}", homework, scheduleId);
-        if (homework != null) {
-            scheduleService.updateHomeworkById(homework, scheduleId);
-        }
-    }
+//    @PutMapping("teacherhome/{scheduleId}")
+//    @Timed
+//    void updateHomeworkByScheduleId(@Valid @RequestBody String homework, Long scheduleId) throws URISyntaxException {
+//        log.debug("REST request to update Schedule Homework : {}", homework, scheduleId);
+//        if (homework != null) {
+//            scheduleService.updateHomeworkById(homework, scheduleId);
+//        }
+//    }
 
 }

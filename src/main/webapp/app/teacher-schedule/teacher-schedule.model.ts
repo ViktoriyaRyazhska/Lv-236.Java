@@ -1,10 +1,7 @@
-/**
- * Created by inva on 23-May-17.
- */
-export class PupilHomeSchedules {
+export class TeacherSchedule {
     constructor(
         public id?: number,
-        public date?: Date,
+        public date?: any,
         public homework?: string,
         public lessonPosition?: number,
         public enabled?: boolean,
@@ -16,8 +13,6 @@ export class PupilHomeSchedules {
         public lessonName?: string,
         public formName?: string,
         public classroomName?: string,
-        public teacherLastName?: string,
-        public teacherFirstName?: string,
     ) {
         this.enabled = false;
     }

@@ -15,6 +15,28 @@
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span jhiTranslate="global.menu.teacher-home">Teacher home</span>
                 </a>
+            <li *jhiHasAnyAuthority="['ROLE_TEACHER']" ngbDropdown class="nav-item dropdown pointer">
+                <a class="nav-link dropdown-toggle" routerLinkActive="active" ngbDropdownToggle href="javascript:void(0);" id="teacher-menu">
+                    <span>
+                        <i class="fa fa-th-list" aria-hidden="true"></i>
+                        <span jhiTranslate="global.menu.teacher-menu">Teacher Menu</span>
+                        <b class="caret"></b>
+                    </span>
+                </a>
+                <ul class="dropdown-menu" ngbDropdownMenu>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="teacher-home" (click)="collapseNavbar()">
+                            <i class="fa fa-home" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.teacher-home">Teacher home</span>
+                        </a>
+                    </li>
+                    <li uiSrefActive="active">
+                        <a class="dropdown-item" routerLink="teacher-schedule" (click)="collapseNavbar()">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                            <span jhiTranslate="global.menu.teacher-schedule">Teacher Schedule</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li *jhiHasAnyAuthority="['ROLE_PUPIL']" ngbDropdown class="nav-item dropdown pointer">
                 <a class="nav-link dropdown-toggle" routerLinkActive="active" ngbDropdownToggle href="javascript:void(0);" id="pupil-menu">
@@ -71,13 +93,6 @@
                         <a class="dropdown-item" routerLink="headteacher-form" (click)="collapseNavbar()">
                             <i class="fa fa-building-o" aria-hidden="true"></i>
                             <span jhiTranslate="global.menu.teacher-management.forms">Forms</span>
-                        </a>
-                    </li>
-
-                    <li uiSrefActive="active">
-                        <a class="dropdown-item" routerLink="classroom-management" (click)="collapseNavbar()">
-                            <i class="fa fa-building-o" aria-hidden="true"></i>
-                            <span jhiTranslate="global.menu.classroom-management.classroom">Classrooms</span>
                         </a>
                     </li>
 

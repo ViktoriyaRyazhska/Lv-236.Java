@@ -3,9 +3,11 @@
         "title": "SchoolNet",
         "browsehappy": "Ваш браузер <strong>устарел</strong>. Пожалуйста <a href=\"http://browsehappy.com/?locale=ru\">обновите ваш браузер</a>.",
         "menu": {
-            "teacher-home": "Учитель",
-            "user-home": "User Home",
-            "pupil-home": "Pupil Home",
+            "teacher-menu": "Меню учителя",
+            "teacher-home": "Главная",
+            "teacher-schedule": "Расписание занятий",
+            "user-home": "Пользователь",
+            "pupil-home": "Ученик",
             "management":"Управление",
             "teacher-management":{
                 "teachers":"Учителя",
@@ -13,6 +15,7 @@
                 "forms":"Классы"
             },
             "home": "Главная",
+            "forms": "Классы",
             "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
             "entities": {
                 "main": "Сущности",
@@ -68,7 +71,7 @@
                 "authenticated": {
                     "prefix": "Если вы хотите ",
                     "link": "авторизироваться",
-                    "suffix": ", вы можете попробовать аккаунты по умолчанию:<br/>- Администратор (логин=\"admin\" и пароль=\"admin\") <br/>- Пользователь (логин=\"user\" и пароль=\"user\")."
+                    "suffix": ", вы можете попробовать аккаунты по умолчанию:<br/>- Администратор (логин=\"admin\" и пароль=\"admin\") <br/>- Пользователь (логин=\"user\" и пароль=\"user\") <br/>- Ученик (логин=\"pupil\" and логин=\"pupil\") <br/>- Учитель (логин=\"teacher\" and логин=\"teacher\") <br/>- Родитель (логин=\"parent\" and логин=\"parent\")."
                 },
                 "register": {
                     "noaccount": "У вас нет аккаунта?",

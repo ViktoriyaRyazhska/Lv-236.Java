@@ -1,8 +1,10 @@
 package com.inva.hipstertest.service;
 
+import com.inva.hipstertest.domain.Parent;
 import com.inva.hipstertest.service.dto.ParentDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Service Interface for managing Parent.
@@ -38,4 +40,10 @@ public interface ParentService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+    /**
+     *  Finds parents of the pupil with id.
+     *
+     *  @param id the id of the pupil
+     */
+    List<ParentDTO> findParentOfPupil(Long id);
 }

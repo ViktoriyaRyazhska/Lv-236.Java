@@ -5,13 +5,17 @@ import { EventManager , JhiLanguageService  } from 'ng-jhipster';
 
 import { FormMySuffix } from './form-my-suffix.model';
 import { FormMySuffixService } from './form-my-suffix.service';
+import { PupilMySuffix } from '../pupil/pupil-my-suffix.model';
+import { PupilMySuffixService } from "../pupil/pupil-my-suffix.service";
+
+
 
 @Component({
     selector: 'jhi-form-my-suffix-detail',
     templateUrl: './form-my-suffix-detail.component.html'
 })
 export class FormMySuffixDetailComponent implements OnInit, OnDestroy {
-
+pupils:PupilMySuffix[];
     form: FormMySuffix;
     private subscription: any;
     private eventSubscriber: Subscription;
@@ -20,6 +24,7 @@ export class FormMySuffixDetailComponent implements OnInit, OnDestroy {
         private eventManager: EventManager,
         private jhiLanguageService: JhiLanguageService,
         private formService: FormMySuffixService,
+        private pupilService: PupilMySuffixService,
         private route: ActivatedRoute
     ) {
         this.jhiLanguageService.setLocations(['form']);
@@ -36,6 +41,7 @@ export class FormMySuffixDetailComponent implements OnInit, OnDestroy {
         this.formService.find(id).subscribe((form) => {
             this.form = form;
         });
+
     }
     previousState() {
         window.history.back();
@@ -48,5 +54,7 @@ export class FormMySuffixDetailComponent implements OnInit, OnDestroy {
 
     registerChangeInForms() {
         this.eventSubscriber = this.eventManager.subscribe('formListModification', (response) => this.load(this.form.id));
-    }
-}
+    }}
+
+
+

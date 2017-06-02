@@ -1,21 +1,30 @@
 
 <div *ngIf="form">
-    <h2><span jhiTranslate="schoolNetApp.form.detail.title">Form</span> {{form.id}}</h2>
-    <hr>
+    <h2><span jhiTranslate="schoolNetApp.form.detail.title">Form</span> {{form.name}} (<a [routerLink]="['/school-my-suffix', form.schoolId]">{{form.schoolName}}</a>)</h2>
     <jhi-alert-error></jhi-alert-error>
     <dl class="row-md jh-entity-details">
-        <dt><span jhiTranslate="schoolNetApp.form.name">Name</span></dt>
-        <dd>
-            <span>{{form.name}}</span>
-        </dd>
-        <dt><span jhiTranslate="schoolNetApp.form.enabled">Enabled</span></dt>
-        <dd>
-            <span>{{form.enabled}}</span>
-        </dd>
-        <dt><span jhiTranslate="schoolNetApp.form.school">School</span></dt>
-        <dd>
-            <div *ngIf="form.schoolId">
-                <a [routerLink]="['/school-my-suffix', form.schoolId]">{{form.schoolId}}</a>
+        <div class="table-responsive" >
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><span jhiTranslate="schoolNetApp.form.pupils">Pupils</span></th>
+                        <th><span jhiTranslate="schoolNetApp.form.parents">Parents</span></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let i of form.pupilsId | sortPipe">
+                        <td>{{i.lastName }} {{i.firstName }}</td>
+                        <td>
+                            <div *ngFor="let k of i.parents | sortPipe">
+                                <li >{{k.lastName }} {{k.firstName}}
+                                <br>{{k.email}}
+                                </li>
+                            </div>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </dd>
     </dl>
@@ -24,12 +33,5 @@
             (click)="previousState()"
             class="btn btn-info">
         <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'form-my-suffix/'+ form.id + '/edit'} }]"
-            replaceUrl="true"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
     </button>
 </div>

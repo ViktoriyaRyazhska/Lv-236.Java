@@ -9,19 +9,22 @@ import java.util.List;
 /**
  * Mapper for the entity Pupil and its DTO PupilDTO.
  */
-@Mapper(componentModel = "spring", uses = {UserMapper.class, FormMapper.class, })
+@Mapper(componentModel = "spring", uses = {UserMapper.class, FormMapper.class, ParentMapper.class, })
 public interface PupilMapper {
 
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "form.id", target = "formId")
+    @Mapping(source = "parents", target = "parents")
+    @Mapping(source = "user.lastName", target = "lastName")
+    @Mapping(source = "user.firstName", target = "firstName")
     PupilDTO pupilToPupilDTO(Pupil pupil);
 
     List<PupilDTO> pupilsToPupilDTOs(List<Pupil> pupils);
 
     @Mapping(source = "userId", target = "user")
     @Mapping(target = "attendances", ignore = true)
-    @Mapping(source = "formId", target = "form")
-    @Mapping(target = "parents", ignore = true)
+    @Mapping(source = "formId",target="form")
+    @Mapping(source = "parents",target="parents")
     Pupil pupilDTOToPupil(PupilDTO pupilDTO);
 
     List<Pupil> pupilDTOsToPupils(List<PupilDTO> pupilDTOs);
@@ -32,7 +35,7 @@ public interface PupilMapper {
      * @param id id of the entity
      * @return the entity instance
      */
-     
+
     default Pupil pupilFromId(Long id) {
         if (id == null) {
             return null;
@@ -41,6 +44,6 @@ public interface PupilMapper {
         pupil.setId(id);
         return pupil;
     }
-    
+
 
 }

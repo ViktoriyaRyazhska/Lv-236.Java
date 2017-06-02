@@ -16,11 +16,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-            <th><span jhiTranslate="global.field.id">ID</span></th>
-            <th><span jhiTranslate="schoolNetApp.form.name">Name</span></th>
-            <th><span jhiTranslate="schoolNetApp.form.enabled">Enabled</span></th>
-            <th><span jhiTranslate="schoolNetApp.form.school">School</span></th>
-            <th></th>
+                <th><span jhiTranslate="global.field.id">ID</span></th>
+                <th><span jhiTranslate="schoolNetApp.form.name">Name</span></th>
+                <th><span jhiTranslate="schoolNetApp.form.enabled">Enabled</span></th>
+                <th><span jhiTranslate="schoolNetApp.form.school">School</span></th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -33,6 +33,7 @@
                         <a [routerLink]="['../school-my-suffix', form.schoolId  ]" >{{form.schoolId}}</a>
                     </div>
                 </td>
+
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
@@ -62,3 +63,4 @@
         </table>
     </div>
 </div>
+

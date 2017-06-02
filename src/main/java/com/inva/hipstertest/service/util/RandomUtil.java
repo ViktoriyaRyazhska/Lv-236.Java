@@ -11,7 +11,7 @@ import java.util.Map;
 public final class RandomUtil {
 
     private static final int DEF_COUNT = 20;
-    private static final int LOG_COUNT = 3;
+    private static final int LOG_COUNT = 2;
 
     private RandomUtil() {
     }
@@ -48,9 +48,9 @@ public final class RandomUtil {
      *
      * @return the generated login for teacher
      */
-    public static String generateLogin(String firstName, String lastName) {
+    public static String generateLogin(String firstName, String lastName, Long idSchool) {
         String returned = transliter(firstName.substring(0,2)
-            + lastName);
+             + lastName) + idSchool.toString();
         if(returned.contains("null")){
             returned = RandomStringUtils.randomAlphabetic(LOG_COUNT);
         }

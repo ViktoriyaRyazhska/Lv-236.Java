@@ -6,7 +6,7 @@ import { Response } from '@angular/http';
 import {Principal} from '../shared';
 import {PupilHomeService} from './pupil-home.service';
 import {EventManager, JhiLanguageService, AlertService} from 'ng-jhipster';
-import {PupilMySuffix} from "../entities/pupil/pupil-my-suffix.model";
+import {PupilMySuffix} from '../entities/pupil/pupil-my-suffix.model';
 
 @Component({
     selector: 'pupil-home',

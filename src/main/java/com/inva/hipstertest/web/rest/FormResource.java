@@ -2,11 +2,14 @@ package com.inva.hipstertest.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.inva.hipstertest.service.FormService;
+import com.inva.hipstertest.service.PupilService;
+import com.inva.hipstertest.service.dto.PupilDTO;
 import com.inva.hipstertest.web.rest.util.HeaderUtil;
 import com.inva.hipstertest.service.dto.FormDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +33,8 @@ public class FormResource {
     private static final String ENTITY_NAME = "form";
 
     private final FormService formService;
+    @Autowired
+    private PupilService pupilService;
 
     public FormResource(FormService formService) {
         this.formService = formService;
@@ -95,7 +100,7 @@ public class FormResource {
      * @param teacherId the id of teacher
      * @return the ResponseEntity with status 200 (OK) and with body the list of formsDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/forms/teacher/{teacherId}")
+    @GetMapping("/teacher-home/forms/teacher/{teacherId}")
     @Timed
     public List<FormDTO> getAllByCurrentTeacher(@PathVariable("teacherId") Long teacherId) {
         log.debug("REST request to get all Forms by the current teacher : {}", teacherId);
@@ -115,6 +120,8 @@ public class FormResource {
         FormDTO formDTO = formService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(formDTO));
     }
+
+
 
     /**
      * DELETE  /forms/:id : delete the "id" form.

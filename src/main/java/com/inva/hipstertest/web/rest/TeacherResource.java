@@ -122,7 +122,7 @@ public class TeacherResource {
      *
      * @return the ResponseEntity with status 200 (OK) and with body the current teacherDTO, or with status 404 (Not Found)
      */
-    @GetMapping("/teachers/current")
+    @GetMapping("/teacher-home/teachers/current")
     @Timed
     public ResponseEntity<TeacherDTO> getCurrentTeacher() {
         log.debug("REST request to get current Teacher");
@@ -155,7 +155,6 @@ public class TeacherResource {
     public List<TeacherDTO> getAllTeachersForMe() {
         log.debug("REST request to get all Teachers");
         return teacherService.findAll();
-
         /*
         Optional<User> s = userRepository.findOneWithAuthoritiesByLogin(principal.getName());
         Set<Authority> set = s.get().getAuthorities();
@@ -185,8 +184,13 @@ public class TeacherResource {
     public ResponseEntity<TeacherDTO> createTeacherWithUser(@Valid @RequestBody TeacherDTO teacherDTO) throws URISyntaxException {
         log.debug("REST request to save Teacher : {}", teacherDTO);
         TeacherDTO result = teacherService.saveTeacherWithUser(teacherDTO);
+
+        if(!result.getEnabled()){
+            return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME,
+                "idexistsEmail", "Try another email, this already use!")).body(null);
+        }
         return ResponseEntity.created(new URI("/api/headteacher-management/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getFirstName()))
             .body(result);
     }
 

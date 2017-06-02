@@ -1,5 +1,7 @@
 <div>
     <h2>{{selectedDate | date:'shortDate'}}</h2>
+    //for test view---------------------
+    <div *ngFor="let lesson of pupilLessons">{{lesson.id}} {{lesson.name}}</div>
     <h2>
         <span>User Schedules</span>
     </h2>

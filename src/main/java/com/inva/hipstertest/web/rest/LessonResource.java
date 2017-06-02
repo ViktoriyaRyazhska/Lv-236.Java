@@ -2,6 +2,8 @@ package com.inva.hipstertest.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.inva.hipstertest.service.LessonService;
+import com.inva.hipstertest.service.PupilService;
+import com.inva.hipstertest.service.dto.PupilDTO;
 import com.inva.hipstertest.web.rest.util.HeaderUtil;
 import com.inva.hipstertest.service.dto.LessonDTO;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -94,11 +96,25 @@ public class LessonResource {
      *
      * @return the ResponseEntity with status 200 (OK) and the list of lessons in body
      */
-    @GetMapping("/lessons/teacher/{teacherId}")
+    @GetMapping("/teacher-home/lessons/teacher/{teacherId}")
     @Timed
-    public List<LessonDTO> getAllLessonsByCurrentUser(@PathVariable("teacherId") Long teacherId) {
+    public List<LessonDTO> getAllLessonsByCurrentTeacher(@PathVariable("teacherId") Long teacherId) {
         log.debug("REST request to get all lessons for the current teacher : {}", teacherId);
         return lessonService.getAllLessonsByTeacherId(teacherId);
+    }
+
+
+    /**
+     * GET get dist lessons.
+     *
+     * @param formId id fo the current form
+     * @return list of dist lessons
+     */
+    @GetMapping("/pupilhome/distinctform/{formId}")
+    @Timed
+    public List<LessonDTO> getDistinctLessonsForForm(@PathVariable("formId") Long formId) {
+        log.debug("REST request to get all distinct lessons for the current form : {}", formId);
+        return lessonService.getDistinctLessonsForForm(formId);
     }
 
     /**

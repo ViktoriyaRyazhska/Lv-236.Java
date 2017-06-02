@@ -19,7 +19,9 @@
             "enabled": "Enabled",
             "pupil": "Pupil",
             "schedule": "Schedule",
-            "school": "School"
+            "school": "School",
+            "pupils":"Pupils",
+            "parents":"Parents"
         }
     }
 }

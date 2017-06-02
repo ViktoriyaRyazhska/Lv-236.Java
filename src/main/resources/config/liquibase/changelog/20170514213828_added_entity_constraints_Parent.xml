@@ -7,7 +7,7 @@
         Added the constraints for entity Parent.
     -->
     <changeSet id="20170514213828-2" author="jhipster">
-        
+
         <addForeignKeyConstraint baseColumnNames="user_id"
                                  baseTableName="parent"
                                  constraintName="fk_parent_user_id"
@@ -19,11 +19,14 @@
                                  constraintName="fk_parent_pupil_parents_id"
                                  referencedColumnNames="id"
                                  referencedTableName="parent"/>
+
         <addForeignKeyConstraint baseColumnNames="pupils_id"
                                  baseTableName="parent_pupil"
                                  constraintName="fk_parent_pupil_pupils_id"
                                  referencedColumnNames="id"
                                  referencedTableName="pupil"/>
-        
+
+
+
     </changeSet>
 </databaseChangeLog>

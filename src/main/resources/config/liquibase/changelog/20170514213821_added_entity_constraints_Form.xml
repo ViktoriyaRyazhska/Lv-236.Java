@@ -7,12 +7,11 @@
         Added the constraints for entity Form.
     -->
     <changeSet id="20170514213821-2" author="jhipster">
-        
         <addForeignKeyConstraint baseColumnNames="school_id"
-                                 baseTableName="form"
-                                 constraintName="fk_form_school_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="school"/>
+                                        baseTableName="form"
+                                        constraintName="fk_form_school_id"
+                                        referencedColumnNames="id"
+                                       referencedTableName="school"/>
 
     </changeSet>
 </databaseChangeLog>

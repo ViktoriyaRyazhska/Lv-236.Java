@@ -8,6 +8,7 @@ export class PupilMySuffixService {
 
     private resourceUrl = 'api/pupils';
 
+
     constructor(private http: Http) { }
 
     create(pupil: PupilMySuffix): Observable<PupilMySuffix> {
@@ -29,6 +30,7 @@ export class PupilMySuffixService {
             return res.json();
         });
     }
+
 
     query(req?: any): Observable<Response> {
         const options = this.createRequestOption(req);

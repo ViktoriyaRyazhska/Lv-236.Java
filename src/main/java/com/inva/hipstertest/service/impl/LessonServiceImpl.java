@@ -77,6 +77,20 @@ public class LessonServiceImpl implements LessonService{
     }
 
     /**
+     * GET all distinct lessons for selected form.
+     *
+     * @param formId to check form
+     * @return list of lesson DTO's
+     */
+    @Override
+    public List<LessonDTO> getDistinctLessonsForForm(Long formId) {
+        log.debug("Request to get distinct Lessons by form {}", formId);
+        List<Lesson> lessons = lessonRepository.getDistinctLessonsForForm(formId);
+        List<LessonDTO> lessonDTOS = lessonMapper.lessonsToLessonDTOs(lessons);
+        return lessonDTOS;
+    }
+
+    /**
      *  Get one lesson by id.
      *
      *  @param id the id of the entity

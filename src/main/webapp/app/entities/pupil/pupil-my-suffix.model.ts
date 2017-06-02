@@ -1,3 +1,6 @@
+
+
+import {ParentMySuffix} from "../parent/parent-my-suffix.model";
 export class PupilMySuffix {
     constructor(
         public id?: number,
@@ -5,7 +8,8 @@ export class PupilMySuffix {
         public userId?: number,
         public attendancesId?: number,
         public formId?: number,
-        public parentId?: number,
+        public parents?: ParentMySuffix[],
+
     ) {
         this.enabled = false;
     }

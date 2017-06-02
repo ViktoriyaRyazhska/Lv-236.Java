@@ -1,0 +1,53 @@
+.day-schedule {
+    width: 400px;
+}
+
+.day-schedule tr td,
+.week-schedule tr td,
+.month-schedule tr td {
+    background-color: rgba(131, 255, 74, 0.3);
+}
+
+.week-schedule tr td:last-child,
+.month-schedule tr td:last-child {
+    background-color: rgba(255, 0, 0, 0.3);
+}
+.day-schedule tr td:first-child,
+.week-schedule tr td:first-child {
+    font-weight: bold;
+    color: #fff;
+    background-color: #292b2c;
+}
+
+
+.day-schedule td:first-child,
+.week-schedule td:first-child {
+    width: 2%;
+}
+.week-schedule td {
+    width: 14%;
+}
+.month-schedule td {
+    width: 14.28%;
+}
+
+.day-schedule tr th,
+.week-schedule tr th,
+.month-schedule tr th {
+    text-align: center;
+}
+
+.day-number {
+    float: right;
+    font-weight: bold;
+    background-color: #292b2c;
+    color: white;
+    padding: 1px 6px;
+    position: relative;
+    right: -.75rem;
+    top: -.75rem;
+}
+.day-inactive {
+    color: #292b2c;
+    background-color: #ffffff;
+}

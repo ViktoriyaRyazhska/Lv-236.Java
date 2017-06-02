@@ -55,23 +55,23 @@ public class PupilServiceIntTest {
         assertNull(maybePupil);
     }
 
-    @Test
-    public void shouldFindAllByFormId() throws Exception {
-        // prepare
-        Long formId = 4L;
-
-        // act
-        List<PupilDTO> pupils = pupilService.findAllByFormId(formId);
-
-        // verify
-        assertNotNull(pupils);
-        assertTrue(!pupils.isEmpty());
-
-        PupilDTO pupilDTO = pupils.get(0);
-        assertNotNull(pupilDTO);
-
-        assertTrue(formId.equals(pupilDTO.getFormId()));
-    }
+//    @Test
+//    public void shouldFindAllByFormId() throws Exception {
+//        // prepare
+//        Long formId = 4L;
+//
+//        // act
+//        List<PupilDTO> pupils = pupilService.findAllByFormId(formId);
+//
+//        // verify
+//        assertNotNull(pupils);
+//        assertTrue(!pupils.isEmpty());
+//
+//        PupilDTO pupilDTO = pupils.get(0);
+//        assertNotNull(pupilDTO);
+//
+//        assertTrue(formId.equals(pupilDTO.getFormId()));
+//    }
 
 //    private Pupil generatePupil(){
 //        return new Pupil();

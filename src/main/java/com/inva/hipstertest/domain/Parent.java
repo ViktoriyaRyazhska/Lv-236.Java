@@ -38,7 +38,7 @@ public class Parent implements Serializable {
     @JoinTable(name = "parent_pupil",
                joinColumns = @JoinColumn(name="parents_id", referencedColumnName="id"),
                inverseJoinColumns = @JoinColumn(name="pupils_id", referencedColumnName="id"))
-    private Set<Pupil> pupils = new HashSet<>();
+    private Set<Pupil> pupils;
 
     public Long getId() {
         return id;

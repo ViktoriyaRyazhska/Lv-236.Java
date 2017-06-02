@@ -13,6 +13,9 @@ import java.util.List;
 public interface ParentMapper {
 
     @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.lastName", target = "lastName")
+    @Mapping(source = "user.firstName", target = "firstName")
+    @Mapping(source = "user.email", target = "email")
     ParentDTO parentToParentDTO(Parent parent);
 
     List<ParentDTO> parentsToParentDTOs(List<Parent> parents);
@@ -28,7 +31,7 @@ public interface ParentMapper {
      * @param id id of the entity
      * @return the entity instance
      */
-     
+
     default Parent parentFromId(Long id) {
         if (id == null) {
             return null;
@@ -37,6 +40,6 @@ public interface ParentMapper {
         parent.setId(id);
         return parent;
     }
-    
+
 
 }

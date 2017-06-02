@@ -2,6 +2,7 @@ package com.inva.hipstertest.service;
 
 import com.inva.hipstertest.domain.User;
 
+import com.inva.hipstertest.service.dto.TeacherDTO;
 import io.github.jhipster.config.JHipsterProperties;
 
 import org.apache.commons.lang3.CharEncoding;
@@ -96,9 +97,20 @@ public class MailService {
             log.warn("Email could not be sent to user '{}'", to, e);
         }
     }
-
-
     @Async
+    public void sendSimpleEmailTry(User user, String cont) {
+        log.debug("Sending start email to '{}'", user.getEmail());
+        Locale locale = Locale.forLanguageTag(user.getLangKey());
+        Context context = new Context(locale);
+        context.setVariable(USER, user);
+        context.setVariable("content", cont);
+        String content = templateEngine.process("simpleEmail", context);
+        String subject = messageSource.getMessage("email.activation.titleS", null, locale);
+        sendEmail(user.getEmail(), subject, content, false, true);
+
+    }
+
+        @Async
     public void sendActivationEmail(User user) {
         log.debug("Sending activation email to '{}'", user.getEmail());
         Locale locale = Locale.forLanguageTag(user.getLangKey());

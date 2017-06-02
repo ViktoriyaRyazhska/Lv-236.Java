@@ -2,24 +2,26 @@
     "schoolNetApp": {
         "form" : {
             "home": {
-                "title": "Forms",
-                "createLabel": "Создать новый Form",
+                "title": "Классы",
+                "createLabel": "Создать новый класс",
                 "createOrEditLabel": "Создать или отредактировать Form"
             },
-            "created": "Новый Form создан с идентификатором {{ param }}",
-            "updated": "Form обновлен с идентификатором {{ param }}",
-            "deleted": "Form удален с идентификатором {{ param }}",
+            "created": "Новый класс создан с идентификатором {{ param }}",
+            "updated": "Класс обновлен с идентификатором {{ param }}",
+            "deleted": "Класс удален с идентификатором {{ param }}",
             "delete": {
-                "question": "Вы уверены что хотите удалить Form {{ id }}?"
+                "question": "Вы уверены что хотите удалить класс {{ id }}?"
             },
             "detail": {
-                "title": "Form"
+                "title": "Класс"
             },
-            "name": "Name",
-            "enabled": "Enabled",
-            "pupil": "Pupil",
-            "schedule": "Schedule",
-            "school": "School"
+            "name": "Имя",
+            "enabled": "Активный",
+            "pupil": "Ученик",
+            "schedule": "Расписание",
+            "school": "Школа",
+            "pupils":"Ученики",
+            "parents":"Родители"
         }
     }
 }

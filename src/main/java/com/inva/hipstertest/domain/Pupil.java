@@ -44,9 +44,8 @@ public class Pupil implements Serializable {
     private Form form;
 
     @ManyToMany(mappedBy = "pupils")
-    @JsonIgnore
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-    private Set<Parent> parents = new HashSet<>();
+    private Set<Parent> parents ;
 
     public Long getId() {
         return id;

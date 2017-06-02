@@ -22,11 +22,7 @@ public interface TeacherRepository extends JpaRepository<Teacher,Long> {
     @Query("select teacher from Teacher teacher where teacher.user.login = ?#{principal.username}")
     Teacher findTeacherByCurrentUser();
 
-    //@Query("select pupil from Pupil pupil where pupil.user.login = ?#{principal.username}")
     @Query("select t from Teacher t left join fetch t.school s where t.user.login = ?#{principal.username}")
     Teacher findOneWithSchool();
-
-    //@Query("select teac.id from Teacher teac where teac.user.login =?#{principal.username}")
-    //Long findTeacherId();
 
 }

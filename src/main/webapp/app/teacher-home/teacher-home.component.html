@@ -1,16 +1,136 @@
 <h2 *ngIf="currentAccount">Welcome <b>{{currentAccount.login}}</b></h2>
 
 
+<!--<form class="container" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">-->
+<!--<div>-->
+<!--<select name="languag" ngModel>-->
+<!--<option *ngFor="let lesson of Lessons" value={{lesson.id}}>{{lesson.name}}</option>-->
+<!--</select>-->
+<!--<select name="form" ngModel>-->
+<!--<option *ngFor="let form of forms" value={{form.id}}>{{form.name}}</option>-->
+<!--</select>-->
+<!--</div>-->
+<!--</form>-->
+
+<!--<form class="container"   #userForm = "ngForm"  (ngSubmit)="onSubmit(userForm.value)">-->
+<!--<select name="Lesson" ngModel>-->
+<!--<option *ngFor="let lesson of lessons" value="Lesson">{{lesson.name}}</option>-->
+<!--</select>-->
+<!--<select name="Form" ngModel>-->
+<!--<option *ngFor="let form of forms" value="form">{{form.name}}</option>-->
+<!--</select>-->
+
+<!--</form>-->
+
+<!--<div>-->
+<!--<ng-form ng-hide="isDetail">-->
+<!--First Name:-->
+<!--<input type="text" ng-model="fName">-->
+<!--<br />-->
+<!--Last Name:-->
+<!--<input type="text" ng-model="lName">-->
+<!--<br />-->
+<!--User Name:-->
+<!--<input type="text" ng-model="uName">-->
+<!--<br />-->
+<!--Password:-->
+<!--<input type="password" ng-model="password">-->
+<!--<br />-->
+<!--</ng-form>-->
+<!--<input type="button" ng-click="isDetail=true" value="Submit" />-->
+<!--<div ng-show="isDetail">-->
+<!--First Name:<b>{{fName}}</b><br />-->
+<!--Last Name:<b>{{lName}}</b><br />-->
+<!--User Name:<b>{{uName}}</b><br />-->
+<!--Password:<b>{{password}}</b>-->
+<!--</div>-->
+<!--</div>-->
 
 
-<form class="container" #userForm="ngForm" (ngSubmit)="onSubmit(userForm.value)">
-    <div>
-        <select name="languag" ngModel>
-            <option *ngFor="let lesson of Lessons" value={{lesson.id}}>{{lesson.name}}</option>
-        </select>
-        <select name="form" ngModel>
-            <option *ngFor="let form of forms" value={{form.id}}>{{form.name}}</option>
-        </select>
+<div class="col-md-8 offset-md-2">
+    <form #teacherSelectForm="ngForm">
+        <div class="form-group row">
+            <label for="date-select" class="col-2 col-form-label">Date</label>
+            <div class="col-10">
+                <input class="form-control" type="date" id="date-select" name="date-select" [(ngModel)]="selectedDate">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="lesson-select" class="col-2 col-form-label">Lesson</label>
+            <div class="col-10">
+                <select class="form-control" id="lesson-select" name="lesson-select" [(ngModel)]="selectedLessonId"
+                        (change)="onFormChange()">
+                    <option *ngFor="let lesson of lessons;" value="{{lesson.id}}">{{lesson.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="teacherForm-select" class="col-2 col-form-label">Form</label>
+            <div class="col-10">
+                <select class="form-control" id="teacherForm-select" name="teacherForm-select"
+                        [(ngModel)]="selectedFormId"
+                        (change)="onFormChange()">
+                    <option *ngFor="let form of forms;" value="{{form.id}}">{{form.name}}</option>
+                </select>
+            </div>
+        </div>
+        <input type="submit" value="submit">
+    </form>
+</div>
+
+
+<div>
+    <h2>{{selectedDate | date:'shortDate'}}</h2>
+    <h2>
+        <span>User Schedules</span>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
     </div>
-</form>
-
+    <br/>
+    <div class="table-responsive" *ngIf="schedules">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><span>Lesson Position</span></th>
+                <th><span>Lesson</span></th>
+                <th><span>Classroom</span></th>
+                <th><span>Form</span></th>
+                <th><span>FormHomework</span></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let schedule of schedules">
+                <td>{{schedule.lessonPosition}}</td>
+                <td>
+                    <div *ngIf="schedule.lessonId">
+                        <span>{{schedule.lessonName}}</span>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="schedule.classroomId">
+                        <span>{{schedule.classroomName}}</span>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="schedule.formId">
+                        <span>{{schedule.formName}}</span>
+                    </div>
+                </td>
+                <div>
+                    <td>
+                        <span>{{schedule.homework }}</span>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'schedule-my-suffix/'+ schedule.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                    </td>
+                </div>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -8,6 +8,7 @@ import { FormMySuffix } from './form-my-suffix.model';
 import { FormMySuffixPopupService } from './form-my-suffix-popup.service';
 import { FormMySuffixService } from './form-my-suffix.service';
 
+
 @Component({
     selector: 'jhi-form-my-suffix-delete-dialog',
     templateUrl: './form-my-suffix-delete-dialog.component.html'

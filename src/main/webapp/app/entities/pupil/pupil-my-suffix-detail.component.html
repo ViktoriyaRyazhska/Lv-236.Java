@@ -18,6 +18,17 @@
                 <a [routerLink]="['/form-my-suffix', pupil.formId]">{{pupil.formId}}</a>
             </div>
         </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <div *ngIf="pupil.formId">
+                <a >{{pupil.lastName}}  {{pupil.firstName}} </a>
+                <div *ngFor="let i of pupil.parents">
+                    <a >{{i.user.login}} </a>
+                </div>
+
+            </div>
+        </dd>
+
     </dl>
 
     <button type="submit"

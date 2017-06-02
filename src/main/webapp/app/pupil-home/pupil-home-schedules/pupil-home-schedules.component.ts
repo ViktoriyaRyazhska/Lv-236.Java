@@ -7,6 +7,7 @@ import {PupilHomeSchedules} from './pupil-home-schedules.model';
 import {PupilHomeService} from '../pupil-home.service';
 import {ITEMS_PER_PAGE, Principal} from '../../shared';
 import {PupilMySuffix} from "../../entities/pupil/pupil-my-suffix.model";
+import {Lesson} from "./pupil-home-lesson.model";
 // service to retrieve schedules for pupil
 @Component({
     selector: 'jhi-pupil-home-schedules',
@@ -15,7 +16,8 @@ import {PupilMySuffix} from "../../entities/pupil/pupil-my-suffix.model";
 export class PupilHomeSchedulesComponent implements OnInit {
     @Input() currentPupil: PupilMySuffix;
     pupilSchedules: PupilHomeSchedules[] = [];
-    currentAccount: any;
+    pupilLessons: Lesson[] = [];
+    account: any;
     eventSubscriber: Subscription;
     currentSchedules: PupilHomeSchedules[] = [];
     schedulesWithBlanks: PupilHomeSchedules[] = [];
@@ -51,11 +53,20 @@ export class PupilHomeSchedulesComponent implements OnInit {
                 this.schedulesWithBlanks = this.getSchedulesWithBlanks();
             });
         this.jhiLanguageService.setLocations(['home']);
-
     }
 
     ngOnInit() {
         this.loadByFormId();
+        this.loadDistinctLessons(7);
+    }
+
+    //load all distinct lessons into pupilLessons
+    loadDistinctLessons(formId: number){
+        this.pupilHomeService.getDistinctLessons(formId).subscribe(
+            (res: Response) => {
+                this.pupilLessons = res.json();
+            },
+        );
     }
 
     // function to load schedules for form for current user(if he is pupil)
@@ -68,7 +79,6 @@ export class PupilHomeSchedulesComponent implements OnInit {
             },
             (res: Response) => this.onError(res.json())
         );
-
     }
 
     trackId(index: number, item: PupilHomeSchedules) {

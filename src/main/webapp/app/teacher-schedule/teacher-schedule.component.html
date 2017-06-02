@@ -1,0 +1,43 @@
+<div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1 jhiTranslate="global.menu.teacher-schedule">Teacher Schedule</h1>
+        </div>
+        <div class="col-md-8 offset-md-2">
+            <form #teacherSelectForm="ngForm">
+                <div class="form-group row">
+                    <label for="date-select" class="col-2 col-form-label">Date</label>
+                    <div class="col-10">
+                        <input class="form-control" type="date" id="date-select" name="date-select" [(ngModel)]="selectedDate" (change)="onFormChange()">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="teacher-select" class="col-2 col-form-label">Teacher</label>
+                    <div class="col-10">
+                        <select class="form-control" id="teacher-select" name="teacher-select" [(ngModel)]="selectedID" (change)="onFormChange()">
+                            <option *ngFor="let teacher of teachers;" value="{{teacher.id}}">{{teacher.firstName}} {{teacher.lastName}}</option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <table>
+                <tr>
+                    <th>Date</th>
+                    <th>Day of week</th>
+                    <th>Position</th>
+                    <th>Lesson</th>
+                    <th>Form</th>
+                    <th>Classroom</th>
+                </tr>
+                <tr *ngFor="let filteredSchedule of filteredSchedules;">
+                    <td>{{filteredSchedule.date | date:'yyyy-MM-dd'}}</td>
+                    <td>{{filteredSchedule.date | date:'EEEE'}}</td>
+                    <td>{{filteredSchedule.lessonPosition}}</td>
+                    <td>{{filteredSchedule.lessonName}}</td>
+                    <td>{{filteredSchedule.formName}}</td>
+                    <td>{{filteredSchedule.classroomName}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

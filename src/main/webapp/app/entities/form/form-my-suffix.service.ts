@@ -9,6 +9,16 @@ export class FormMySuffixService {
     private resourceUrl = 'api/forms';
 
     constructor(private http: Http) { }
+    findByFormId(formId: number): Observable<Response> {
+        return this.http.get(`${this.resourceUrl}/${formId}`).map((res: Response) =>
+            this.convertResponse(res));
+    }
+    private convertResponse(res: any): any {
+        const jsonResponse = res.json();
+
+        res._body = jsonResponse;
+        return res;
+    }
 
     create(form: FormMySuffix): Observable<FormMySuffix> {
         const copy: FormMySuffix = Object.assign({}, form);

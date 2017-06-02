@@ -10,8 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -86,5 +88,19 @@ public class ParentServiceImpl implements ParentService{
     public void delete(Long id) {
         log.debug("Request to delete Parent : {}", id);
         parentRepository.delete(id);
+    }
+    /**
+     *  Finds the  parents of pupil by id.
+     *
+     *  @param id the id of the pupil
+     */
+    @Override
+    public List<ParentDTO> findParentOfPupil(Long id) {
+        log.debug("Request to get Parents of pupil : {}", id);
+        List<Parent> parents = parentRepository.findParentOfPupil(id);
+        List<ParentDTO> parentsDTO=parentMapper.parentsToParentDTOs(parents);
+
+
+        return parentsDTO;
     }
 }

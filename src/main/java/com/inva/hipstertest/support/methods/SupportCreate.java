@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.ZonedDateTime;
+import java.util.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -38,11 +39,27 @@ abstract public class SupportCreate {
     public Map<String, Object> saveUserWithRole(TeacherDTO teacherDTO, ROLE_ENUM role){
         log.debug("Request to save user", teacherDTO, role);
         User user = new User();
-        String login =  RandomUtil.generateLogin(teacherDTO.getFirstName(), teacherDTO.getLastName());
-        user.setLogin(login);
+        Map<String, Object> map = new HashMap<>();
+        String login =  RandomUtil.generateLogin(teacherDTO.getFirstName(),
+            teacherDTO.getLastName(),teacherDTO.getSchoolId());
+
+        if (!userRepository.findOneByLogin(login).isPresent() &&
+            !userRepository.findOneByEmail(teacherDTO.getEmail()).isPresent()){
+            user.setLogin(login);
+            user.setEmail(teacherDTO.getEmail());
+        }else{
+            if (userRepository.findOneByEmail(teacherDTO.getEmail()).isPresent()){
+                map.put("error", teacherDTO);
+                return map;
+            }else{
+                String anotherLogin = RandomUtil.generateLogin(teacherDTO.getFirstName(),
+                    teacherDTO.getLastName(),teacherDTO.getSchoolId());
+                user.setLogin(anotherLogin);
+                user.setEmail(teacherDTO.getEmail());
+            }
+        }
         user.setFirstName(teacherDTO.getFirstName());
         user.setLastName(teacherDTO.getLastName());
-        user.setEmail(teacherDTO.getEmail());
         user.setLangKey("en");
         /* For user what we need use true */
         user.setActivated(true);
@@ -58,15 +75,18 @@ abstract public class SupportCreate {
             authority.setName("ROLE_PUPIL");
             auto.add(authority);
             user.setActivated(false);
+            user.setActivationKey(RandomUtil.generateActivationKey());
         }else if(role.equals(ROLE_ENUM.PARENT)){
             authority.setName("ROLE_PARENT");
             auto.add(authority);
             user.setActivated(false);
+            user.setActivationKey(RandomUtil.generateActivationKey());
         }else{
             System.out.println("BAD PARAM(role) IN METHOD saveUserWithRole");
             authority.setName("ROLE_USER");
             auto.add(authority);
             user.setActivated(false);
+            user.setActivationKey(RandomUtil.generateActivationKey());
         }
         user.setAuthorities(auto);
         String noEncryptedPassword = RandomUtil.generatePassword();
@@ -76,7 +96,6 @@ abstract public class SupportCreate {
         user.setResetDate(ZonedDateTime.now());
         user = userRepository.save(user);
         String content = "Your login: (" + login + "). And password: (" + noEncryptedPassword + ").";
-        Map<String, Object> map = new HashMap<>();
         map.put("userObject", user);
         map.put("content", content);
         return map;

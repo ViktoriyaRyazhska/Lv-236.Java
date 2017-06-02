@@ -76,3 +76,5 @@
                   tableName="jhi_user_authority"/>
     </changeSet>
 </databaseChangeLog>
+
+

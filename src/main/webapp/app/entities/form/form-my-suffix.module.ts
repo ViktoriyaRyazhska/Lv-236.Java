@@ -14,6 +14,7 @@ import {
     formRoute,
     formPopupRoute,
 } from './';
+import { SortPipe } from './form-my-suffix.sort';
 
 const ENTITY_STATES = [
     ...formRoute,
@@ -26,6 +27,7 @@ const ENTITY_STATES = [
         RouterModule.forRoot(ENTITY_STATES, { useHash: true })
     ],
     declarations: [
+        SortPipe,
         FormMySuffixComponent,
         FormMySuffixDetailComponent,
         FormMySuffixDialogComponent,

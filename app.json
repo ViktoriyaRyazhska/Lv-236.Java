@@ -1,0 +1,17 @@
+{
+  "name": "Lv-236.Java",
+  "scripts": {
+  },
+  "env": {
+  },
+  "formation": {
+  },
+  "addons": [
+    "heroku-postgresql"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/jvm"
+    }
+  ]
+}
