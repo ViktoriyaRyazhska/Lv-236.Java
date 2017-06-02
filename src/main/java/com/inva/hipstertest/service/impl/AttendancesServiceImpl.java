@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 public class AttendancesServiceImpl implements AttendancesService{
 
     private final Logger log = LoggerFactory.getLogger(AttendancesServiceImpl.class);
-    
+
     private final AttendancesRepository attendancesRepository;
 
     private final AttendancesMapper attendancesMapper;
@@ -30,6 +30,15 @@ public class AttendancesServiceImpl implements AttendancesService{
     public AttendancesServiceImpl(AttendancesRepository attendancesRepository, AttendancesMapper attendancesMapper) {
         this.attendancesRepository = attendancesRepository;
         this.attendancesMapper = attendancesMapper;
+    }
+
+
+    @Override
+    public List<AttendancesDTO> findAllByPupilAndLessonId(Long pupilId, Long lessonId) {
+        log.debug("Request to findAllByPupilAndLessonId");
+        List<Attendances> attendances = attendancesRepository.findAllByPupilAndLessonId(pupilId, lessonId);
+        List<AttendancesDTO> attendancesDTOS = attendancesMapper.attendancesToAttendancesDTOs(attendances);
+        return attendancesDTOS;
     }
 
     /**
@@ -49,7 +58,7 @@ public class AttendancesServiceImpl implements AttendancesService{
 
     /**
      *  Get all the attendances.
-     *  
+     *
      *  @return the list of entities
      */
     @Override

@@ -8,6 +8,11 @@ import java.util.List;
  */
 public interface AttendancesService {
 
+
+    List<AttendancesDTO> findAllByPupilAndLessonId(Long pupilId, Long lessonId);
+
+
+
     /**
      * Save a attendances.
      *
@@ -18,7 +23,7 @@ public interface AttendancesService {
 
     /**
      *  Get all the attendances.
-     *  
+     *
      *  @return the list of entities
      */
     List<AttendancesDTO> findAll();

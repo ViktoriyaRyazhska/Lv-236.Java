@@ -1,0 +1,29 @@
+<h2 *ngIf="account">Welcome <b>{{account.firstName}} {{account.lastName}}</b></h2>
+<jhi-alert></jhi-alert>
+
+<span class="lessonsButtons" *ngIf="pupilLessons">
+        <span *ngFor="let lesson of pupilLessons">
+                <button type="submit" class="btn" (click)="findAllByPupilAndLessonId(currentPupil.id, lesson.id)">
+                    <span class="hidden-md-down">{{lesson.name}}</span>
+                </button>
+        </span>
+</span>
+<!--<div *ngFor="let lesson of pupilLessons">-->
+    <!--{{lesson.id}} {{lesson.name}}-->
+<!--</div>-->
+<div class="table-responsive2" *ngIf="pupilAttendances">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th><span>Grade</span></th>
+            <th><span>Date</span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let attendance of pupilAttendances">
+            <td>{{attendance.grade | gradesPipe}}</td>
+            <td>{{attendance.date | date:'shortDate'}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

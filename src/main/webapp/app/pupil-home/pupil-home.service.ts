@@ -2,11 +2,12 @@
  * Created by Kolja on 22.05.2017.
  */
 import { Injectable } from '@angular/core';
-import {Subject, Observable} from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Http, Response, URLSearchParams, BaseRequestOptions } from '@angular/http';
 import { PupilHomeSchedules } from './pupil-home-schedules/pupil-home-schedules.model';
 import { DateUtils } from 'ng-jhipster';
-import {Lesson} from "./pupil-home-schedules/pupil-home-lesson.model";
+import { PupilMySuffix } from '../entities/pupil/pupil-my-suffix.model';
+
 @Injectable()
 export class PupilHomeService {
 
@@ -15,19 +16,19 @@ export class PupilHomeService {
 
     // Observable string sources
     private dateToSend = new Subject<Date>();
-
+    private currentPupil: PupilMySuffix;
     // Observable string streams
     dateToSend$ = this.dateToSend.asObservable();
 
     constructor(private http: Http, private dateUtils: DateUtils) { }
 
-    findByForm(): Observable<Response> {
-        return this.http.get(`${this.resourceUrl}/getschedules`).map((res: Response) =>
+    findByFormId(formId: number): Observable<Response> {
+        return this.http.get(`${this.resourceUrl}/getschedules/${formId}`).map((res: Response) =>
             this.convertResponse(res));
     }
 
-    findByFormId(formId: number): Observable<Response> {
-        return this.http.get(`${this.resourceUrl}/getschedules/${formId}`).map((res: Response) =>
+    findAllByPupilAndLessonId(pupilId: number, lessonId: number): Observable<Response> {
+        return this.http.get(`${this.resourceUrl}/${pupilId}/${lessonId}`).map((res: Response) =>
             this.convertResponse(res));
     }
 
@@ -48,13 +49,21 @@ export class PupilHomeService {
         return res;
     }
 
-    getCurrentPupil(): Observable<Response> {
+    loadCurrentPupil(): Observable<Response> {
         return this.http.get(`${this.resourceUrl}/getpupil`);
     }
 
     // Service message commands
     publishData(data: Date) {
         this.dateToSend.next(data);
+    }
+
+    setPupil(pupil: PupilMySuffix) {
+        this.currentPupil = pupil;
+    }
+
+    getPupil() {
+        return this.currentPupil;
     }
 
     // get schedules array for specified date

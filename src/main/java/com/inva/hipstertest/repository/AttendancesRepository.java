@@ -18,4 +18,10 @@ public interface AttendancesRepository extends JpaRepository<Attendances, Long> 
         "where attendances.pupil.id = :pupilId and attendances.schedule.date between :fromDate and :toDate")
     List<Attendances> findAllByPupilIdAndScheduleDateBetween(@Param("pupilId") Long pupilId,
                                                              @Param("fromDate") LocalDateTime fromDate, @Param("toDate") LocalDateTime toDate);
+
+    //query to find all attendances for lesson and pupil
+    @Query(value = "select * from attendances where pupil_id =:pupilId and\n" +
+        "schedule_id in(select id from schedule where lesson_id =:lessonId)", nativeQuery = true)
+    List<Attendances> findAllByPupilAndLessonId(@Param("pupilId") Long pupilId, @Param("lessonId") Long lessonId);
+
 }

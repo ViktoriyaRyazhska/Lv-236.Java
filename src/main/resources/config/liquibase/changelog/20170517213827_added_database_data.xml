@@ -71,6 +71,12 @@
             <column name="enabled" type="boolean"/>
         </loadData>
         <loadData encoding="UTF-8"
+                  file="config/liquibase/attendances.csv"
+                  separator=";"
+                  tableName="attendances">
+            <column name="enabled" type="boolean"/>
+        </loadData>
+        <loadData encoding="UTF-8"
                   file="config/liquibase/user_authority.csv"
                   separator=";"
                   tableName="jhi_user_authority"/>

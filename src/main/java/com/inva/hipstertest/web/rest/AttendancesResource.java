@@ -28,7 +28,7 @@ public class AttendancesResource {
     private final Logger log = LoggerFactory.getLogger(AttendancesResource.class);
 
     private static final String ENTITY_NAME = "attendances";
-        
+
     private final AttendancesService attendancesService;
 
     public AttendancesResource(AttendancesService attendancesService) {
@@ -102,6 +102,14 @@ public class AttendancesResource {
         AttendancesDTO attendancesDTO = attendancesService.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(attendancesDTO));
     }
+
+    @GetMapping("/pupilhome/{pupilId}/{lessonId}")
+    @Timed
+    public List<AttendancesDTO> findAllByPupilAndLessonId(@PathVariable("pupilId") Long pupilId, @PathVariable("lessonId") Long lessonId) {
+        log.debug("REST request to get Attendances : {}", pupilId);
+        return attendancesService.findAllByPupilAndLessonId(pupilId, lessonId);
+    }
+
 
     /**
      * DELETE  /attendances/:id : delete the "id" attendances.

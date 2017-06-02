@@ -5,6 +5,7 @@ export class AttendancesMySuffix {
         public enabled?: boolean,
         public pupilId?: number,
         public scheduleId?: number,
+        public date?: any,
     ) {
         this.enabled = false;
     }

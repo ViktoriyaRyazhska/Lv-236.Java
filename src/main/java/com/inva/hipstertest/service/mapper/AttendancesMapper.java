@@ -14,6 +14,7 @@ public interface AttendancesMapper {
 
     @Mapping(source = "pupil.id", target = "pupilId")
     @Mapping(source = "schedule.id", target = "scheduleId")
+    @Mapping(source = "schedule.date", target = "date")
     AttendancesDTO attendancesToAttendancesDTO(Attendances attendances);
 
     List<AttendancesDTO> attendancesToAttendancesDTOs(List<Attendances> attendances);
@@ -30,7 +31,7 @@ public interface AttendancesMapper {
      * @param id id of the entity
      * @return the entity instance
      */
-     
+
     default Attendances attendancesFromId(Long id) {
         if (id == null) {
             return null;
@@ -39,6 +40,6 @@ public interface AttendancesMapper {
         attendances.setId(id);
         return attendances;
     }
-    
+
 
 }
