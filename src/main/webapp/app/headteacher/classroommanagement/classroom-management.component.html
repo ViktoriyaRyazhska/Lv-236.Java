@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span jhiTranslate="schoolNetApp.classroom.home.title">Classrooms</span>
-        <button class="btn btn-primary float-right create-classroom-management" [routerLink]="['/', { outlets: { popup: ['classroom-management-new'] } }]">
+        <button class="btn btn-primary float-right create-classroom-managment" [routerLink]="['/', { outlets: { popup: ['classroom-managment-popup'] } }]">
             <span class="fa fa-plus"></span>
             <span  jhiTranslate="schoolNetApp.classroom.home.createLabel">
             Create new Classroom
@@ -34,20 +34,20 @@
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['../classroom-management', classroom.id ]"
+                                [routerLink]="['../classroom-managment', classroom.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'classroom-management/'+ classroom.id + '/edit'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'classroom-managment/'+ classroom.id + '/edit'} }]"
                                 replaceUrl="true"
                                 class="btn btn-primary btn-sm">
                             <span class="fa fa-pencil"></span>
                             <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'classroom-management/'+ classroom.id + '/delete'} }]"
+                                [routerLink]="['/', { outlets: { popup: 'classroom-managment/'+ classroom.id + '/delete'} }]"
                                 replaceUrl="true"
                                 class="btn btn-danger btn-sm">
                             <span class="fa fa-remove"></span>

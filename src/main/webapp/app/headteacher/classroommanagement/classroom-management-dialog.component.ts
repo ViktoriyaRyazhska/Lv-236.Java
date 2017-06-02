@@ -12,7 +12,7 @@ import { SchoolMySuffix, SchoolMySuffixService } from '../../entities/school';
 
 @Component({
     selector: 'jhi-classroom-management-dialog',
-    templateUrl: './classroom-mangement-dialog.component.html'
+    templateUrl: './classroom-management-dialog.component.html'
 })
 export class ClassroomManagementDialogComponent implements OnInit {
 
