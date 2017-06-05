@@ -12,7 +12,8 @@
             "teacher-management":{
                 "teachers":"Вчителі",
                 "schedules":"Розклад",
-                "forms":"Класи"
+                "forms":"Класи",
+                "classrooms":"Кабінети"
             },
             "home": "Головна",
             "forms": "Класи",
