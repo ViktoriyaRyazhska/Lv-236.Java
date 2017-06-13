@@ -11,10 +11,8 @@ deploy:
   provider: heroku
   api_key:
     secure: jYv037N1GRS6ru86oM5vUNReUlrI79ruGrmDbZSkoqn+5TUBo0C5hLpIgM7ZaSDoy6b5uQMiupxPYettqSGiA8FQ+DGCm2kMRE1oQeRWzWiBIeCkMuzIvVyLpwua5AAz/kfq5Yz7lHFzUlGrKLAtdxE9m20lUm6BolPjMucnDur2OJ0uZgGSg69D1RWmskeGqDieLRWkmTjsNE8CBHaP1KieVhdCUxn9Q2wGCP8KCt96Uwal4q7J9fGb2vutJvqdOwiSb7+ciotEeXU06rAuSz3aiJN1lYC/jotdb3aQSiHLPEAddz5p0OhSIx9TKe3xsW/pMatqfxBKRTRSSRqhXR/9TeolR8NuWA5P2MxjZJouIMzGcyvQtR458CO3Y5C+/jzZhiRAlq9jWI+5F0An7HI97Dzp56qU8cBxqK2Q7g3GqfCWREe+OMy54r9NOiBMMIWWAkQrzBQRm7IOqN1+xusYW0BjVum6atGT3nzQHvZrzbyfKHNXw0k0Pn+ZR9dqBORSmnktm1UqCpLAK2erLmA1IArJ42jbQZMLW6J3sL4ccUuNangXgUXBuG8GhvMz/SI4t1xG4uNO1q7I3NbQjqgjhENG8iXQh4Q4Y3r9zOVKL8v5NDHxSUp26H2JOp8Dm/dN/KXODbhvdcw/NdtACpTY5SMgrZ+0gMaF3ksJqgs=
-branches:
-  only:
-  - dev
-  - herokutest2
+ app:
+    dev: school-net
 sudo: false
 cache:
   directories:
