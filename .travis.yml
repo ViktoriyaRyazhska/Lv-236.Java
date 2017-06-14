@@ -14,7 +14,7 @@ deploy:
   app: school-net
   on:
     repo: ViktoriyaRyazhska/Lv-236.Java
-    branch: travis-setup
+    branch: travis-heroku
 sudo: false
 cache:
   directories:
