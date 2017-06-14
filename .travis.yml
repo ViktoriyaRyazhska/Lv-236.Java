@@ -10,8 +10,11 @@ jdk:
 deploy:
   provider: heroku
   api_key:
-    secure: rBMAtwbeDv4fBkGmgvPDuLAfibWxHluCZzuD9ksbI6FZSPr6QTBSbTeYg23Ix1126H9XUBT+IJEijT/MDcs9zxY5G4J8lXjbmL5Kmj0CttcrTzfEGpYi1ifZK5btwnkW7dlBnZclcXeOocXJQwaeTTN3qfS88pQLMwNHS/LbCFvVyoLJa32LfQmMNHWtPpFgjOiDLHh9/VGENlZAqNRteSZj0BhBU6nNCk1nRoFMZQ3I6Fx2pUgN2jFPfINcMmFlxgAKCuPgLFju245JstyJmqLFEstdj8aDvSpuliAY48kerbVg6x4lgRHeQR5W009iDGEo4Bdk7nJYNpU/UD+2zUCKFI9uhoGbXHVqn6n+jcUR0Xm//yFy4yy8Q5Q94VMhael0fuD3+g00dFGRfDv4/p9NOW4LhGc7OoK2H5YywEVnvc+UfTVtUDQpbaXUmdZT6e20KYlzYSY6E/QPtrgj84T1ZIYEX5Xs9e1ErjRljcaLSdw2g3a0iMcSIllarAflAW/SCGRX8S/XcM/Oz911V9r5XE+cp+jiANbJAiNhDtTOaE3rxXK55C+bGsoZ5+KBcp3e2ICJxHXGHLV52i/9BaqA5AqyjYLmEecO+J+PZFXeyrWycjvNTZL93eQ6deVrb1qdJ2nX+zAW3PivtyFNJwvjhv+MdKvjzX0JcKd4gsc=
-  on: travis-setup
+    secure: ZECYrBktwhH2tlBCcysgVD3VmmsN/+wOSvdb7InKx1FPL1xilGwRw4Q9C0mNlc6gL0fvJgImXZa4/Z5AePmyi6F5uowSx/NxFQHyPrP81Asfq0Tzl0ghDisG/ysIUKOSd2LbXhQ9LlF0qkCD+gqPLQfjTWhYL0HnvJZb0tuDxD7PIcWCmncNe2YBPg/O6OBw2WVJpV9hzKgNwVPFXB4WyjE+cCK1rGZaXFhAhmxFQwKWJunaD7Ffbz3sOSRdp5Q+D38K+xY9ojfigbwxqCkWjmppr8YUGQKnwQhVVnzr4hyWoRbA1PY0SH+KPQlEoPfiO8xfGANuunroOixdjQFh/ZF2Kr3az6Uvf/9OU75MnMSYmJO79XmA2el/GE7OstMfqJq4wD3x40SD3Bj48Dm8G/PfAorM9GXZVQs3OmA7FsaOUy4ahv9aIs0ofC0+93zaTZh1N9cE13BTI3O1fgPgPVqsCHWr26AL86sp6PzKguW9rXnaJba5sO8F+YuVIUiT1eyWnch/+XBsfFE1DE93cvbRPZKGHnQoaZPTQ1LCa1FbrRdTx/+TtmBcTl6svRykcC5RcFW1cWGFSsHw3JXuiAuCGrxdwni/saybmcvVtBcrq7Dp1HfRrnXc1QBWf3RR9abV3d7IIDqtX/LYWj17kTFQlBMuQ5u97yC+LxguC3o=
+  app: Lv-236.Java
+  on:
+    repo: ViktoriyaRyazhska/Lv-236.Java
+    branch: travis-setup
 sudo: false
 cache:
   directories:
@@ -40,4 +43,4 @@ script:
 - "./mvnw package -Pprod -DskipTests"
 notifications:
   email:
-    - myndykmykola@gmail.com
+  - myndykmykola@gmail.com
