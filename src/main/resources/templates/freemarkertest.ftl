@@ -9,8 +9,7 @@
 </div>
 
 <div id="content">
-    <script type="text/javascript" src="/temlates/test.js"></script>
-
+<#--<script type="text/javascript" src="/temlates/test.js"></script>-->
     <fieldset>
         <legend>Add School</legend>
         <form name="schoolDTO" action="/freemarker/freemarkertest/add" method="post">
