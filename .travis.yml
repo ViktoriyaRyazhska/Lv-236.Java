@@ -19,6 +19,7 @@ env:
   - NODE_VERSION=6.10.3
   - SPRING_OUTPUT_ANSI_ENABLED=ALWAYS
   - SPRING_JPA_SHOW_SQL=false
+  - HEROKU_API_KEY="eccfc73b-b203-4172-a54a-c25727202737"
 before_install:
 - jdk_switcher use oraclejdk8
 - java -version
@@ -29,7 +30,7 @@ before_install:
 install:
 - yarn install
 after_success:
-- mvn clean heroku:deploy-war
+- mvn heroku:deploy-war
 script:
 - chmod +x mvnw
 - "./mvnw clean test"
