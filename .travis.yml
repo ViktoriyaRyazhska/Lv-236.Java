@@ -7,14 +7,6 @@ node_js:
 - 6.10.3
 jdk:
 - oraclejdk8
-deploy:
-  provider: heroku
-  api_key:
-    secure: V2tyAyDcMLrnBAj6dsX9Np1zoCH7urFm3HwMXPeINUqBGW8wH5pGdvJYlAg7NvVWex7p4Y+NgUSQldEyMfoDs5wPYfT34mRBGZVrbSDqixVu5/NlN3kri/MgjHtkelTZmqZbPns8E+VrU8vqIgWO8Rb/TlYrfOvMLETwn9D+QHm2pM5qpaGbaJte4c4mpuY7cuPzRz5p5HtiQ+azWdmUGKZ+aKmJUQjPw1FxBc0geizsovYUt5aWcrbQo8zKXgyKoIIc72Eln066qaMmVavI+Kjy8473ZsMsxiJiaB1THgEm+X/EIal5JkaNOhkySb7c7yamm5MxG2HEPZrcCOfhJPW3TGzC01bBF46uYqyp0XnP8VimpOP2rxu8p9/hbG/Sq2PWkKH26H3+D0W5bZdJGMX+jNUx0b41yEbu+s8lbEKBsr7zWlxeAWCLDvvlRuG+h8MdUVZdiUMkVsrAy+5iluuhnR9B5MWht0xd9yNmUNEyqC4/dYb7tTmWw60yg7um0NCRpR0Rh1+XmYEUOY+bKYjtx0VrdItaDuUpmjrKMoUAwW4Ernk6xG4NPe6WSS+6iX7SOJinxjz1kD9oHqW6UJUvkRL0aQBmyVuwv+8L+4ufoAt2r9EccUbt3R/+lZSEBtID6Ijz/4eocYAaew2WEnQWOzErIoG8BuGYLUCDuig=
-  app: school-net
-  on:
-    repo: ViktoriyaRyazhska/Lv-236.Java
-    branch: travis-heroku
 sudo: false
 cache:
   directories:
@@ -36,6 +28,8 @@ before_install:
 - export PATH=$HOME/.yarn/bin:$PATH
 install:
 - yarn install
+after_success:
+- mvn clean heroku:deploy-war
 script:
 - chmod +x mvnw
 - "./mvnw clean test"
