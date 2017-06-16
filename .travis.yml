@@ -30,7 +30,7 @@ before_install:
 install:
 - yarn install
 after_success:
-- mvn heroku:deploy-war -Pprod package -DskipTests
+- mvn heroku:deploy-war
 script:
 - chmod +x mvnw
 - "./mvnw clean test"
