@@ -30,7 +30,8 @@ before_install:
 install:
 - yarn install
 after_success:
-- mvn heroku:deploy-war
+- heroku plugins:install https://github.com/heroku/heroku-deploy
+- heroku deploy:jar --jar target/*.war
 script:
 - chmod +x mvnw
 - "./mvnw clean test"
