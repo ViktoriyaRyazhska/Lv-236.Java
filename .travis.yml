@@ -27,11 +27,9 @@ before_install:
 - sudo /etc/init.d/postgresql stop
 - curl -o- -L https://yarnpkg.com/install.sh | bash
 - export PATH=$HOME/.yarn/bin:$PATH
-install:
-- yarn install
 after_success:
 - heroku plugins:install heroku-cli-deploy
-- heroku deploy:jar --jar target/*.war
+- heroku deploy:jar --jar target/*.war --app school-net
 script:
 - chmod +x mvnw
 - "./mvnw clean"
