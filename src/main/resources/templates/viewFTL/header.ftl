@@ -26,6 +26,16 @@
         <div class="navbar-collapse collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
 
+
+
+    <@security.authorize  access="hasRole('ROLE_TEACHER')">
+        <li class="nav-item">
+            <a class="nav-link"  (click)="collapseNavbar()" href="/freemarker/teacher-schedule">
+                <i class="fa fa-home" aria-hidden="true"></i>
+                <span>Teacher Schedule</span>
+            </a>
+        </li>
+    </@security.authorize>
                 <@security.authorize  access="hasRole('ROLE_HEAD_TEACHER') or hasRole('ROLE_ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link"  (click)="collapseNavbar()" href="/freemarker/freemarkertest">

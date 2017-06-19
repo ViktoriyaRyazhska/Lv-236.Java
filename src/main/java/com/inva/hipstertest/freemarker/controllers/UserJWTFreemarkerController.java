@@ -69,6 +69,8 @@ public class UserJWTFreemarkerController {
                 return "redirect:pupil-home";
             } else if (authorities.contains(new SimpleGrantedAuthority("ROLE_HEAD_TEACHER"))) {
                 return "redirect:teacher-mgmt/teacher-mgmt";
+            }else if(authorities.contains(new SimpleGrantedAuthority("ROLE_TEACHER"))){
+                return "redirect:teacher-schedule";
             } else {
                 return "redirect:freemarkertest";
             }
