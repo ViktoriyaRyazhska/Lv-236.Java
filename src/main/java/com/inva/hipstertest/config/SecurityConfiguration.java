@@ -103,7 +103,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .antMatchers("/freemarker/teacher-mgmt/**").hasAuthority(AuthoritiesConstants.HEAD_TEACHER)
             .antMatchers("/freemarker/pupil-home").hasAuthority(AuthoritiesConstants.PUPIL)
             .antMatchers("/freemarker/freemarkertest/**").permitAll() // change
-
             .antMatchers("/api/register").permitAll()
             .antMatchers("/api/activate").permitAll()
             .antMatchers("/api/authenticate").permitAll()

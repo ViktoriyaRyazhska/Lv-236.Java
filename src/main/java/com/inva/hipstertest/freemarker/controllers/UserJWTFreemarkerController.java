@@ -64,6 +64,7 @@ public class UserJWTFreemarkerController {
             boolean rememberMe = (loginVM.isRememberMe() == null) ? false : loginVM.isRememberMe();
             String jwt = tokenProvider.createToken(authentication, rememberMe);
             CookieUtil.create(httpServletResponse, "JWT-TOKEN", jwt, false, -1);
+
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             if (authorities.contains(new SimpleGrantedAuthority("ROLE_PUPIL"))) {
                 return "redirect:pupil-home";
