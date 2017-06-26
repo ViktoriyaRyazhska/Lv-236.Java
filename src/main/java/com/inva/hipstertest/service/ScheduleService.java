@@ -2,6 +2,8 @@ package com.inva.hipstertest.service;
 
 import com.inva.hipstertest.domain.Schedule;
 import com.inva.hipstertest.service.dto.ScheduleDTO;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -56,4 +58,18 @@ public interface ScheduleService {
      *  @return the list of entities
      */
     List<ScheduleDTO> findAllBySchoolId(Long schoolId);
+
+
+    /**
+     *FOR PAGEABLE
+     * @param pageable
+     * @return
+     */
+    Page<ScheduleDTO> findAll(Pageable pageable);
+
+    /**
+     *FOR PAGEABLE
+     * @return
+     */
+    Long countAllSchedule();
 }

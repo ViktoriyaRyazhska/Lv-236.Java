@@ -21,4 +21,8 @@ public interface ScheduleRepository extends JpaRepository<Schedule,Long> {
     @Query("select schedule from Schedule schedule, Teacher teacher, School school where schedule.teacher.id = teacher.id and teacher.school.id = school.id and school.id = :schoolId")
     List<Schedule> findAllBySchoolId(@Param("schoolId") Long schoolId);
 
+    @Query("SELECT COUNT(sched) FROM Schedule sched")
+    Long countAllSchedule();
+
+
 }

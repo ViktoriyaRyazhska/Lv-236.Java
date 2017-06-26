@@ -7,6 +7,8 @@ import com.inva.hipstertest.service.dto.ScheduleDTO;
 import com.inva.hipstertest.service.mapper.ScheduleMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -128,6 +130,18 @@ public class ScheduleServiceImpl implements ScheduleService{
             .collect(Collectors.toCollection(LinkedList::new));
 
         return result;
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Page<ScheduleDTO> findAll(Pageable pageable) {
+        return scheduleRepository.findAll(pageable).map(scheduleMapper::scheduleToScheduleDTO);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Long countAllSchedule(){
+        return scheduleRepository.countAllSchedule();
     }
 
 }
