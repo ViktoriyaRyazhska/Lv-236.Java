@@ -29,8 +29,12 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-info" data-dismiss="modal"
-                onclick="window.location.href='/freemarker/admin/admin-home/'">
+                onclick="window.location.href='/freemarker/admin-home/'">
             <span class="fa fa-arrow-left"></span>&nbsp;<span><@spring.message "back"/></span>
+        </button>
+        <button type="button" class="btn btn-default" data-dismiss="modal"
+                onclick="reset()">
+            <span class="fa fa-ban"></span>&nbsp;<span><@spring.message "school.cancel"/></span>
         </button>
         <button type="submit" class="btn btn-primary">
             <span class="fa fa-save"></span>&nbsp;<span><@spring.message "save"/></span>

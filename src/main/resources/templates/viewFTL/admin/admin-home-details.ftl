@@ -3,7 +3,6 @@
 
 </@h.header>
 
-
 <br>
 <div id="header">
 
@@ -19,12 +18,21 @@
             <th id="demo"><@spring.message "firstname"/></th>
             <th><@spring.message "lastname"/></th>
             <th><@spring.message "email"/></th>
+            <th><@spring.message "school.headTeacher"/></th>
         </tr>
     <#list model["teachersList"] as teacher>
         <tr>
             <td>${teacher.firstName}</td>
             <td>${teacher.lastName}</td>
             <td>${teacher.email}</td>
+            <td>
+                <div class="btn-group flex-btn-group-container">
+                    <button id="view" type="submit" class="btn btn-info btn-sm"
+                        <span class="fa fa-check-square-o"></span>
+                        <span class="hidden-md-down"><@spring.message "school.headTeacher"/></span>
+                    </button>
+                </div>
+            </td>
         </tr>
 
     </#list>
@@ -49,12 +57,22 @@
             <th id="demo"><@spring.message "firstname"/></th>
             <th><@spring.message "lastname"/></th>
             <th><@spring.message "email"/></th>
+            <th><@spring.message "school.headTeacher"/></th>
         </tr>
     <#list model["headTeachers"] as headTeacher>
         <tr>
             <td>${headTeacher.firstName}</td>
             <td>${headTeacher.lastName}</td>
             <td>${headTeacher.email}</td>
+            <td>
+                <div class="btn-group flex-btn-group-container">
+                    <button id="delete" type="submit" class="btn btn-danger btn-sm">
+                        <span class="fa fa-remove"></span>
+                        <span class="hidden-md-down"><@spring.message "school.headTeacher"/></span>
+                    </button>
+                </div>
+            </td>
+
         </tr>
 
     </#list>
