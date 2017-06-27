@@ -7,6 +7,7 @@ import com.inva.hipstertest.repository.PupilRepository;
 import com.inva.hipstertest.service.AttendancesService;
 import com.inva.hipstertest.service.dto.AttendancesDTO;
 import com.inva.hipstertest.service.mapper.AttendancesMapper;
+import com.inva.hipstertest.service.util.DataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -115,13 +116,8 @@ public class AttendancesServiceImpl implements AttendancesService{
      */
     @Override
     public List<AttendancesDTO> findAllMembersByPupilIdAndDateBetween(String date) {
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.parse(date, timeFormatter);
-        ZoneId zoneId = ZoneId.systemDefault();
-        ZonedDateTime dateStart = localDateTime.atZone(zoneId);
+        ZonedDateTime dateStart = DataUtil.getZonedDateTime(date);
         ZonedDateTime dateEnd = dateStart.plusDays(1);
-
         Pupil pupil = pupilRepository.findPupilByCurrentUser();
         log.debug("Request to get attendances by pupil and date {}", date);
         List<Attendances> attendances = attendancesRepository.findAllMembersByPupilIdAndDateBetween(pupil.getId(), dateStart, dateEnd);

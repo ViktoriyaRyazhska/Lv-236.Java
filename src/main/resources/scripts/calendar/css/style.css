@@ -1,16 +1,46 @@
-#calendar{
-	max-width: 900px;
-	margin: auto;
+#calendar {
+    max-width: 900px;
+    margin: auto;
 }
 
-#calendar .fc-today{
-	background: #ccc;
+#calendar .fc-today {
+    background: #ccc;
 }
 
-#calendar .fc-day{
-	transition: all .1s;
+#calendar .fc-day {
+    transition: all .1s;
 }
 
-#calendar .fc-day:hover{
-	background: #ccc;
+#calendar .fc-day:hover {
+    background: #ccc;
+}
+
+#scheduleTable table th{
+    text-align: center;
+}
+
+#scheduleTable table tr td {
+    vertical-align: middle;
+    text-align: center;
+    line-height: 16px;
+    height: 43px;
+    font-size: 10pt;
+    padding: 2px 2px;
+}
+
+#scheduleTable table tr:first-child td {
+    line-height: 18px;
+    font-size: 11pt;
+    width: 5px;
+}
+
+td.homework{
+    max-width: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+td.homework:hover, td.teacher:hover {
+    color: #105cb6;
 }

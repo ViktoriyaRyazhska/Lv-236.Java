@@ -1,5 +1,6 @@
 <#import "header.ftl" as h>
-<@h.header></@h.header>
+<@h.header>
+</@h.header>
 
 <link rel='stylesheet' href='/scripts/calendar/css/jquery-ui.css'/>
 <link rel='stylesheet' href='/scripts/calendar/fc/fullcalendar.css'/>
@@ -13,8 +14,8 @@
 
     </div>
     <div class="row">
-        <div class="col-md-7">
-            <table class="table table-striped">
+        <div class="col-md-7" id="scheduleTable">
+            <table class="table table-striped" >
                 <tr>
                     <th><@spring.message "pupil.home.table.position"/></th>
                     <th><@spring.message "pupil.home.table.lesson"/></th>
@@ -23,7 +24,7 @@
                     <th><@spring.message "pupil.home.table.teacher"/></th>
                     <th><@spring.message "pupil.home.table.attendance"/></th>
                 </tr>
-                <tbody id="scheduleTable">
+                <tbody>
                 <#list 1..10 as table_row>
                 <tr id="row">
                     <#list 0..5 as col>
@@ -68,7 +69,7 @@
                                 </div>
                             </div>
                         <#else>
-                            <td id="clear">-</td>
+                            <td>-</td>
                         </#if>
                     </#list>
                 </tr>

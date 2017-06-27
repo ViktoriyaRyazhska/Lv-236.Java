@@ -7,6 +7,7 @@ import com.inva.hipstertest.repository.ScheduleRepository;
 import com.inva.hipstertest.service.ScheduleService;
 import com.inva.hipstertest.service.dto.ScheduleDTO;
 import com.inva.hipstertest.service.mapper.ScheduleMapper;
+import com.inva.hipstertest.service.util.DataUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -130,13 +131,8 @@ public class ScheduleServiceImpl implements ScheduleService {
      */
     @Override
     public List<ScheduleDTO> findAllByFormIdAndDate(String date) {
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.parse(date, timeFormatter);
-        ZoneId zoneId = ZoneId.systemDefault();
-        ZonedDateTime dateStart = localDateTime.atZone(zoneId);
+        ZonedDateTime dateStart = DataUtil.getZonedDateTime(date);
         ZonedDateTime dateEnd = dateStart.plusDays(1);
-
         Pupil currentPupil = pupilRepository.findPupilByCurrentUser();
         log.debug("Request to get schedules by pupil form and date {}", date);
         List<Schedule> schedules = scheduleRepository.findAllMembersByFormIdAndDateBetween(currentPupil.getForm().getId(), dateStart, dateEnd);

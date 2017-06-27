@@ -61,8 +61,12 @@ function getSchedule(date) {
             };
             request.send();
         }
-
-        $("#row td:not(:first-child)").html("-");
+        var resetToDefoultVal = $("#row td:not(:first-child)");
+        resetToDefoultVal.html("-");
+        resetToDefoultVal.removeAttr('trgId', 'data-toggle', 'data-target');
+        resetToDefoultVal.removeAttr('data-toggle');
+        resetToDefoultVal.removeAttr('data-target');
+        // $("#row td:not(:first-child)").removeAttr('trgId').then(removeAttr());
         schedules.forEach(function (el) {
             if (el.id) {
                 var selector = $('table tr').eq(el.lessonPosition);
@@ -81,7 +85,6 @@ function getSchedule(date) {
     };
     request.send();
 }
-
 
 function pickUpAttendance(id, attendances) {
     var grade = 'n/a';
@@ -119,15 +122,17 @@ $('.homework').on('click', function () {
 });
 
 $('.teacher').on('click', function () {
-    var id = $(this).attr('trgId')
-    $.ajax({
-        url: 'pupil-home/teacher',
-        type: 'POST',
-        data: JSON.stringify(id),
-        contentType: 'application/json',
-        success: function (response) {
-            $('#teacher-modal').html('<p>' + response.firstName + ' ' + response.lastName + '</p>' +
-                '<p>e-mail: ' + response.email + '</p>')
-        }
-    });
+    var id = $(this).attr('trgId');
+    if(id) {
+        $.ajax({
+            url: 'pupil-home/teacher',
+            type: 'POST',
+            data: JSON.stringify(id),
+            contentType: 'application/json',
+            success: function (response) {
+                $('#teacher-modal').html('<p>' + response.firstName + ' ' + response.lastName + '</p>' +
+                    '<p>e-mail: ' + response.email + '</p>')
+            }
+        });
+    }
 });
