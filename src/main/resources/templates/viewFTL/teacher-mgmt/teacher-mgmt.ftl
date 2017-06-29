@@ -14,6 +14,13 @@
             <@spring.message "teacherm.createNew"/>
             </span>
         </button>
+        <button id="lessons" class="btn btn-primary float-right lessons-teacher-management"
+                onclick="window.location.href='/freemarker/teacher-mgmt/teacher-mgmt-lessons/'" style="margin-right: 10px">
+            <span class="fa fa-plus"></span>
+            <span>
+            <@spring.message "teacherm.createNewLessons"/>
+            </span>
+        </button>
     </h2>
 </div>
 <div id="content">

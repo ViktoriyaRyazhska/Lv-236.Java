@@ -1,14 +1,14 @@
 package com.inva.hipstertest.service.impl;
 
-import com.inva.hipstertest.service.LessonService;
 import com.inva.hipstertest.domain.Lesson;
 import com.inva.hipstertest.repository.LessonRepository;
+import com.inva.hipstertest.service.LessonService;
 import com.inva.hipstertest.service.dto.LessonDTO;
 import com.inva.hipstertest.service.mapper.LessonMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  */
 @Service
 @Transactional
-public class LessonServiceImpl implements LessonService{
+public class LessonServiceImpl implements LessonService {
 
     private final Logger log = LoggerFactory.getLogger(LessonServiceImpl.class);
 
@@ -41,16 +41,19 @@ public class LessonServiceImpl implements LessonService{
     @Override
     public LessonDTO save(LessonDTO lessonDTO) {
         log.debug("Request to save Lesson : {}", lessonDTO);
+        System.out.println("2");
         Lesson lesson = lessonMapper.lessonDTOToLesson(lessonDTO);
+        System.out.println("3");
         lesson = lessonRepository.save(lesson);
+        System.out.println("4");
         LessonDTO result = lessonMapper.lessonToLessonDTO(lesson);
         return result;
     }
 
     /**
-     *  Get all the lessons.
+     * Get all the lessons.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     @Transactional(readOnly = true)
@@ -64,9 +67,9 @@ public class LessonServiceImpl implements LessonService{
     }
 
     /**
-     *  Get all the lessons by teacher id.
+     * Get all the lessons by teacher id.
      *
-     *  @return the list of entities
+     * @return the list of entities
      */
     @Override
     public List<LessonDTO> getAllLessonsByTeacherId(Long teacherId) {
@@ -91,10 +94,10 @@ public class LessonServiceImpl implements LessonService{
     }
 
     /**
-     *  Get one lesson by id.
+     * Get one lesson by id.
      *
-     *  @param id the id of the entity
-     *  @return the entity
+     * @param id the id of the entity
+     * @return the entity
      */
     @Override
     @Transactional(readOnly = true)
@@ -106,13 +109,18 @@ public class LessonServiceImpl implements LessonService{
     }
 
     /**
-     *  Delete the  lesson by id.
+     * Delete the  lesson by id.
      *
-     *  @param id the id of the entity
+     * @param id the id of the entity
      */
     @Override
     public void delete(Long id) {
         log.debug("Request to delete Lesson : {}", id);
         lessonRepository.delete(id);
+    }
+
+    @Override
+    public LessonDTO saveLesson(LessonDTO lessonDTO) {
+        return null;
     }
 }

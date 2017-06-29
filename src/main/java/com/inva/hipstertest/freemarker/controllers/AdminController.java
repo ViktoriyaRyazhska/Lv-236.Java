@@ -4,28 +4,24 @@ import com.codahale.metrics.annotation.Timed;
 import com.inva.hipstertest.domain.User;
 import com.inva.hipstertest.service.SchoolService;
 import com.inva.hipstertest.service.TeacherService;
-import com.inva.hipstertest.service.UserAddonService;
 import com.inva.hipstertest.service.UserService;
 import com.inva.hipstertest.service.dto.SchoolDTO;
 import com.inva.hipstertest.service.dto.TeacherDTO;
-import com.inva.hipstertest.service.dto.UserAddonDTO;
 import com.inva.hipstertest.service.dto.UserDTO;
 import com.inva.hipstertest.service.mapper.UserMapper;
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.ui.Model;
 
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.List;
-
-import org.springframework.data.domain.Page;
 
 @Controller
 public class AdminController {
@@ -37,7 +33,7 @@ public class AdminController {
 
 
     public AdminController(SchoolService schoolService, TeacherService teacherService, UserMapper userMapper,
-    UserService userService) {
+                           UserService userService) {
         this.schoolService = schoolService;
         this.teacherService = teacherService;
         this.userMapper = userMapper;
@@ -47,7 +43,7 @@ public class AdminController {
     @RequestMapping(value = "freemarker/admin-home", method = RequestMethod.GET)
     public String index(Model model, Pageable pageable) {
         User user = userService.findByLoginUserId();
-        UserDTO userDTO=userMapper.userToUserDTO(user);
+        UserDTO userDTO = userMapper.userToUserDTO(user);
         Page<SchoolDTO> page = schoolService.findAllEnabled(pageable);
         model.addAttribute("schools", page.getContent());
         model.addAttribute("sizes", pageable.getPageSize());
@@ -70,7 +66,7 @@ public class AdminController {
     public String dataForDelete(Model model, Pageable pageable) {
         Page<SchoolDTO> page = schoolService.findAllDisabled(pageable);
         User user = userService.findByLoginUserId();
-        UserDTO userDTO=userMapper.userToUserDTO(user);
+        UserDTO userDTO = userMapper.userToUserDTO(user);
         model.addAttribute("disabledSchools", page.getContent());
         model.addAttribute("sizes", pageable.getPageSize());
         model.addAttribute("current", pageable.getPageNumber());
@@ -127,14 +123,13 @@ public class AdminController {
             schoolService.save(schoolDTO);
             return "redirect:";
         } else {
-            return "redirect:error"; //TODO: create error page
+            return "redirect:error";
         }
     }
 
 
     @RequestMapping(value = "/freemarker/admin-home/createHeadTeacher/{schoolId}", method = RequestMethod.GET)
     public ModelAndView adminNewHeadTeacher(@PathVariable Long schoolId) {
-
         return new ModelAndView("admin/admin-home-create-headTeacher");
     }
 
