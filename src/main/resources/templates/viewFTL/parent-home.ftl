@@ -20,7 +20,7 @@ jsSources = [
     <div class="row content">
         <div class="col-sm-12 text-left">
 
-        <#if model["pupilList"]?size == 0>
+        <#if model.pupilList?size == 0>
             <h1><@spring.message "parent.page.havenopupils"/></h1>
         <#else>
 
@@ -35,7 +35,7 @@ jsSources = [
             <br><br>
             <div class="font-weight-bold"><@spring.message "parent.page.selectpupil"/></div>
             <ul class="nav nav-pills" id="pupil-select" role="tablist">
-            <#list model["pupilList"] as pupil>
+            <#list model.pupilList as pupil>
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="tab" href="#pupil${pupil.id}" role="tab" aria-controls="pupil${pupil.id}" data-pupil-id="${pupil.id}" data-pupil-form-id="${pupil.formId}">${pupil.firstName} ${pupil.lastName} [${pupil.formName}]</a>
                 </li>
@@ -43,6 +43,13 @@ jsSources = [
             </ul>
             <br>
             <div class="clearfix"></div>
+
+            <div class="alert alert-danger" style="display: none;" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>Error!</strong> Couldn't load schedule/subjects/grades.
+            </div>
 
             <div class="card">
                 <div class="card-header">

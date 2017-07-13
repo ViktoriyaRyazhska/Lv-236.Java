@@ -1,10 +1,7 @@
 package com.inva.hipstertest.freemarker.controllers;
 
 import com.inva.hipstertest.service.*;
-import com.inva.hipstertest.service.dto.AttendancesDTO;
-import com.inva.hipstertest.service.dto.PupilDTO;
-import com.inva.hipstertest.service.dto.ScheduleDTO;
-import com.inva.hipstertest.service.dto.TeacherDTO;
+import com.inva.hipstertest.service.dto.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -13,12 +10,12 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class TeacherGradebookController {
@@ -30,80 +27,75 @@ public class TeacherGradebookController {
     private final PupilService pupilService;
     private final AttendancesService attendancesService;
     private final SchoolService schoolService;
+    private final FormService formService;
+    private final LessonService lessonService;
 
-    public TeacherGradebookController(TeacherService teacherService, ScheduleService scheduleService, PupilService pupilService,
-                                      AttendancesService attendancesService, SchoolService schoolService) {
+    public TeacherGradebookController(TeacherService teacherService, ScheduleService scheduleService,
+                                      PupilService pupilService, AttendancesService attendancesService,
+                                      SchoolService schoolService, FormService formService,
+                                      LessonService lessonService) {
         this.teacherService = teacherService;
         this.scheduleService = scheduleService;
         this.pupilService = pupilService;
         this.attendancesService = attendancesService;
         this.schoolService = schoolService;
+        this.formService = formService;
+        this.lessonService = lessonService;
     }
 
-    @RequestMapping(value = "/freemarker/teacher-gradebook", method = RequestMethod.GET)
-    public ModelAndView home(@ModelAttribute("model") ModelMap model) {
+    @RequestMapping(value = {"/freemarker/teacher-gradebook", "/freemarker/teacher-gradebook/{formId}/{lessonId}"}, method = RequestMethod.GET)
+    public String gradebook(@ModelAttribute("model") ModelMap model, @PageableDefault(value = 10) Pageable pageable, @PathVariable Optional<Long> formId, @PathVariable Optional<Long> lessonId) {
         TeacherDTO teacher = teacherService.findTeacherByCurrentUser();
+        model.addAttribute("teacher", teacher);
+
         log.debug("request to get school status by current user");
-               Boolean schoolEnabled=schoolService.getSchoolStatus(teacher.getSchoolId());
-        if (schoolEnabled==false){
-                       model.addAttribute("currentUser", teacher);
-            return new ModelAndView("schoolDisabledPage");
+        Boolean schoolEnabled = schoolService.getSchoolStatus(teacher.getSchoolId());
+        if (schoolEnabled == false){
+            model.addAttribute("currentUser", teacher);
+            return "schoolDisabledPage";
         }
+
         List<ScheduleDTO> formsAndLessons = scheduleService.findFormsAndLessonsByTeacherId(teacher.getId());
+
         if(formsAndLessons.isEmpty()) {
-            return new ModelAndView("redirect:/freemarker/error");
-        }
-        Collections.sort(formsAndLessons, (o1, o2) -> o1.getFormName().compareTo(o2.getFormName()));
-        ScheduleDTO formAndLesson = formsAndLessons.get(0);
-        return new ModelAndView("redirect:/freemarker/teacher-gradebook/" + formAndLesson.getFormId() + "/" + formAndLesson.getLessonId());
-    }
-
-    @RequestMapping(value = "/freemarker/teacher-gradebook/{formId}/{lessonId}", method = RequestMethod.GET)
-    public String gradebook(@ModelAttribute("model") ModelMap model, @PageableDefault(value = 10) Pageable pageable, @PathVariable Long formId, @PathVariable Long lessonId) {
-        TeacherDTO teacher = teacherService.findTeacherByCurrentUser();
-        log.debug("request to get school status by current user");
-                Boolean schoolEnabled=schoolService.getSchoolStatus(teacher.getSchoolId());
-                if (schoolEnabled==false){
-                        model.addAttribute("currentUser", teacher);
-                       return "schoolDisabledPage";
-                   }
-        List<ScheduleDTO> formsAndLessons = scheduleService.findFormsAndLessonsByTeacherId(teacher.getId());
-        if(formsAndLessons.isEmpty()) {
-            return "redirect:/freemarker/error";
-        }
-        ScheduleDTO formAndLesson = null;
-
-        for(ScheduleDTO item : formsAndLessons) {
-            if(item.getFormId() == formId && item.getLessonId() == lessonId) {
-                formAndLesson = item;
-            }
+            model.addAttribute("error", 1);
+            return "teacher-gradebook";
         }
 
-        Page<ScheduleDTO> page = scheduleService.findSchedulesByTeacherIdFormIdSubjectIdMaxDate(pageable, teacher.getId(), formId, lessonId, ZonedDateTime.now());
-        List<PupilDTO> pupilDTOs = pupilService.findAllByFormId(formId);
-        Comparator<PupilDTO> comparatorLastNameFirstName = Comparator.comparing(PupilDTO::getLastName).thenComparing(PupilDTO::getFirstName);
-        List<AttendancesDTO> attendancesDTOs = attendancesService.findAllWherePupilIdInAndScheduleIdIn(teacher.getId(), formId, lessonId);
+        if(!formId.isPresent() || !lessonId.isPresent()) {
+            return "redirect:/freemarker/teacher-gradebook/" + formsAndLessons.get(0).getFormId() + "/" + formsAndLessons.get(0).getLessonId();
+        }
 
-        Collections.sort(formsAndLessons, (o1, o2) -> o1.getFormName().compareTo(o2.getFormName()));
-        Collections.sort(pupilDTOs, comparatorLastNameFirstName);
-
-        model.addAttribute("teacher", teacher.getFirstName() + " " + teacher.getLastName());
         model.addAttribute("formsAndLessons", formsAndLessons);
-        model.addAttribute("formAndLesson", formAndLesson);
-        model.addAttribute("pupils", pupilDTOs);
-        model.addAttribute("attendances", attendancesDTOs);
+        model.addAttribute("form", formService.findOne(formId.get()));
+        model.addAttribute("lesson", lessonService.findOne(lessonId.get()));
+
+        Page<ScheduleDTO> page = scheduleService.findAllByFormIdLessonIdMaxDate(pageable, formId.get(), lessonId.get(), ZonedDateTime.now());
+
+        if(!page.hasContent()) {
+            model.addAttribute("error", 2);
+            return "teacher-gradebook";
+        }
+
+        List<PupilDTO> pupils = pupilService.findAllByFormId(formId.get());
+        List<AttendancesDTO> attendances = attendancesService.findAllByFormIdAndLessonId(formId.get(), lessonId.get());
+        Comparator<PupilDTO> comparatorLastNameFirstName = Comparator.comparing(PupilDTO::getLastName).thenComparing(PupilDTO::getFirstName);
+
+        Collections.sort(formsAndLessons, (o1, o2) -> o1.getLessonName().compareTo(o2.getLessonName()));
+        Collections.sort(pupils, comparatorLastNameFirstName);
+
+        model.addAttribute("pupils", pupils);
+        model.addAttribute("attendances", attendances);
         model.addAttribute("schedules", page.getContent());
         model.addAttribute("sizes", pageable.getPageSize());
         model.addAttribute("current", pageable.getPageNumber());
-        model.addAttribute("longs", pages(pageable.getPageSize(), teacher.getId(), formId, lessonId, ZonedDateTime.now()));
-//        model.addAttribute("formId", formId);
-//        model.addAttribute("lessonId", lessonId);
+        model.addAttribute("longs", pages(pageable.getPageSize(), formId.get(), lessonId.get(), ZonedDateTime.now()));
 
         return "teacher-gradebook";
     }
 
-    public long pages(int size, Long teacherId, Long formId, Long lessonId, ZonedDateTime today) {
-        long all = scheduleService.countSchedulesForGradeBook(teacherId, formId, lessonId, today);
+    public long pages(int size, Long formId, Long lessonId, ZonedDateTime maxDate) {
+        long all = scheduleService.countAllByFormIdLessonIdMaxDate(formId, lessonId, maxDate);
         long realPage = all/size;
         if(all % size == 0){
             return realPage;
@@ -113,10 +105,19 @@ public class TeacherGradebookController {
 
     @RequestMapping(value = "/freemarker/teacher-gradebook/update", method = RequestMethod.POST)
     public @ResponseBody
-    AttendancesDTO updateSchedule(@RequestBody AttendancesDTO attendancesDTO) {
-        log.debug("REST request to create/update Schedule : {}", attendancesDTO);
-        attendancesService.save(attendancesDTO);
-        return attendancesDTO;
+    AttendancesDTO updateSchedule(@RequestBody AttendancesDTO attendances) {
+        log.debug("REST request to create/update Schedule : {}", attendances);
+
+//        TeacherDTO teacher = teacherService.findTeacherByCurrentUser();
+//        if(teacher.getId() != attendancesDTO.getTeacherId()) {
+//            return null;
+//        }
+//        if ((attendances.getGrade() >= 0 && attendances.getGrade() <= 12) || attendances.getGrade() == null) {
+//            return null;
+//        }
+
+        AttendancesDTO newAttendances = attendancesService.save(attendances);
+        return newAttendances;
     }
 
 }

@@ -2,16 +2,13 @@ package com.inva.hipstertest.service;
 
 import com.inva.hipstertest.service.dto.AttendancesDTO;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
  * Service Interface for managing Attendances.
  */
 public interface AttendancesService {
-
-
-    List<AttendancesDTO> findAllByPupilAndLessonId(Long pupilId, Long lessonId);
-
 
     /**
      * Save a attendances.
@@ -49,8 +46,13 @@ public interface AttendancesService {
      * @param date requested date
      * @return list of entities
      */
-    List<AttendancesDTO> findAllMembersByPupilIdAndDateBetween(String date);
 
-    List<AttendancesDTO> findAllWherePupilIdInAndScheduleIdIn(Long teacherId, Long formId, Long lessonId);
+    List<AttendancesDTO> findAllByPupilIdAndDate(Long pupilId, String date);
+
+    List<AttendancesDTO> findAllByPupilIdAndDateBetween(Long pupilId, ZonedDateTime dateStart, ZonedDateTime dateEnd);
+
+    List<AttendancesDTO> findAllByPupilIdAndLessonId(Long pupilId, Long lessonId);
+
+    List<AttendancesDTO> findAllByFormIdAndLessonId(Long formId, Long lessonId);
 
 }

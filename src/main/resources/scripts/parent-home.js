@@ -61,7 +61,7 @@ $(function() {
         }
     });
 
-    $("#pupil-select a:last").trigger("click");
+    $("#pupil-select a:first").trigger("click");
 
     $("#week-schedule-link").click(function () {
         $("#datepicker").show();
@@ -98,6 +98,8 @@ $(function() {
             contentType : "application/json",
             data : JSON.stringify(searchParams),
             success : function (response) {
+                $(".alert").alert('close');
+
                 var daysInWeek = 7;
 
                 for(var i = 1; i <= daysInWeek; i++) {
@@ -114,6 +116,9 @@ $(function() {
                     selector.prop("title", schedule.homework);
                     selector.html(schedule.lessonName + "<br>" + schedule.classroomName + "<br>" + schedule.teacherFirstName + " " + schedule.teacherLastName);
                 });
+            },
+            error: function() {
+                $(".alert").alert();
             }
         });
     }
@@ -129,11 +134,16 @@ $(function() {
             contentType : "application/json",
             data : JSON.stringify(searchParams),
             success : function (response) {
+                $(".alert").alert('close');
+
                 $("#lessons").empty();
                 $.each(response, function(i, lesson) {
                     $("#lessons").append($("<option></option>").attr("value", lesson.id).text(lesson.name));
                 });
                 loadAttendance();
+            },
+            error: function() {
+                $(".alert").alert();
             }
         });
     }
@@ -150,6 +160,8 @@ $(function() {
             contentType : "application/json",
             data : JSON.stringify(searchParams),
             success : function (response) {
+                $(".alert").alert('close');
+
                 var avgGradeSum = 0;
                 var avgGradeCount = 0;
 
@@ -160,7 +172,7 @@ $(function() {
                         avgGradeSum += attendance.grade;
                         avgGradeCount += 1;
                     }
-                    $('#attendanceTable tbody').prepend('<tr><td>' + $.datepicker.formatDate('DD, dd.mm.yy', new Date(attendance.date)) + '</td><td>' + attendance.grade + '</td></tr>');
+                    $('#attendanceTable tbody').prepend('<tr><td>' + $.datepicker.formatDate('DD, dd.mm.yy', new Date(attendance.date)) + '</td><td>' + (attendance.grade == 0 ? 'Н' : attendance.grade) + '</td></tr>');
                 });
 
                 if(response.length == 0) {
@@ -169,10 +181,14 @@ $(function() {
                     $("#attendanceTable").hide();
                     $("#attendanceEmpty").show();
                 } else {
-                    $('#avg-grade').text(Number((avgGradeSum/avgGradeCount).toFixed(2)));
+                    var avgGradeText = (avgGradeCount > 0 ? Number((avgGradeSum/avgGradeCount).toFixed(2)) : "Н");
+                    $('#avg-grade').text(avgGradeText);
                     $("#attendanceEmpty").hide();
                     $("#attendanceTable").show();
                 }
+            },
+            error: function() {
+                $(".alert").alert();
             }
         });
     }

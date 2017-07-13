@@ -6,7 +6,7 @@
 <div id="subjectArea">
     <label for="lessons"><h2>Choose subject:</h2></label>
     <select class="form-control form-control-lg" id="lessons" name="subject" style="width: auto">
-    <#list lessons as lesson>
+    <#list model["lessons"] as lesson>
         <option value="${lesson.id}">${lesson.name}</option>
     </#list>
     </select>

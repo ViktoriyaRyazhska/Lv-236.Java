@@ -132,12 +132,19 @@ public class ScheduleServiceImpl implements ScheduleService {
      * @return the list of entities.
      */
     @Override
-    public List<ScheduleDTO> findAllByFormIdAndDate(String date) {
+    public List<ScheduleDTO> findAllByFormIdAndDate(Long formId, String date) {
+        log.debug("Request to get schedules by form id and date {}", date);
         ZonedDateTime dateStart = DataUtil.getZonedDateTime(date);
         ZonedDateTime dateEnd = dateStart.plusDays(1);
-        Pupil currentPupil = pupilRepository.findPupilByCurrentUser();
-        log.debug("Request to get schedules by pupil form and date {}", date);
-        List<Schedule> schedules = scheduleRepository.findAllMembersByFormIdAndDateBetween(currentPupil.getForm().getId(), dateStart, dateEnd);
+        List<Schedule> schedules = scheduleRepository.findAllByFormIdAndDateBetween(formId, dateStart, dateEnd);
+        List<ScheduleDTO> scheduleDTOS = scheduleMapper.schedulesToScheduleDTOs(schedules);
+        return scheduleDTOS;
+    }
+
+    @Override
+    public List<ScheduleDTO> findAllByFormIdAndDateBetween(Long formId, ZonedDateTime startDate, ZonedDateTime endDate) {
+        log.debug("Request to get schedules by form id {} and date between {} - {}", formId, startDate, endDate);
+        List<Schedule> schedules = scheduleRepository.findAllByFormIdAndDateBetween(formId, startDate, endDate);
         List<ScheduleDTO> scheduleDTOS = scheduleMapper.schedulesToScheduleDTOs(schedules);
         return scheduleDTOS;
     }
@@ -170,15 +177,15 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     @Transactional(readOnly = true)
-    public Page<ScheduleDTO> findSchedulesByTeacherIdFormIdSubjectIdMaxDate(Pageable pageable, Long teacherId, Long formId, Long lessonId, ZonedDateTime today) {
-        log.debug("Request to get lessons dates where teacher {} gives lessons for class {} on subject {}", teacherId, formId, lessonId);
-        return scheduleRepository.findSchedulesByTeacherIdFormIdSubjectIdMaxDate(pageable, teacherId, formId, lessonId, today).map(scheduleMapper::scheduleToScheduleDTO);
+    public Page<ScheduleDTO> findAllByFormIdLessonIdMaxDate(Pageable pageable, Long formId, Long lessonId, ZonedDateTime maxDate) {
+        log.debug("Request to get lessons dates for class {} on subject {}", formId, lessonId);
+        return scheduleRepository.findAllByFormIdLessonIdMaxDate(pageable, formId, lessonId, maxDate).map(scheduleMapper::scheduleToScheduleDTO);
     }
 
     @Override
     @Transactional(readOnly = true)
-    public Long countSchedulesForGradeBook(Long teacherId, Long formId, Long lessonId, ZonedDateTime today) {
-        return scheduleRepository.countSchedulesForGradeBook(teacherId, formId, lessonId, today);
+    public Long countAllByFormIdLessonIdMaxDate(Long formId, Long lessonId, ZonedDateTime maxDate) {
+        return scheduleRepository.countAllByFormIdLessonIdMaxDate(formId, lessonId, maxDate);
     }
 
 }

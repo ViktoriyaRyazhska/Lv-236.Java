@@ -98,9 +98,9 @@ public class LessonResource {
      */
     @GetMapping("/teacher-home/lessons/teacher/{teacherId}")
     @Timed
-    public List<LessonDTO> getAllLessonsByCurrentTeacher(@PathVariable("teacherId") Long teacherId) {
+    public List<LessonDTO> getAllByTeacherId(@PathVariable("teacherId") Long teacherId) {
         log.debug("REST request to get all lessons for the current teacher : {}", teacherId);
-        return lessonService.getAllLessonsByTeacherId(teacherId);
+        return lessonService.getAllByTeacherId(teacherId);
     }
 
 
@@ -112,9 +112,9 @@ public class LessonResource {
      */
     @GetMapping("/pupilhome/distinctform/{formId}")
     @Timed
-    public List<LessonDTO> getDistinctLessonsForForm(@PathVariable("formId") Long formId) {
+    public List<LessonDTO> findAllByFormId(@PathVariable("formId") Long formId) {
         log.debug("REST request to get all distinct lessons for the current form : {}", formId);
-        return lessonService.getDistinctLessonsForForm(formId);
+        return lessonService.findAllByFormId(formId);
     }
 
     /**
