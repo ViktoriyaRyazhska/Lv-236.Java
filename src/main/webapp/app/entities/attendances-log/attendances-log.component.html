@@ -1,0 +1,74 @@
+<div>
+    <h2>
+        <span jhiTranslate="schoolNetApp.attendancesLog.home.title">Attendances Logs</span>
+        <button class="btn btn-primary float-right create-attendances-log" [routerLink]="['/', { outlets: { popup: ['attendances-log-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span  jhiTranslate="schoolNetApp.attendancesLog.home.createLabel">
+            Create new Attendances Log
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="attendancesLogs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.date">Date</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.oldGrade">Old Grade</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.newGrade">New Grade</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.reason">Reason</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.teacher">Teacher</span></th>
+            <th><span jhiTranslate="schoolNetApp.attendancesLog.attendances">Attendances</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let attendancesLog of attendancesLogs ;trackBy: trackId">
+                <td><a [routerLink]="['../attendances-log', attendancesLog.id ]">{{attendancesLog.id}}</a></td>
+                <td>{{attendancesLog.date | date:'medium'}}</td>
+                <td>{{attendancesLog.oldGrade}}</td>
+                <td>{{attendancesLog.newGrade}}</td>
+                <td>{{attendancesLog.reason}}</td>
+                <td>
+                    <div *ngIf="attendancesLog.teacherId">
+                        <a [routerLink]="['../teacher-my-suffix', attendancesLog.teacherId  ]" >{{attendancesLog.teacherId}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="attendancesLog.attendancesId">
+                        <a [routerLink]="['../attendances-my-suffix', attendancesLog.attendancesId  ]" >{{attendancesLog.attendancesId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../attendances-log', attendancesLog.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'attendances-log/'+ attendancesLog.id + '/edit'} }]"
+                                replaceUrl="true"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'attendances-log/'+ attendancesLog.id + '/delete'} }]"
+                                replaceUrl="true"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="hidden-md-down" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

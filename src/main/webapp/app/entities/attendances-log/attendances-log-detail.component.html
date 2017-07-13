@@ -1,0 +1,49 @@
+
+<div *ngIf="attendancesLog">
+    <h2><span jhiTranslate="schoolNetApp.attendancesLog.detail.title">Attendances Log</span> {{attendancesLog.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.date">Date</span></dt>
+        <dd>
+            <span>{{attendancesLog.date | date:'medium'}}</span>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.oldGrade">Old Grade</span></dt>
+        <dd>
+            <span>{{attendancesLog.oldGrade}}</span>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.newGrade">New Grade</span></dt>
+        <dd>
+            <span>{{attendancesLog.newGrade}}</span>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.reason">Reason</span></dt>
+        <dd>
+            <span>{{attendancesLog.reason}}</span>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.teacher">Teacher</span></dt>
+        <dd>
+            <div *ngIf="attendancesLog.teacherId">
+                <a [routerLink]="['/teacher-my-suffix', attendancesLog.teacherId]">{{attendancesLog.teacherId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.attendancesLog.attendances">Attendances</span></dt>
+        <dd>
+            <div *ngIf="attendancesLog.attendancesId">
+                <a [routerLink]="['/attendances-my-suffix', attendancesLog.attendancesId]">{{attendancesLog.attendancesId}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'attendances-log/'+ attendancesLog.id + '/edit'} }]"
+            replaceUrl="true"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+    </button>
+</div>

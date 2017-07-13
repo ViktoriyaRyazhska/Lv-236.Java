@@ -11,6 +11,7 @@ import { SchoolNetAttendancesMySuffixModule } from './attendances/attendances-my
 import { SchoolNetParentMySuffixModule } from './parent/parent-my-suffix.module';
 import { SchoolNetUserAddonModule } from './user-addon/user-addon.module';
 import { SchoolNetLessonTypeModule } from './lesson-type/lesson-type.module';
+import { SchoolNetAttendancesLogModule } from './attendances-log/attendances-log.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -26,6 +27,7 @@ import { SchoolNetLessonTypeModule } from './lesson-type/lesson-type.module';
         SchoolNetParentMySuffixModule,
         SchoolNetUserAddonModule,
         SchoolNetLessonTypeModule,
+        SchoolNetAttendancesLogModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

@@ -38,6 +38,7 @@
                 "parentMySuffix": "Parent",
                 "userAddon": "User Addon",
                 "lessonType": "Lesson Type",
+                "attendancesLog": "Attendances Log",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {
