@@ -1,6 +1,5 @@
 package com.inva.hipstertest.service.impl;
 
-import com.inva.hipstertest.domain.Pupil;
 import com.inva.hipstertest.domain.Schedule;
 import com.inva.hipstertest.repository.PupilRepository;
 import com.inva.hipstertest.repository.ScheduleRepository;
@@ -15,11 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -69,7 +64,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Transactional(readOnly = true)
     public List<ScheduleDTO> findAll() {
         log.debug("Request to get all Schedules");
-        //log.debug(scheduleRepository.findAllByFormId(1L).toString());
         List<ScheduleDTO> result = scheduleRepository.findAll().stream()
             .map(scheduleMapper::scheduleToScheduleDTO)
             .collect(Collectors.toCollection(LinkedList::new));

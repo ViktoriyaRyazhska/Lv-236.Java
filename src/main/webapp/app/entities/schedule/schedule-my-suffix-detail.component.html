@@ -38,6 +38,18 @@
                 <a [routerLink]="['/classroom-my-suffix', schedule.classroomId]">{{schedule.classroomId}}</a>
             </div>
         </dd>
+        <dt><span jhiTranslate="schoolNetApp.schedule.teacher">Teacher</span></dt>
+        <dd>
+            <div *ngIf="schedule.teacherId">
+                <a [routerLink]="['/teacher-my-suffix', schedule.teacherId]">{{schedule.teacherId}}</a>
+            </div>
+        </dd>
+        <dt><span jhiTranslate="schoolNetApp.schedule.lessonType">Lesson Type</span></dt>
+        <dd>
+            <div *ngIf="schedule.lessonTypeId">
+                <a [routerLink]="['/lesson-type', schedule.lessonTypeId]">{{schedule.lessonTypeId}}</a>
+            </div>
+        </dd>
     </dl>
 
     <button type="submit"

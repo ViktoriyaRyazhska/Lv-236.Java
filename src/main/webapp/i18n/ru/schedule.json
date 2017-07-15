@@ -23,7 +23,8 @@
             "lesson": "Lesson",
             "form": "Form",
             "classroom": "Classroom",
-            "teacher": "Teacher"
+            "teacher": "Teacher",
+            "lessonType": "Lesson Type"
         }
     }
 }

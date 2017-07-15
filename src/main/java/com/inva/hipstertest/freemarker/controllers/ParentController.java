@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
 
@@ -52,9 +53,9 @@ public class ParentController {
     public @ResponseBody
     List<ScheduleDTO> pupilSchedule(@RequestBody ParentPagePOJO parentPagePOJO){
         log.debug("Create ajax request for pupil schedule by pupil id and date: " + parentPagePOJO.getDate());
-        ZonedDateTime prevSunday = parentPagePOJO.getDate().with(previousOrSame(DayOfWeek.SUNDAY));;
-        ZonedDateTime nextSunday = prevSunday.plusDays(7);
-        List<ScheduleDTO> scheduleDTOs = scheduleService.findAllByFormIdAndDateBetween(parentPagePOJO.getPupilFormId(), prevSunday, nextSunday);
+        ZonedDateTime startDay = parentPagePOJO.getDate().truncatedTo(ChronoUnit.DAYS).with(previousOrSame(DayOfWeek.SUNDAY));;
+        ZonedDateTime endDate = startDay.plusDays(6);
+        List<ScheduleDTO> scheduleDTOs = scheduleService.findAllByFormIdAndDateBetween(parentPagePOJO.getPupilFormId(), startDay, endDate);
         return scheduleDTOs;
     }
 

@@ -26,8 +26,8 @@
     <include file="config/liquibase/changelog/20170514213827_added_entity_constraints_Attendances.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170514213828_added_entity_constraints_Parent.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170608163605_added_entity_constraints_UserAddon.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170517213827_added_database_data.xml" relativeToChangelogFile="false"/>
-    <include file="config/liquibase/changelog/20170623124100_added_teacher_to_form.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20170713163414_added_entity_constraints_AttendancesLog.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
+    <include file="config/liquibase/changelog/20170517213827_added_database_data.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20170623124100_added_teacher_to_form.xml" relativeToChangelogFile="false"/>
 </databaseChangeLog>

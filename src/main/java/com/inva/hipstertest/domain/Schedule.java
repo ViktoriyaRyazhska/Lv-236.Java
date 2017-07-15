@@ -62,6 +62,9 @@ public class Schedule implements Serializable {
     @NotNull
     private Teacher teacher;
 
+    @ManyToOne
+    private LessonType lessonType;
+
     public Long getId() {
         return id;
     }
@@ -190,13 +193,26 @@ public class Schedule implements Serializable {
         return teacher;
     }
 
+    public Schedule teacher(Teacher teacher) {
+        this.teacher = teacher;
+        return this;
+    }
+
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
     }
 
-    public Schedule teacher(Teacher teacher) {
-        this.teacher = teacher;
+    public LessonType getLessonType() {
+        return lessonType;
+    }
+
+    public Schedule lessonType(LessonType lessonType) {
+        this.lessonType = lessonType;
         return this;
+    }
+
+    public void setLessonType(LessonType lessonType) {
+        this.lessonType = lessonType;
     }
 
     @Override

@@ -2,6 +2,7 @@ $(function() {
     var pupilId = -1;
     var pupilFormId = -1;
     var selectedDate = new Date();
+    selectedDate.setHours(0,0,0,0);
     var monday = getMonday(selectedDate);
     var minYear = selectedDate.getFullYear();
     var maxYear = selectedDate.getFullYear();
@@ -31,6 +32,7 @@ $(function() {
 
     $("#datepicker").change(function() {
         selectedDate = $(this).datepicker("getDate");
+        selectedDate.setHours(0,0,0,0);
         var newMonday = getMonday(selectedDate);
 
         if (monday.getTime() === newMonday.getTime()) {

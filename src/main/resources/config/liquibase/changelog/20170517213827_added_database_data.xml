@@ -3,9 +3,6 @@
     xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
-    <!--
-        Added the constraints for entity Attendances.
-    -->
     <changeSet id="20170517213827-1" author="inva">
         <loadData encoding="UTF-8"
                   file="config/liquibase/users2.csv"
@@ -45,6 +42,12 @@
             <column name="enabled" type="boolean"/>
         </loadData>
         <loadData encoding="UTF-8"
+                  file="config/liquibase/lesson_type.csv"
+                  separator=";"
+                  tableName="lesson_type">
+            <column name="enabled" type="boolean"/>
+        </loadData>
+        <loadData encoding="UTF-8"
                   file="config/liquibase/parent.csv"
                   separator=";"
                   tableName="parent">
@@ -65,7 +68,7 @@
                   separator=";"
                   tableName="teacher_lesson"/>
         <loadData encoding="UTF-8"
-                  file="config/liquibase/schedule2.csv"
+                  file="config/liquibase/schedule.csv"
                   separator=";"
                   tableName="schedule">
             <column name="enabled" type="boolean"/>
@@ -82,5 +85,3 @@
                   tableName="jhi_user_authority"/>
     </changeSet>
 </databaseChangeLog>
-
-

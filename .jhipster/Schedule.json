@@ -27,6 +27,19 @@
             "relationshipName": "classroom",
             "otherEntityName": "classroom",
             "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "teacher",
+            "otherEntityName": "teacher",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": "required",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "lessonType",
+            "otherEntityName": "lessonType",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
         }
     ],
     "fields": [

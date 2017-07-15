@@ -34,6 +34,8 @@ public class ScheduleDTO implements Serializable {
 
     private Long teacherId;
 
+    private Long lessonTypeId;
+
     private String teacherLastName;
 
     private String teacherFirstName;
@@ -44,6 +46,8 @@ public class ScheduleDTO implements Serializable {
 
     private String classroomName;
 
+    private String lessonTypeName;
+
     public Long getId() {
         return id;
     }
@@ -51,6 +55,7 @@ public class ScheduleDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     public ZonedDateTime getDate() {
         return date;
     }
@@ -58,6 +63,7 @@ public class ScheduleDTO implements Serializable {
     public void setDate(ZonedDateTime date) {
         this.date = date;
     }
+
     public String getHomework() {
         return homework;
     }
@@ -65,6 +71,7 @@ public class ScheduleDTO implements Serializable {
     public void setHomework(String homework) {
         this.homework = homework;
     }
+
     public Integer getLessonPosition() {
         return lessonPosition;
     }
@@ -72,6 +79,7 @@ public class ScheduleDTO implements Serializable {
     public void setLessonPosition(Integer lessonPosition) {
         this.lessonPosition = lessonPosition;
     }
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -112,6 +120,14 @@ public class ScheduleDTO implements Serializable {
         this.teacherId = teacherId;
     }
 
+    public Long getLessonTypeId() {
+        return lessonTypeId;
+    }
+
+    public void setLessonTypeId(Long lessonTypeId) {
+        this.lessonTypeId = lessonTypeId;
+    }
+
     public String getLessonName() {
         return lessonName;
     }
@@ -150,6 +166,14 @@ public class ScheduleDTO implements Serializable {
 
     public void setTeacherFirstName(String teacherFirstName) {
         this.teacherFirstName = teacherFirstName;
+    }
+
+    public String getLessonTypeName() {
+        return lessonTypeName;
+    }
+
+    public void setLessonTypeName(String lessonTypeName) {
+        this.lessonTypeName = lessonTypeName;
     }
 
     @Override
