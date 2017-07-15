@@ -32,5 +32,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="teacher"/>
 
+        <addForeignKeyConstraint baseColumnNames="lesson_type_id"
+                                 baseTableName="schedule"
+                                 constraintName="fk_schedule_lesson_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lesson_type"/>
+
     </changeSet>
 </databaseChangeLog>

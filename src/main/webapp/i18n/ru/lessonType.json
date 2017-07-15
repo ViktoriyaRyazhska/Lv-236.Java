@@ -1,0 +1,22 @@
+{
+    "schoolNetApp": {
+        "lessonType" : {
+            "home": {
+                "title": "Lesson Types",
+                "createLabel": "Создать новый Lesson Type",
+                "createOrEditLabel": "Создать или отредактировать Lesson Type"
+            },
+            "created": "Новый Lesson Type создан с идентификатором {{ param }}",
+            "updated": "Lesson Type обновлен с идентификатором {{ param }}",
+            "deleted": "Lesson Type удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Lesson Type {{ id }}?"
+            },
+            "detail": {
+                "title": "Lesson Type"
+            },
+            "enabled": "Enabled",
+            "name": "Name"
+        }
+    }
+}

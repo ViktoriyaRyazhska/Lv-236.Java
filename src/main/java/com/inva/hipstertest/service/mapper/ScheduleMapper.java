@@ -9,18 +9,20 @@ import java.util.List;
 /**
  * Mapper for the entity Schedule and its DTO ScheduleDTO.
  */
-@Mapper(componentModel = "spring", uses = {LessonMapper.class, FormMapper.class, ClassroomMapper.class, TeacherMapper.class, })
+@Mapper(componentModel = "spring", uses = {LessonMapper.class, FormMapper.class, ClassroomMapper.class, TeacherMapper.class, LessonTypeMapper.class, })
 public interface ScheduleMapper {
 
-    @Mapping(source = "lesson.name", target = "lessonName")
-    @Mapping(source = "form.name", target = "formName")
-    @Mapping(source = "classroom.name", target = "classroomName")
     @Mapping(source = "lesson.id", target = "lessonId")
     @Mapping(source = "form.id", target = "formId")
     @Mapping(source = "classroom.id", target = "classroomId")
     @Mapping(source = "teacher.id", target = "teacherId")
-    @Mapping(source = "teacher.user.lastName", target = "teacherLastName")
+    @Mapping(source = "lessonType.id", target = "lessonTypeId")
+    @Mapping(source = "lesson.name", target = "lessonName")
+    @Mapping(source = "form.name", target = "formName")
+    @Mapping(source = "classroom.name", target = "classroomName")
     @Mapping(source = "teacher.user.firstName", target = "teacherFirstName")
+    @Mapping(source = "teacher.user.lastName", target = "teacherLastName")
+    @Mapping(source = "lessonType.name", target = "lessonTypeName")
     ScheduleDTO scheduleToScheduleDTO(Schedule schedule);
 
     List<ScheduleDTO> schedulesToScheduleDTOs(List<Schedule> schedules);
@@ -30,6 +32,7 @@ public interface ScheduleMapper {
     @Mapping(source = "formId", target = "form")
     @Mapping(source = "classroomId", target = "classroom")
     @Mapping(source = "teacherId", target = "teacher")
+    @Mapping(source = "lessonTypeId", target = "lessonType")
     Schedule scheduleDTOToSchedule(ScheduleDTO scheduleDTO);
 
     List<Schedule> scheduleDTOsToSchedules(List<ScheduleDTO> scheduleDTOs);
@@ -49,6 +52,5 @@ public interface ScheduleMapper {
         schedule.setId(id);
         return schedule;
     }
-
 
 }

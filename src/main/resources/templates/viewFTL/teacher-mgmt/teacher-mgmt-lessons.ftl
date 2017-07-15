@@ -30,7 +30,7 @@
     <#list model["lessonList"] as lesson>
         <tr>
             <td>${lesson.id}</td>
-            <td>${lesson.name}</a></td>
+            <td>${lesson.name}</td>
         </tr>
     </#list>
     </table>

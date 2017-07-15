@@ -1,5 +1,7 @@
 $(function() {
 
+    $('[data-toggle="tooltip"]').tooltip();
+
     $("#sizeSelector").change(function () {
         $("#sizeChangerForm").submit();
     });
@@ -91,9 +93,13 @@ $(function() {
             contentType : "application/json",
             data : JSON.stringify(attendanceDTO),
             success : function (response) {
+                selectedTd.data("attendance-id", response.id);
                 selectedTd.find("input").attr("value", (!string_value ? "" : response.grade));
                 selectedTd.find("div").text((!string_value ? "-" : response.grade));
                 hideInputShowDiv();
+            },
+            error: function() {
+                // add error handling
             }
         });
     });

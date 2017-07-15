@@ -64,6 +64,8 @@ public class CacheConfiguration {
             cm.createCache(com.inva.hipstertest.domain.Parent.class.getName(), jcacheConfiguration);
             cm.createCache(com.inva.hipstertest.domain.Parent.class.getName() + ".pupils", jcacheConfiguration);
             cm.createCache(com.inva.hipstertest.domain.UserAddon.class.getName(), jcacheConfiguration);
+            cm.createCache(com.inva.hipstertest.domain.LessonType.class.getName(), jcacheConfiguration);
+            cm.createCache(com.inva.hipstertest.domain.AttendancesLog.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

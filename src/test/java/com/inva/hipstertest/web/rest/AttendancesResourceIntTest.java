@@ -1,4 +1,3 @@
-/*
 package com.inva.hipstertest.web.rest;
 
 import com.inva.hipstertest.SchoolNetApp;
@@ -34,12 +33,12 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-*/
+
 /**
  * Test class for the AttendancesResource REST controller.
  *
  * @see AttendancesResource
- *//*
+ */
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = SchoolNetApp.class)
@@ -86,13 +85,13 @@ public class AttendancesResourceIntTest {
             .setMessageConverters(jacksonMessageConverter).build();
     }
 
-    */
+
 /**
      * Create an entity for this test.
      *
      * This is a static method, as tests for other entities might also need it,
      * if they test an entity which requires the current entity.
-     *//*
+     */
 
     public static Attendances createEntity(EntityManager em) {
         Attendances attendances = new Attendances()
@@ -282,4 +281,3 @@ public class AttendancesResourceIntTest {
         TestUtil.equalsVerifier(Attendances.class);
     }
 }
-*/

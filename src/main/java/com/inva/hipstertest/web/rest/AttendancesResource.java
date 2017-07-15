@@ -105,9 +105,9 @@ public class AttendancesResource {
 
     @GetMapping("/pupilhome/{pupilId}/{lessonId}")
     @Timed
-    public List<AttendancesDTO> findAllByPupilAndLessonId(@PathVariable("pupilId") Long pupilId, @PathVariable("lessonId") Long lessonId) {
+    public List<AttendancesDTO> findAllByPupilIdAndLessonId(@PathVariable("pupilId") Long pupilId, @PathVariable("lessonId") Long lessonId) {
         log.debug("REST request to get Attendances : {}", pupilId);
-        return attendancesService.findAllByPupilAndLessonId(pupilId, lessonId);
+        return attendancesService.findAllByPupilIdAndLessonId(pupilId, lessonId);
     }
 
 

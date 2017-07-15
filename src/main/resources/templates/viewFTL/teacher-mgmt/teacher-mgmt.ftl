@@ -6,7 +6,7 @@
 <br>
 <div id="header">
     <h2>
-        <span><@spring.message "hello"/>, ${model.currentTeacher.firstName} ${model.currentTeacher.lastName}</span>
+        <span><@spring.message "hello"/>, ${model.currentUser.firstName} ${model.currentUser.lastName}</span>
         <button id="create" class="btn btn-primary float-right create-teacher-management"
                 onclick="window.location.href='/freemarker/teacher-mgmt/teacher-mgmt-create/'">
             <span class="fa fa-plus"></span>

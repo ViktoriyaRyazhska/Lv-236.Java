@@ -1,0 +1,26 @@
+{
+    "schoolNetApp": {
+        "attendancesLog" : {
+            "home": {
+                "title": "Attendances Logs",
+                "createLabel": "Создать новый Attendances Log",
+                "createOrEditLabel": "Создать или отредактировать Attendances Log"
+            },
+            "created": "Новый Attendances Log создан с идентификатором {{ param }}",
+            "updated": "Attendances Log обновлен с идентификатором {{ param }}",
+            "deleted": "Attendances Log удален с идентификатором {{ param }}",
+            "delete": {
+                "question": "Вы уверены что хотите удалить Attendances Log {{ id }}?"
+            },
+            "detail": {
+                "title": "Attendances Log"
+            },
+            "date": "Date",
+            "oldGrade": "Old Grade",
+            "newGrade": "New Grade",
+            "reason": "Reason",
+            "teacher": "Teacher",
+            "attendances": "Attendances"
+        }
+    }
+}

@@ -42,15 +42,6 @@ public class AttendancesServiceImpl implements AttendancesService{
         this.attendancesMapper = attendancesMapper;
     }
 
-
-    @Override
-    public List<AttendancesDTO> findAllByPupilAndLessonId(Long pupilId, Long lessonId) {
-        log.debug("Request to findAllByPupilAndLessonId");
-        List<Attendances> attendances = attendancesRepository.findAllByPupilAndLessonId(pupilId, lessonId);
-        List<AttendancesDTO> attendancesDTOS = attendancesMapper.attendancesToAttendancesDTOs(attendances);
-        return attendancesDTOS;
-    }
-
     /**
      * Save a attendances.
      *
@@ -115,20 +106,43 @@ public class AttendancesServiceImpl implements AttendancesService{
      * @return the list of entities.
      */
     @Override
-    public List<AttendancesDTO> findAllMembersByPupilIdAndDateBetween(String date) {
+    public List<AttendancesDTO> findAllByPupilIdAndDate(Long pupilId, String date) {
+        log.debug("Request to get attendances by pupil and date {}", date);
         ZonedDateTime dateStart = DataUtil.getZonedDateTime(date);
         ZonedDateTime dateEnd = dateStart.plusDays(1);
-        Pupil pupil = pupilRepository.findPupilByCurrentUser();
-        log.debug("Request to get attendances by pupil and date {}", date);
-        List<Attendances> attendances = attendancesRepository.findAllMembersByPupilIdAndDateBetween(pupil.getId(), dateStart, dateEnd);
+        List<Attendances> attendances = attendancesRepository.findAllByPupilIdAndDateBetween(pupilId, dateStart, dateEnd);
+        List<AttendancesDTO> attendancesDTOs = attendancesMapper.attendancesToAttendancesDTOs(attendances);
+        return attendancesDTOs;
+    }
+
+    /**
+     * Get all attendances by requested date and current pupil id.
+     *
+     * @param pupilId pupil id
+     * @param dateStart start date
+     * @param dateEnd end date
+     * @return the list of entities.
+     */
+    @Override
+    public List<AttendancesDTO> findAllByPupilIdAndDateBetween(Long pupilId, ZonedDateTime dateStart, ZonedDateTime dateEnd) {
+        log.debug("Request to get attendances by pupil and date between {}", dateStart, dateEnd);
+        List<Attendances> attendances = attendancesRepository.findAllByPupilIdAndDateBetween(pupilId, dateStart, dateEnd);
         List<AttendancesDTO> attendancesDTOs = attendancesMapper.attendancesToAttendancesDTOs(attendances);
         return attendancesDTOs;
     }
 
     @Override
-    public List<AttendancesDTO> findAllWherePupilIdInAndScheduleIdIn(Long teacherId, Long formId, Long lessonId) {
-        log.debug("Request to get all grades for all pupils in the class {} for all lessons, that gives teacher {} on subject {} for this class", formId, teacherId, lessonId);
-        List<Attendances> attendances = attendancesRepository.findAllWherePupilIdInAndScheduleIdIn(teacherId, formId, lessonId);
+    public List<AttendancesDTO> findAllByPupilIdAndLessonId(Long pupilId, Long lessonId) {
+        log.debug("Request to findAllByPupilAndLessonId");
+        List<Attendances> attendances = attendancesRepository.findAllByPupilIdAndLessonId(pupilId, lessonId);
+        List<AttendancesDTO> attendancesDTOS = attendancesMapper.attendancesToAttendancesDTOs(attendances);
+        return attendancesDTOS;
+    }
+
+    @Override
+    public List<AttendancesDTO> findAllByFormIdAndLessonId(Long formId, Long lessonId) {
+        log.debug("Request to get all grades for all pupils in the class {} for all lessons on subject {} for this class", formId, lessonId);
+        List<Attendances> attendances = attendancesRepository.findAllByFormIdAndLessonId(formId, lessonId);
         List<AttendancesDTO> attendancesDTOs = attendancesMapper.attendancesToAttendancesDTOs(attendances);
         return attendancesDTOs;
     }

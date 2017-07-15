@@ -1,0 +1,52 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "teacher",
+            "otherEntityName": "teacher",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipName": "attendances",
+            "otherEntityName": "attendances",
+            "relationshipType": "many-to-one",
+            "relationshipValidateRules": [
+                "required"
+            ],
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "oldGrade",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "newGrade",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "reason",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "changelogDate": "20170713163414",
+    "dto": "mapstruct",
+    "service": "serviceImpl",
+    "entityTableName": "attendances_log",
+    "pagination": "no"
+}

@@ -6,6 +6,7 @@ import com.inva.hipstertest.domain.Schedule;
 import com.inva.hipstertest.domain.Lesson;
 import com.inva.hipstertest.domain.Form;
 import com.inva.hipstertest.domain.Classroom;
+import com.inva.hipstertest.domain.Teacher;
 import com.inva.hipstertest.repository.ScheduleRepository;
 import com.inva.hipstertest.service.PupilService;
 import com.inva.hipstertest.service.ScheduleService;
@@ -127,6 +128,11 @@ public class ScheduleResourceIntTest {
         em.persist(classroom);
         em.flush();
         schedule.setClassroom(classroom);
+        // Add required entity
+        Teacher teacher = TeacherResourceIntTest.createEntity(em);
+        em.persist(teacher);
+        em.flush();
+        schedule.setTeacher(teacher);
         return schedule;
     }
 
@@ -353,5 +359,37 @@ public class ScheduleResourceIntTest {
     @Transactional
     public void equalsVerifier() throws Exception {
         TestUtil.equalsVerifier(Schedule.class);
+        Schedule schedule1 = new Schedule();
+        schedule1.setId(1L);
+        Schedule schedule2 = new Schedule();
+        schedule2.setId(schedule1.getId());
+        assertThat(schedule1).isEqualTo(schedule2);
+        schedule2.setId(2L);
+        assertThat(schedule1).isNotEqualTo(schedule2);
+        schedule1.setId(null);
+        assertThat(schedule1).isNotEqualTo(schedule2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ScheduleDTO.class);
+        ScheduleDTO scheduleDTO1 = new ScheduleDTO();
+        scheduleDTO1.setId(1L);
+        ScheduleDTO scheduleDTO2 = new ScheduleDTO();
+        assertThat(scheduleDTO1).isNotEqualTo(scheduleDTO2);
+        scheduleDTO2.setId(scheduleDTO1.getId());
+        assertThat(scheduleDTO1).isEqualTo(scheduleDTO2);
+        scheduleDTO2.setId(2L);
+        assertThat(scheduleDTO1).isNotEqualTo(scheduleDTO2);
+        scheduleDTO1.setId(null);
+        assertThat(scheduleDTO1).isNotEqualTo(scheduleDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(scheduleMapper.scheduleFromId(42L).getId()).isEqualTo(42);
+        assertThat(scheduleMapper.scheduleFromId(null)).isNull();
     }
 }

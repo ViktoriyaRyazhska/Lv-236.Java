@@ -29,7 +29,7 @@ public interface LessonService {
      *
      * @return the list of entities
      */
-    List<LessonDTO> getAllLessonsByTeacherId(Long teacherId);
+    List<LessonDTO> getAllByTeacherId(Long teacherId);
 
 
     /**
@@ -38,7 +38,7 @@ public interface LessonService {
      * @param formId to check form
      * @return list of distinct lessons
      */
-    List<LessonDTO> getDistinctLessonsForForm(Long formId);
+    List<LessonDTO> findAllByFormId(Long formId);
 
     /**
      * Get the "id" lesson.

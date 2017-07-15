@@ -13,3 +13,48 @@
 .gradebook tr th.date {
     width: 6%;
 }
+
+tr:nth-child(odd) .lesson-type-1 {
+    border: 1px solid #ffa145;
+    background: #ffa145;
+}
+tr:nth-child(even) .lesson-type-1 {
+    border: 1px solid #ffcfa1;
+    background: #ffcfa1;
+}
+
+tr:nth-child(odd) .lesson-type-2 {
+    border: 1px solid #a4e265;
+    background: #a4e265;
+}
+tr:nth-child(even) .lesson-type-2 {
+    border: 1px solid #e3f2d3;
+    background: #e3f2d3;
+}
+
+tr:nth-child(odd) .lesson-type-3 {
+    border: 1px solid #4d8dcb;
+    background: #4d8dcb;
+}
+tr:nth-child(even) .lesson-type-3 {
+    border: 1px solid #c0d4db;
+    background: #c0d4db;
+}
+
+tr:nth-child(odd) .lesson-type-4 {
+    border: 1px solid #ff4949;
+    background: #ff4949
+}
+tr:nth-child(even) .lesson-type-4 {;
+    border: 1px solid #ffc4c4;
+    background: #ffc4c4;
+}
+
+tr:nth-child(odd) .lesson-type-5 {
+    border: 1px solid #cd65e2;
+    background: #cd65e2
+}
+tr:nth-child(even) .lesson-type-5 {;
+    border: 1px solid #edc0f6;
+    background: #edc0f6;
+}
