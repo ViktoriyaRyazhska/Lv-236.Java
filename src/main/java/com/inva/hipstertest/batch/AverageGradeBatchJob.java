@@ -4,6 +4,7 @@ import com.inva.hipstertest.domain.*;
 import com.inva.hipstertest.domain.enums.NotificationType;
 import com.inva.hipstertest.domain.enums.SampleView;
 import com.inva.hipstertest.repository.*;
+import com.inva.hipstertest.service.MailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -24,10 +25,10 @@ public class AverageGradeBatchJob {
     /**
      * every 20:00:00, working days.
      */
-    private static final String CRON_EXPRESSION = "0 0 20 ? * MON,TUE,WED,THU,FRI";
+    private static final String CRON_EXPRESSION = "0 0 19 ? * WED";
 
-    private static final String NOTIFICATION_MESSAGE_TEMPLATE = "%s %s, form: %s, lesson: %s, average rating: %.2f";
-    private static int averageGradeThreshold = 10;
+    private static final String NOTIFICATION_MESSAGE_TEMPLATE = "%s %s, school: %s, form: %s, lesson: %s, average rating: %.2f";
+    private static int averageGradeThreshold = 7;
 
     @Autowired
     private PupilRepository pupilRepository;
@@ -46,6 +47,9 @@ public class AverageGradeBatchJob {
 
     @Autowired
     private NotificationRepository notificationRepository;
+
+    @Autowired
+    private MailService mailService;
 
     /**
      * Analyzes pupils attendances and create notifications for related users (parents and teacher)
@@ -93,11 +97,15 @@ public class AverageGradeBatchJob {
 
     private String prepareNotificationString(Pupil pupil, Lesson lesson, double average) {
         return String.format(NOTIFICATION_MESSAGE_TEMPLATE, pupil.getUser().getFirstName(), pupil.getUser().getLastName(),
-            pupil.getForm().getName(), lesson.getName(), average);
+           pupil.getForm().getSchool().getName(), pupil.getForm().getName(), lesson.getName(), average);
     }
 
     private void informUsers(Pupil pupil, String message) {
-        List<Notification> notifications = parentRepository.findAllByPupilId(pupil.getId()).stream().map(parent ->
+        List<Parent> parents = parentRepository.findAllByPupilId(pupil.getId());
+        parents.forEach(parent ->
+            mailService.sendSimpleEmail(parent.getUser().getEmail(), message, NotificationType.GRADE)
+        );
+        List<Notification> notifications = parents.stream().map(parent ->
             Notification.builder()
                 .user(parent.getUser())
                 .message(message)

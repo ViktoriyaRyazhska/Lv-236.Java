@@ -5,5 +5,5 @@ package com.inva.hipstertest.domain.enums;
  */
 public enum NotificationType {
 
-    GRADE, INFO
+    GRADE, INFO, LOGIN_PASSWORD
 }

@@ -1,10 +1,8 @@
 package com.inva.hipstertest.service;
 
 import com.inva.hipstertest.domain.User;
-
-import com.inva.hipstertest.service.dto.TeacherDTO;
+import com.inva.hipstertest.domain.enums.NotificationType;
 import io.github.jhipster.config.JHipsterProperties;
-
 import org.apache.commons.lang3.CharEncoding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,9 +77,11 @@ public class MailService {
      *                 about login and password.
      * */
     @Async
-    public void sendSimpleEmail(String to, String content){
+    public void sendSimpleEmail(String to, String content, NotificationType type) {
 
-        final String subject = "LOGIN AND PASSWORD";
+        final String loginAndPassword = "LOGIN AND PASSWORD";
+        final String attendanceInfo = "Information about the pupil's progress.";
+        final String generalInfo = "General information.";
 
         // Prepare message using a Spring helper
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
@@ -89,7 +89,17 @@ public class MailService {
             MimeMessageHelper message = new MimeMessageHelper(mimeMessage, false, CharEncoding.UTF_8);
             message.setTo(to);
             message.setFrom(jHipsterProperties.getMail().getFrom());
-            message.setSubject(subject);
+            switch (type) {
+                case LOGIN_PASSWORD:
+                    message.setSubject(loginAndPassword);
+                    break;
+                case GRADE:
+                    message.setSubject(attendanceInfo);
+                    break;
+                case INFO:
+                default:
+                    message.setSubject(generalInfo);
+            }
             message.setText(content, true);
             javaMailSender.send(mimeMessage);
             log.debug("Sent email to User '{}'", to);
