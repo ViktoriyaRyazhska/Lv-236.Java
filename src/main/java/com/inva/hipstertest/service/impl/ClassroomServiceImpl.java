@@ -1,6 +1,7 @@
 package com.inva.hipstertest.service.impl;
 
 import com.inva.hipstertest.domain.Teacher;
+import com.inva.hipstertest.freemarker.searchcriteria.ClassroomSearchCriteria;
 import com.inva.hipstertest.repository.TeacherRepository;
 import com.inva.hipstertest.service.ClassroomService;
 import com.inva.hipstertest.domain.Classroom;
@@ -13,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -106,5 +109,25 @@ public class ClassroomServiceImpl implements ClassroomService {
         return classroomRepository.findAllClassroomsByCurrentSchool(idSchool).stream()
             .map(classroomMapper::classroomToClassroomDTO)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<ClassroomDTO> findAvailableByCurrentSchoolAndSearchCriteria(ClassroomSearchCriteria classroomSearchCriteria) {
+        ZonedDateTime date = classroomSearchCriteria.getDate().truncatedTo(ChronoUnit.DAYS);
+        ZonedDateTime endDate = date.plusDays(1).minusNanos(1);
+        log.debug("Request to get all available Classrooms for current school by search criteria");
+        long schoolId = teacherRepository.findOneWithSchool().getSchool().getId();
+        List<Classroom> classrooms = classroomRepository.findAllAvailableClassroomsBySchoolIdAndSearchCriteria(schoolId, classroomSearchCriteria.getLessonPosition(), date, endDate);
+        return classroomMapper.classroomsToClassroomDTOs(classrooms);
+    }
+
+    @Override
+    public List<ClassroomDTO> findAvailablePlusOneById(ClassroomSearchCriteria classroomSearchCriteria) {
+        List<ClassroomDTO> classroomDTOs = findAvailableByCurrentSchoolAndSearchCriteria(classroomSearchCriteria);
+        ClassroomDTO classroomDTO = classroomMapper.classroomToClassroomDTO(classroomRepository.findOne(classroomSearchCriteria.getClassroomId()));
+        if (!classroomDTOs.contains(classroomDTO)) {
+            classroomDTOs.add(classroomDTO);
+        }
+        return classroomDTOs;
     }
 }

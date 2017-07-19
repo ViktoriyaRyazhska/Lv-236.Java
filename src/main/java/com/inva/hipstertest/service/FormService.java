@@ -1,5 +1,6 @@
 package com.inva.hipstertest.service;
 
+import com.inva.hipstertest.freemarker.searchcriteria.FormSearchCriteria;
 import com.inva.hipstertest.service.dto.FormDTO;
 import java.util.List;
 
@@ -51,6 +52,10 @@ public interface FormService {
     List<FormDTO> findAllFormsByCurrentSchool();
 
     List<FormDTO> findAllUnassignedFormsByCurrentSchool();
+
+    List<FormDTO> findAvailableFormsByCurrentSchoolAndSearchCriteria(FormSearchCriteria formSearchCriteria);
+
+    List<FormDTO> findAllAvailablePlusOneById(FormSearchCriteria formSearchCriteria);
 
     FormDTO findFormByTeacherId(Long teacherId);
 }

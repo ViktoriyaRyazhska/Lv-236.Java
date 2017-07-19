@@ -42,27 +42,14 @@
                     </li>
                 </@security.authorize>
 
-                <#--<@security.authorize  access="hasRole('ROLE_HEAD_TEACHER')">-->
-                <#--<li class="nav-item dropdown pointer">-->
-                    <#--<a class="nav-link dropdown-toggle" href="javascript:void(0);" id="head-teacher-menu" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">-->
-                        <#--<span>-->
-                            <#--<i class="fa fa-tasks" aria-hidden="true"></i>-->
-                            <#--<span><@spring.message "navbar.management"/></span>-->
-                            <#--<b class="caret"></b>-->
-                        <#--</span>-->
-                    <#--</a>-->
-                    <#--<div class="dropdown-menu" aria-labelledby="head-teacher-menu">-->
-                        <#--<a class="dropdown-item" (click)="collapseNavbar()" href="/freemarker/teacher-mgmt/teacher-mgmt">-->
-                            <#--<i class="fa fa-user" aria-hidden="true"></i>-->
-                            <#--<span><@spring.message "navbar.teachers"/></span>-->
-                        <#--</a>-->
-                        <#--<a class="dropdown-item" (click)="collapseNavbar()" href="#">-->
-                            <#--<i class="fa fa-calendar" aria-hidden="true"></i>-->
-                            <#--<span><@spring.message "navbar.classrooms"/></span>-->
-                        <#--</a>-->
-                    <#--</div>-->
-                <#--</li>-->
-                <#--</@security.authorize>-->
+                <@security.authorize access="hasRole('ROLE_TEACHER')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/freemarker/teacher/schedule">
+                            <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                            <span><@spring.message "navbar.schedule"/></span>
+                        </a>
+                    </li>
+                </@security.authorize>
 
                 <@security.authorize  access="hasAnyRole('ROLE_TEACHER', 'ROLE_HEAD_TEACHER')">
                     <li class="nav-item">

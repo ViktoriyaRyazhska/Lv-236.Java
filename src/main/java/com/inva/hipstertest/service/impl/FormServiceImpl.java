@@ -1,5 +1,6 @@
 package com.inva.hipstertest.service.impl;
 
+import com.inva.hipstertest.freemarker.searchcriteria.FormSearchCriteria;
 import com.inva.hipstertest.repository.TeacherRepository;
 import com.inva.hipstertest.service.FormService;
 import com.inva.hipstertest.domain.Form;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
 
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -135,6 +138,22 @@ List<FormDTO> formDTOs=formMapper.formsToFormDTOs(formRepository.findAllFormsByC
         return formRepository.findAllUnassignedFormsByCurrentSchool(idSchool).stream()
             .map(formMapper::formToFormDTO)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+
+    @Override
+    public List<FormDTO> findAvailableFormsByCurrentSchoolAndSearchCriteria(FormSearchCriteria formSearchCriteria) {
+        ZonedDateTime date = formSearchCriteria.getDate().truncatedTo(ChronoUnit.DAYS);
+        ZonedDateTime endDate = date.plusDays(1).minusNanos(1);
+        log.debug("Request to get all available Forms for current school by search criteria");
+        long schoolId = teacherRepository.findOneWithSchool().getSchool().getId();
+        List<Form> forms = formRepository.findAllAvailableByCurrentSchoolAndSearchCriteria(schoolId, formSearchCriteria.getLessonPosition(), date, endDate);
+        return formMapper.formsToFormDTOs(forms);
+    }
+
+    public List<FormDTO> findAllAvailablePlusOneById(FormSearchCriteria formSearchCriteria) {
+        List<FormDTO> forms = findAvailableFormsByCurrentSchoolAndSearchCriteria(formSearchCriteria);
+        forms.add(formMapper.formToFormDTO(formRepository.findOne(formSearchCriteria.getFormId())));
+        return forms;
     }
 
     @Override

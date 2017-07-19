@@ -2,6 +2,7 @@ package com.inva.hipstertest.service.impl;
 
 import com.inva.hipstertest.domain.Pupil;
 import com.inva.hipstertest.domain.Schedule;
+import com.inva.hipstertest.freemarker.searchcriteria.ScheduleSearchCriteria;
 import com.inva.hipstertest.repository.PupilRepository;
 import com.inva.hipstertest.repository.ScheduleRepository;
 import com.inva.hipstertest.service.ScheduleService;
@@ -19,6 +20,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoField;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -181,4 +183,31 @@ public class ScheduleServiceImpl implements ScheduleService {
         return scheduleRepository.countSchedulesForGradeBook(teacherId, formId, lessonId, today);
     }
 
+    /**
+     * Get all schedules by searching parameters.
+     *
+     * @param scheduleSearchCriteria searching parameters
+     * @return the list of entities.
+     */
+    @Override
+    public List<ScheduleDTO> getScheduleBySearchCriteria(ScheduleSearchCriteria scheduleSearchCriteria) {
+        ZonedDateTime lastMonday = scheduleSearchCriteria.getDate().with(ChronoField.DAY_OF_WEEK, 1);
+        ZonedDateTime nextMonday = lastMonday.plusWeeks(1).minusDays(1);
+        List<Schedule> schedules;
+        Long id = scheduleSearchCriteria.getId();
+        switch (scheduleSearchCriteria.getScheduleFilterType()) {
+            case BY_FORM:
+                schedules = scheduleRepository.findAllMembersByFormIdAndDateBetween(id, lastMonday, nextMonday);
+                break;
+            case BY_TEACHER:
+                schedules = scheduleRepository.findAllByTeacherIdAndDateBetween(id, lastMonday, nextMonday);
+                break;
+            case BY_CLASSROOM:
+                schedules = scheduleRepository.findAllMembersByClassroomIdAndDateBetween(id, lastMonday, nextMonday);
+                break;
+            default:
+                throw new RuntimeException("invalid schedule type");
+        }
+        return scheduleMapper.schedulesToScheduleDTOs(schedules);
+    }
 }

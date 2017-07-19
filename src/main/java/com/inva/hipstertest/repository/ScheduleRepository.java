@@ -47,4 +47,11 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("select COUNT(s) from Schedule s where s.enabled = true and s.teacher.id = :teacherId and s.form.id = :formId and s.lesson.id = :lessonId and s.date <= :today order by s.date")
     Long countSchedulesForGradeBook(@Param("teacherId") Long teacherId, @Param("formId") Long formId, @Param("lessonId") Long lessonId, @Param("today") ZonedDateTime today);
 
+    List<Schedule> findAllMembersByClassroomIdAndDateBetween(@Param("classroomId") Long classroomId,
+                                                             @Param("startDate") ZonedDateTime startDate,
+                                                             @Param("endDate") ZonedDateTime endDate);
+
+    List<Schedule> findAllByTeacherIdAndDateBetween(@Param("teacherId") Long formId,
+                                                    @Param("startDate") ZonedDateTime startDate,
+                                                    @Param("endDate") ZonedDateTime endDate);
 }
