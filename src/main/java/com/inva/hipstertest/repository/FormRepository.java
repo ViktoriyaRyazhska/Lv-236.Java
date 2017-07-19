@@ -24,4 +24,7 @@ public interface FormRepository extends JpaRepository<Form, Long> {
 
     @Query("select form from Form form where form.teacher.id =:teacherId")
     Form findOneByTeacherId(@Param("teacherId") long teacherId);
+
+    @Query("select teacher.form from Teacher teacher where teacher.id =:teacherId")
+    Form findFormByTeacherId(@Param("teacherId") long teacherId);
 }

@@ -37,13 +37,15 @@ jsSources = [
             <ul class="nav nav-pills" id="pupil-select" role="tablist">
             <#list model["pupilList"] as pupil>
                 <li class="nav-item">
-                    <a class="nav-link" data-toggle="tab" href="#pupil${pupil.id}" role="tab" aria-controls="pupil${pupil.id}" data-pupil-id="${pupil.id}" data-pupil-form-id="${pupil.formId}">${pupil.firstName} ${pupil.lastName} [${pupil.formName}]</a>
+                    <a class="nav-link" data-toggle="tab" href="#pupil${pupil.id}" role="tab" aria-controls="pupil${pupil.id}" data-pupil-id="${pupil.id}" data-pupil-form-id="${pupil.formId}"
+                       <#--data-pupil-form-school-enabled="${pupil.schoolEnabled?string('true', 'false')}-->
+        ">${pupil.firstName} ${pupil.lastName} [${pupil.formName}]</a>
                 </li>
             </#list>
             </ul>
             <br>
             <div class="clearfix"></div>
-
+<#--<div id="message" style="width: 300px; height: 100px; background-color: chartreuse"> </div>-->
             <div class="card">
                 <div class="card-header">
                     <ul class="nav nav-tabs card-header-tabs" role="tablist">

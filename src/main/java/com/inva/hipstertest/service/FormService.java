@@ -51,4 +51,6 @@ public interface FormService {
     List<FormDTO> findAllFormsByCurrentSchool();
 
     List<FormDTO> findAllUnassignedFormsByCurrentSchool();
+
+    FormDTO findFormByTeacherId(Long teacherId);
 }

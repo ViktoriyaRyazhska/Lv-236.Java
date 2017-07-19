@@ -1,6 +1,8 @@
 package com.inva.hipstertest.service;
 
+import com.inva.hipstertest.service.dto.FormDTO;
 import com.inva.hipstertest.service.dto.PupilDTO;
+import com.inva.hipstertest.service.dto.TeacherDTO;
 
 import java.util.List;
 
@@ -57,5 +59,13 @@ public interface PupilService {
      * @param parentId the id of the parent
      */
     List<PupilDTO> findAllByParentId(Long parentId);
+
+    PupilDTO savePupilWithUser(PupilDTO pupilDTO, Long formId);
+
+
+
+
+
+  PupilDTO saveEditedPupil(PupilDTO pupilDTO) ;
 
 }

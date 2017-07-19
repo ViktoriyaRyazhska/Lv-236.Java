@@ -43,7 +43,7 @@ public class Pupil implements Serializable {
     @NotNull
     private Form form;
 
-    @ManyToMany(mappedBy = "pupils")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "pupils")
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Parent> parents ;
 
@@ -168,7 +168,8 @@ public class Pupil implements Serializable {
     public String toString() {
         return "Pupil{" +
             "id=" + id +
-            ", enabled='" + enabled + "'" +
+            ", enabled=" + enabled +
+            ", user=" + user +
             '}';
     }
 }

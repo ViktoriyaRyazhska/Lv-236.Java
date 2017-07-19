@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var pupilId = -1;
     var pupilFormId = -1;
     var selectedDate = new Date();
@@ -15,8 +15,8 @@ $(function() {
 
     $(document).tooltip({
         track: true,
-        show: { duration: 200 },
-        hide: { duration: 200 }
+        show: {duration: 200},
+        hide: {duration: 200}
     });
 
     $.datepicker.setDefaults($.datepicker.regional[lang]);
@@ -29,7 +29,7 @@ $(function() {
         // defaultDate: selectedDate
     });
 
-    $("#datepicker").change(function() {
+    $("#datepicker").change(function () {
         selectedDate = $(this).datepicker("getDate");
         var newMonday = getMonday(selectedDate);
 
@@ -47,18 +47,23 @@ $(function() {
     $("#pupil-select a").click(function () {
         var newPupilFormId = $(this).data("pupil-form-id");
         var newPupilId = $(this).data("pupil-id");
+        //var newPupilSchoolEnabled = $(this).data("pupil-form-school-enabled");
 
-        if(pupilId == newPupilId) {
+        if (pupilId == newPupilId) {
             return;
         }
         pupilId = newPupilId;
-        if(pupilFormId != newPupilFormId) {
-            pupilFormId = newPupilFormId;
-            loadSchedule();
-            loadLessons();
-        } else {
-            loadAttendance();
-        }
+    //   if (newPupilSchoolEnabled == false) {
+      //      loadSchoolDisabledMessage();
+      //  } else {
+            if (pupilFormId != newPupilFormId) {
+                pupilFormId = newPupilFormId;
+                loadSchedule();
+                loadLessons();
+            } else {
+                loadAttendance();
+            }
+    //    }
     });
 
     $("#pupil-select a:last").trigger("click");
@@ -69,7 +74,7 @@ $(function() {
 
     $("#week-schedule-link").trigger("click");
 
-    $("#lessons").change(function() {
+    $("#lessons").change(function () {
         loadAttendance();
     });
 
@@ -93,20 +98,20 @@ $(function() {
             date: selectedDate
         };
         $.ajax({
-            url : "/freemarker/parent-home/schedule",
-            type : "POST",
-            contentType : "application/json",
-            data : JSON.stringify(searchParams),
-            success : function (response) {
+            url: "/freemarker/parent-home/schedule",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(searchParams),
+            success: function (response) {
                 var daysInWeek = 7;
 
-                for(var i = 1; i <= daysInWeek; i++) {
+                for (var i = 1; i <= daysInWeek; i++) {
                     $('#week-schedule table tr:first td').eq(i).html($.datepicker.formatDate('DD<br>dd.mm.yy', addDays(monday, i - 1)));
                 }
 
                 $(".for-clear").empty();
                 $(".for-clear").prop("title", "");
-                $.each(response, function(i, schedule) {
+                $.each(response, function (i, schedule) {
                     var dayOfWeek = new Date(schedule.date).getDay();
 
                     var selector = $('#week-schedule table tr').eq(schedule.lessonPosition).find("td").eq((dayOfWeek == 0 ? 7 : dayOfWeek));
@@ -124,13 +129,13 @@ $(function() {
             pupilFormId: pupilFormId
         };
         $.ajax({
-            url : "/freemarker/parent-home/lessons",
-            type : "POST",
-            contentType : "application/json",
-            data : JSON.stringify(searchParams),
-            success : function (response) {
+            url: "/freemarker/parent-home/lessons",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(searchParams),
+            success: function (response) {
                 $("#lessons").empty();
-                $.each(response, function(i, lesson) {
+                $.each(response, function (i, lesson) {
                     $("#lessons").append($("<option></option>").attr("value", lesson.id).text(lesson.name));
                 });
                 loadAttendance();
@@ -145,31 +150,31 @@ $(function() {
             lessonId: $("#lessons").val()
         };
         $.ajax({
-            url : "/freemarker/parent-home/attendance",
-            type : "POST",
-            contentType : "application/json",
-            data : JSON.stringify(searchParams),
-            success : function (response) {
+            url: "/freemarker/parent-home/attendance",
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(searchParams),
+            success: function (response) {
                 var avgGradeSum = 0;
                 var avgGradeCount = 0;
 
                 $('#attendanceTable tbody').find('tr:not(:last)').remove();
 
-                $.each(response, function(i, attendance) {
-                    if(attendance.grade > 0) {
+                $.each(response, function (i, attendance) {
+                    if (attendance.grade > 0) {
                         avgGradeSum += attendance.grade;
                         avgGradeCount += 1;
                     }
                     $('#attendanceTable tbody').prepend('<tr><td>' + $.datepicker.formatDate('DD, dd.mm.yy', new Date(attendance.date)) + '</td><td>' + attendance.grade + '</td></tr>');
                 });
 
-                if(response.length == 0) {
+                if (response.length == 0) {
                     $("#attendanceEmpty span:first").text($("#pupil-select li a.active").text());
                     $("#attendanceEmpty span:last").text($("#lessons option:selected").text());
                     $("#attendanceTable").hide();
                     $("#attendanceEmpty").show();
                 } else {
-                    $('#avg-grade').text(Number((avgGradeSum/avgGradeCount).toFixed(2)));
+                    $('#avg-grade').text(Number((avgGradeSum / avgGradeCount).toFixed(2)));
                     $("#attendanceEmpty").hide();
                     $("#attendanceTable").show();
                 }
@@ -177,4 +182,9 @@ $(function() {
         });
     }
 
+   // function loadSchoolDisabledMessage() {
+    //    console.log("loadSchoolDisabledMessage()");
+    //    $("#message").style.color(red);
+   // }
+//
 });

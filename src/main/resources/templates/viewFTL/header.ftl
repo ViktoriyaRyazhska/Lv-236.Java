@@ -64,6 +64,16 @@
                 <#--</li>-->
                 <#--</@security.authorize>-->
 
+                <@security.authorize  access="hasAnyRole('ROLE_TEACHER', 'ROLE_HEAD_TEACHER')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/freemarker/teacher-my-class">
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                            <span><@spring.message "teacher.myClass"/></span>
+                        </a>
+                    </li>
+                </@security.authorize>
+
+
                 <@security.authorize  access="hasRole('ROLE_PUPIL')">
                 <li class="nav-item dropdown pointer">
                     <a class="nav-link dropdown-toggle" href="/freemarker/pupil-home" id="pupil-menu" data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
@@ -148,14 +158,14 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="account-menu">
 
-                        <a class="dropdown-item" (click)="collapseNavbar()" href="javascript:void(0);">
-                            <i class="fa fa-fw fa-wrench" aria-hidden="true"></i>
-                            <span><@spring.message "navbar.settings"/></span>
-                        </a>
-                        <a class="dropdown-item" (click)="collapseNavbar()" href="javascript:void(0);">
-                            <i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>
-                            <span><@spring.message "navbar.password"/></span>
-                        </a>
+                        <#--<a class="dropdown-item" (click)="collapseNavbar()" href="javascript:void(0);">-->
+                            <#--<i class="fa fa-fw fa-wrench" aria-hidden="true"></i>-->
+                            <#--<span><@spring.message "navbar.settings"/></span>-->
+                        <#--</a>-->
+                        <#--<a class="dropdown-item" (click)="collapseNavbar()" href="javascript:void(0);">-->
+                            <#--<i class="fa fa-fw fa-clock-o" aria-hidden="true"></i>-->
+                            <#--<span><@spring.message "navbar.password"/></span>-->
+                        <#--</a>-->
                         <@security.authorize access="isAuthenticated()">
                         <a class="dropdown-item" id="logout" href="/freemarker/logout">
                             <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>

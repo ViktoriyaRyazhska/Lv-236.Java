@@ -31,8 +31,25 @@ public class PupilDTO implements Serializable {
 
     private String lastName;
 
+    private String email;
 
+    private Boolean schoolEnabled;
 
+    public Boolean getSchoolEnabled() {
+        return schoolEnabled;
+    }
+
+    public void setSchoolEnabled(Boolean schoolEnabled) {
+        this.schoolEnabled = schoolEnabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -126,7 +143,8 @@ public class PupilDTO implements Serializable {
     public String toString() {
         return "PupilDTO{" +
             "id=" + id +
-            ", enabled='" + enabled + "'" +
+            ", enabled=" + enabled +
+            ", email='" + email + '\'' +
             '}';
     }
 }

@@ -4,6 +4,7 @@
 </@h.header>
 <link rel="stylesheet" type="text/css" href="/scripts/teacher-mgmt-popup.css">
 <br>
+
 <div id="header">
     <h2>
         <span><@spring.message "hello"/>, ${model.currentUser.firstName} ${model.currentUser.lastName}</span>

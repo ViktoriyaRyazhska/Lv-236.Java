@@ -35,7 +35,7 @@ public class Form implements Serializable {
 
     @OneToMany(mappedBy = "form")
     @JsonIgnore
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<Pupil> pupils = new HashSet<>();
 
     @OneToMany(mappedBy = "form", fetch = FetchType.LAZY)

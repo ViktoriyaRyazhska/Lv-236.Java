@@ -105,7 +105,7 @@ public class TeacherServiceImpl extends SupportCreate implements TeacherService 
             } else {
                 FormDTO formDTO = formService.findOneByTeacherId(teacherDTO.getId());
                 if (formDTO != null) {
-                    formDTO.setTeacherId(null);
+                    formDTO.setTeacherId(formDTO.getId());
                     formService.save(formDTO);
                 }
             }
