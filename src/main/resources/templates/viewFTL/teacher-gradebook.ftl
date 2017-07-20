@@ -68,7 +68,7 @@ jsSources = [
                             </#if>
                         </#list>
 
-                        <#if (schedule.teacherId == model.teacher.id) && (schedule.date.format('d MMM yyyy')?date > model.minDateForEdit.format('d MMM yyyy')?date)>
+                        <#if (schedule.teacherId == model.teacher.id) && (schedule.date.format('MMM d, yyyy')?date > model.minDateForEdit.format('MMM d, yyyy')?date)>
                             <#if attendanceExists == true>
                                 <td class="for-clear text-center attendance" data-pupil-id="${pupil.id}" data-schedule-id="${schedule.id}" data-attendance-id="${att.id}">
                                     <div id="div-attendance-${pupil.id}-${schedule.id}"><#if !att.grade??>-<#elseif att.grade == 0>Н<#else>${att.grade}</#if></div>

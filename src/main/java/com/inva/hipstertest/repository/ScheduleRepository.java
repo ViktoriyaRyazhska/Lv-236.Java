@@ -44,7 +44,7 @@ public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
     @Query("select s from Schedule s where s.enabled = true and s.form.id = :formId and s.lesson.id = :lessonId and s.date <= :maxDate order by s.date")
     Page<Schedule> findAllByFormIdLessonIdMaxDate(Pageable pageable, @Param("formId") Long formId, @Param("lessonId") Long lessonId, @Param("maxDate") ZonedDateTime maxDate);
 
-    @Query("select count(s) from Schedule s where s.enabled = true and s.form.id = :formId and s.lesson.id = :lessonId and s.date <= :maxDate order by s.date")
+    @Query("select count(s) from Schedule s where s.enabled = true and s.form.id = :formId and s.lesson.id = :lessonId and s.date <= :maxDate")
     Long countAllByFormIdLessonIdMaxDate(@Param("formId") Long formId, @Param("lessonId") Long lessonId, @Param("maxDate") ZonedDateTime maxDate);
 
 }
