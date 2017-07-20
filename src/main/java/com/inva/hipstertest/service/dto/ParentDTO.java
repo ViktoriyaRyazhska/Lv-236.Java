@@ -20,10 +20,22 @@ public class ParentDTO implements Serializable {
     private Boolean enabled;
 
     private Long userId;
+
     private String firstName;
 
     private String lastName;
+
     private String email;
+
+    private Set<PupilDTO> pupils;
+
+    public Set<PupilDTO> getPupils() {
+        return pupils;
+    }
+
+    public void setPupils(Set<PupilDTO> pupils) {
+        this.pupils = pupils;
+    }
 
     public String getEmail() {
         return email;
@@ -56,6 +68,7 @@ public class ParentDTO implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+
     public Boolean getEnabled() {
         return enabled;
     }
@@ -73,7 +86,6 @@ public class ParentDTO implements Serializable {
     }
 
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -85,7 +97,9 @@ public class ParentDTO implements Serializable {
 
         ParentDTO parentDTO = (ParentDTO) o;
 
-        if ( ! Objects.equals(id, parentDTO.id)) { return false; }
+        if (!Objects.equals(id, parentDTO.id)) {
+            return false;
+        }
 
         return true;
     }

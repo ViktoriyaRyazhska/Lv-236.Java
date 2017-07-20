@@ -31,6 +31,7 @@ public interface TeacherRepository extends JpaRepository<Teacher,Long> {
     @Query("select teacher from Teacher teacher where teacher.enabled = true and teacher.school.id = :schoolId")
     List<Teacher> getAllBySchoolId(@Param("schoolId") Long schoolId);
 
-
+    @Query("select t.school.id from Teacher t  where t.user.login = ?#{principal.username}")
+    Long findSchoolByCurrentTeacher();
 
 }

@@ -7,8 +7,8 @@
 <div id="header">
     <h2>
         <div style=" position: absolute;">
-            <p class="text-right" style="font-style: italic"><@spring.message "hello"/>
-                , ${model.currentUser.firstName} ${model.currentUser.lastName}</p></div>
+            <p class="text-right" style="font-style: italic"><strong><@spring.message "hello"/>
+                , ${model.currentUser.firstName} ${model.currentUser.lastName}</strong></p></div>
         <br>
     <@spring.message "teacher.class"/> ${model.formName}
         <button type="button" class="btn btn-primary btn-lg" style="margin-left: 84%;"
@@ -21,9 +21,11 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><@spring.message "teacher.gradebook.table.pupil.name"/></th>
-        <th><@spring.message "email"/></th>
+        <th style="width: 20%"><@spring.message "teacher.gradebook.table.pupil.name"/></th>
+        <th></th>
+        <th style="width: 30%"><@spring.message "email"/></th>
         <th><@spring.message "parents"/></th>
+        <th></th>
 
     </tr>
     </thead>
@@ -33,23 +35,28 @@
     <#list model.pupils as i>
     <tr>
         <td>
-            <p style="text-shadow:5px 5px 15px grey;">${i.lastName } ${i.firstName }
-                <button id="edit" type="submit" class="btn btn-primary btn-sm"
-                        onclick="editPupilAjax(${i.id})">
-                    <span class="fa fa-pencil"></span>
-                    <span class="hidden-md-down"><@spring.message "school.edit"/></span>
-                </button>
-            </p>
+            <p style="text-shadow:5px 5px 15px grey;"><strong>${i.lastName } ${i.firstName } </strong></p>
+        </td>
+        <td>
+            <button id="edit" type="submit" class="btn btn-primary btn-sm"
+                    onclick="editPupilAjax(${i.id})">
+                <span class="fa fa-pencil"></span>
+                <span class="hidden-md-down"><@spring.message "school.edit"/></span>
+            </button>
+
             <div id="editPopup" class="editModal">
                 <div class="modal-content3">
                     <div class="modal-body">
                         <div class="form-group">
                             <label class="form-control-label" for="firstName"><@spring.message "firstname"/></label>
-                            <input type="text" class="form-control" id="firstNameEdit" name="firstName" minlength=3 maxlength=50 required>
+                            <input type="text" class="form-control" id="firstNameEdit" name="firstName" minlength=3
+                                   maxlength=50 required>
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" minlength=3 maxlength=50 required><@spring.message "lastname"/></label>
-                            <input type="text" class="form-control" id="lastNameEdit" name="lastName" minlength=3 maxlength=50 required>
+                            <label class="form-control-label" minlength=3 maxlength=50
+                                   required><@spring.message "lastname"/></label>
+                            <input type="text" class="form-control" id="lastNameEdit" name="lastName" minlength=3
+                                   maxlength=50 required>
                         </div>
                         <div class="form-group">
                             <label class="form-control-label" for="email"><@spring.message "email"/></label>
@@ -57,16 +64,12 @@
                                    required minlength="7" maxlength="100">
                         </div>
                         <div class="form-group">
-                            <label class="form-control-label" for="formName"><@spring.message "teacherm.form"/><span id="currentForm">-</label>
+                            <label class="form-control-label" for="formName"><@spring.message "teacherm.form"/><span
+                                id="currentForm">-</label>
                             <button id="assign" class="btn btn-secondary"
                                     onclick="showFormAssignModal()">
                                 <span class="fa fa-plus"></span>
-                                <span id="assignchange"><@spring.message "teacherm.assign"/></span>
-                            </button>
-                            <button id="remove" class="btn btn-secondary"
-                                    onclick="removeFormAssignment()">
-                                <span class="fa fa-minus"></span>
-                                <span id="assignchange"><@spring.message "teacherm.remove"/></span>
+                                <span id="assignchange"><@spring.message "pupil.changeClass"/></span>
                             </button>
                         </div>
                     </div>
@@ -102,23 +105,27 @@
                 </div>
             </div>
         </td>
+        </td>
         <td>
         ${i.email}
         </td>
         <td>
             <#if i.parents??>
                 <#list i.parents as k>
-                    <p style="text-shadow:5px 5px 10px grey;margin-bottom: 0px;margin-top: 10px;"> ${k.firstName } ${k.lastName}
-                        <button type="button" class="close" aria-label="Close" title="delete">
+                    <p style="text-shadow:5px 5px 10px grey;margin-bottom: 0px;margin-top: 10px;"> <strong>${k.firstName } ${k.lastName}
+                        <a type="button" class="close" aria-label="Close" title="Delete">
                             <span aria-hidden="true">&times;</span>
-                        </button>
-                        <br></p>
+                        </a>
+                        <br></strong></p>
                     <i class="fa fa-envelope-open-o" aria-hidden="true">
                     ${k.email} </i><br>
                 </#list>
             </#if>
+        </td>
+        <td>
             <button type="button" class="btn btn-outline-info btn-sm"
-                    style="margin-top: 10px;"><@spring.message "addParent"/></button>
+                    style="margin-top: 10px;"
+                    onclick="window.location.href='/freemarker/teacher-my-class/newParent/${i.id}'"><@spring.message "addParent"/></button>
         </td>
 
 

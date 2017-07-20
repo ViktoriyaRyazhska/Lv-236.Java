@@ -128,7 +128,7 @@ public class FormServiceImpl implements FormService{
     @Transactional(readOnly = true)
     public List<FormDTO> findAllFormsByCurrentSchool() {
         log.debug("Request to get all Forms for current school");
-        long idSchool = teacherRepository.findOneWithSchool().getSchool().getId();
+        long idSchool = teacherRepository.findSchoolByCurrentTeacher();
         List<FormDTO> formDTOs=formMapper.formsToFormDTOs(formRepository.findAllFormsByCurrentSchool(idSchool));
         return formDTOs;
     }

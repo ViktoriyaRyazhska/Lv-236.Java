@@ -171,8 +171,6 @@ public class PupilServiceImpl extends SupportCreate implements PupilService {
     }
 
 
-
-
     /**
      * Save a pupil after editing.
      *
@@ -183,24 +181,22 @@ public class PupilServiceImpl extends SupportCreate implements PupilService {
         log.debug("Request to save pupil : {}", pupilDTO);
         Pupil pupil = pupilMapper.pupilDTOToPupil(pupilDTO);
         TeacherDTO teacher = teacherService.findTeacherByCurrentUser();
-        User pupilUser = userService.getUserWithAuthorities(pupilDTO.getUserId());System.out.println("000000000000000000000000");
-        // modify only if are from same school
-        //if (teacher.getSchoolId().equals(pupil.getForm().getSchool().getId())) {
+        User pupilUser = userService.getUserWithAuthorities(pupilDTO.getUserId());
 
-            pupilUser.setEmail(pupilDTO.getEmail());System.out.println("111111111111111111111111");
-            pupilUser.setFirstName(pupilDTO.getFirstName());System.out.println("222222222222222222222222");
-            pupilUser.setLastName(pupilDTO.getLastName());
+        pupilUser.setEmail(pupilDTO.getEmail());
+        pupilUser.setFirstName(pupilDTO.getFirstName());
+        pupilUser.setLastName(pupilDTO.getLastName());
 
-            userRepository.save(pupilUser);
+        userRepository.save(pupilUser);
 
 
-            FormDTO formDTO = formService.findOne(pupilDTO.getFormId());
-            pupilDTO.setFormId(formDTO.getId());
-            save(pupilDTO);
+        FormDTO formDTO = formService.findOne(pupilDTO.getFormId());
+        pupilDTO.setFormId(formDTO.getId());
+        save(pupilDTO);
 
 
-            pupil = pupilRepository.save(pupil);
-       // }
+        pupil = pupilRepository.save(pupil);
+
         PupilDTO result = pupilMapper.pupilToPupilDTO(pupil);
         return result;
     }

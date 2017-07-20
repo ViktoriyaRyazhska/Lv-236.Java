@@ -50,4 +50,5 @@ public interface ParentService {
      * Find parent by current user (via principal)
      */
     ParentDTO findParentByCurrentUser();
+    ParentDTO saveParentWithUser(ParentDTO parentDTO, Long pupilId);
 }

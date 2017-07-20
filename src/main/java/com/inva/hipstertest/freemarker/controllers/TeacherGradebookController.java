@@ -37,10 +37,11 @@ public class TeacherGradebookController {
     private final FormMapper formMapper;
     private final PupilRepository pupilRepository;
     private final PupilMapper pupilMapper;
+    private final ParentService parentService;
 
     public TeacherGradebookController(TeacherService teacherService, ScheduleService scheduleService, PupilService pupilService,
                                       AttendancesService attendancesService, SchoolService schoolService, FormService formService,
-                                      FormMapper formMapper, PupilRepository pupilRepository, PupilMapper pupilMapper) {
+                                      FormMapper formMapper, PupilRepository pupilRepository, PupilMapper pupilMapper, ParentService parentService) {
         this.teacherService = teacherService;
         this.scheduleService = scheduleService;
         this.pupilService = pupilService;
@@ -50,6 +51,7 @@ public class TeacherGradebookController {
         this.formMapper = formMapper;
         this.pupilRepository = pupilRepository;
         this.pupilMapper = pupilMapper;
+        this.parentService = parentService;
     }
 
     @RequestMapping(value = "/freemarker/teacher-gradebook", method = RequestMethod.GET)
@@ -159,7 +161,7 @@ public class TeacherGradebookController {
     }
 
     @RequestMapping(value = "freemarker/teacher-my-class/newPupil/{formId}", method = RequestMethod.GET)
-    public ModelAndView teacherNewPupil( @PathVariable Long formId) {
+    public ModelAndView teacherNewPupil(@PathVariable Long formId) {
 
         return new ModelAndView("teacher-mgmt/teacher-my-class-createNewPupil");
     }
@@ -219,5 +221,31 @@ public class TeacherGradebookController {
     List<FormDTO> getAvailableForms() {
         log.debug("Create Ajax request for forms");
         return formService.findAllFormsByCurrentSchool();
+    }
+
+    @RequestMapping(value = "freemarker/teacher-my-class/newParent/{pupilId}", method = RequestMethod.GET)
+    public ModelAndView teacherNewParent(@ModelAttribute("model") ModelMap model, @PathVariable Long pupilId) {
+        PupilDTO pupil = pupilService.findOne(pupilId);
+        model.addAttribute("pupil", pupil);
+        return new ModelAndView("teacher-mgmt/teacher-my-class-createParent");
+    }
+
+    /**
+     * Creates new parent for pupil.
+     */
+    @PostMapping(value = "freemarker/teacher-my-class/newParent/{pupilId}")
+    @Timed
+    public ModelAndView teacherCreateParent(@ModelAttribute("model") ModelMap model, ParentDTO parentDTO, @PathVariable Long pupilId, BindingResult bindingResult, String emailFail) throws URISyntaxException {
+        log.debug("Freemarker request to save parent : {}", parentDTO);
+        log.debug(parentDTO.getFirstName() + " " + parentDTO.getLastName() + " " + parentDTO.getEmail());
+        ParentDTO result = parentService.saveParentWithUser(parentDTO, pupilId);
+        emailFail = "Invalid e-mail";
+
+        if (!result.getEnabled()) {
+            // handle email already in use
+            return new ModelAndView("teacher-mgmt/teacher-my-class-createParent", "emailFail", emailFail);
+        }
+        // handle creation success
+        return new ModelAndView("redirect:/freemarker/teacher-my-class");
     }
 }

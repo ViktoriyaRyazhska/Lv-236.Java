@@ -8,11 +8,11 @@
 <br>
 <div id="header">
     <h2>
-        <span><@spring.message "pupil.create"/></span>
+        <span>Створити нового батька для учня ${model.pupil.firstName} ${model.pupil.lastName}</span>
     </h2>
 </div>
 
-<form name="create" action="/freemarker/teacher-my-class/newPupil/${formId}" method="post">
+<form name="create" action="/freemarker/teacher-my-class/newParent/${model.pupil.id}" method="post">
     <div class="body">
         <div class="form-group">
             <label class="form-control-label" for="firstName"><@spring.message "firstname"/></label>
@@ -71,3 +71,4 @@
 <@h.footer>
 
 </@h.footer>
+
